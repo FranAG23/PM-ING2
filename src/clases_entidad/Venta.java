@@ -21,14 +21,14 @@ public class Venta {
     
     public enum EstadoVenta {
         COMPLETADA, CANCELADA, EN_RESERVA;
-      /*  @Override
+        @Override
         public String toString() {
             return switch (this) {
                 case COMPLETADA -> "Completada";
                 case EN_RESERVA -> "En reserva";
                 default -> "Cancelada";
             };
-        }*/
+        }
     }
     
     // Atributos

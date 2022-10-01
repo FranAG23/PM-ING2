@@ -9,7 +9,7 @@ public class Producto {
     
     public enum CategoriaProducto {
         LENCERIA, ACCESORIO, PAPELERIA, MARROQUINERIA, VARIOS;
-       /* @Override
+        @Override
         public String toString() {
             
             return switch (this) {
@@ -19,7 +19,7 @@ public class Producto {
                 case MARROQUINERIA -> "Marroquinería";
                 default -> "Varios";
             };
-        }*/
+        }
     }
     
     // Atributos
