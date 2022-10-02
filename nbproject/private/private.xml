@@ -11,35 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/event/EventMenuPressed.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/component/Profile.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/model/ModelMenu.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/component/Card.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/Button.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/form/FormularioAltaProducto.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/icon/IconCode.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/form/FormularioConsultarVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/icon/GoogleMaterialDesignIcons.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/table/Action.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/component/Header.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/event/EventMenuSelected.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/icon/IconFont.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/icon/IconFontSwing.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/dialog/Message.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/icon/MaterialIcons-Regular.ttf</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/MenuItem.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/form/Form_Home.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/ButtonBadges.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/icon/DefaultIconCode.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/form/FormularioAltaVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/clases_entidad/auxiliares/ItemLista.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/ProgressBarCustom.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/form/MainForm.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/main/Main.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/MenuButton.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/swing/MenuAnimation.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/PM-ING2/src/com/raven/component/Menu.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
