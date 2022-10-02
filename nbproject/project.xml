@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
             <name>MalaikaStore</name>
+=======
+            <name>PM-Ing.2</name>
+>>>>>>> 85b5190b909d8e5fade854a5679bd38b06cda4c8
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

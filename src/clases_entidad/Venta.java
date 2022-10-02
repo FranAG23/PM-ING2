@@ -10,11 +10,11 @@ public class Venta {
     
     public enum MetodoPago {
         EFECTIVO, MERCADOPAGO;
-        @Override
+      /*  @Override
         public String toString() {
             if (this==EFECTIVO) return "Efectivo";
             else return "MercadoPago";
-        }
+        }*/
     }
     
     // Definición de EstadoVenta (tipo enumerado)
