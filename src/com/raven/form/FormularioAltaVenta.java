@@ -30,7 +30,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
-        jLabel1.setText("Alta Venta");
+        jLabel1.setText("Registrar Venta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -39,7 +39,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(1014, Short.MAX_VALUE))
+                .addContainerGap(983, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

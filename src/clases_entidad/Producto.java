@@ -9,8 +9,8 @@ public class Producto {
     
     public enum CategoriaProducto {
         LENCERIA, ACCESORIO, PAPELERIA, MARROQUINERIA, VARIOS;
-      @Override
-       public String toString() {
+        @Override
+        public String toString() {
             
             return switch (this) {
                 case LENCERIA -> "Lencería";

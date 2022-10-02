@@ -17,17 +17,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="button1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace pref="1004" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="995" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -36,9 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-              <Component id="button1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="575" max="32767" attributes="0"/>
+              <EmptySpace pref="717" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,16 +39,8 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Alta Producto"/>
+        <Property name="text" type="java.lang.String" value="Registrar Producto"/>
       </Properties>
-    </Component>
-    <Component class="com.raven.swing.Button" name="button1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="button1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

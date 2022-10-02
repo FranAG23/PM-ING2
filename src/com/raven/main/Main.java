@@ -75,7 +75,7 @@ public class Main extends javax.swing.JFrame {
                 // en base al menú seleccionado. 
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new FormularioAltaProducto());
+;                        main.showForm(new FormularioAltaProducto());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new FormularioConsultarVenta());
                     }
