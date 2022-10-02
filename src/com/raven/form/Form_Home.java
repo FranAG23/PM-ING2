@@ -47,19 +47,19 @@ public class Form_Home extends javax.swing.JPanel {
                 }
             }
         };
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile.jpg")), "Jonh", "Male", "Java", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile1.jpg")), "Dara", "Male", "C++", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
-        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/com/raven/icon/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile.jpg")), "Jonh", "Male", "Java", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile1.jpg")), "Dara", "Male", "C++", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
+        table1.addRow(new ModelStudent(new ImageIcon(getClass().getResource("/imagenes/profile2.jpg")), "Bora", "Male", "C#", 300).toRowTable(eventAction));
     }
 
     private void initCardData() {

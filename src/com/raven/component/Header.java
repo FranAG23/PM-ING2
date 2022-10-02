@@ -2,6 +2,15 @@ package com.raven.component;
 
 import java.awt.event.ActionListener;
 
+/*
+    DESCRIPCIÓN
+
+       Este panel es el encabezado que contiene la foto y nombre del usuario
+       que está usando el sistema, así como botones para cerrar/abrir el panel
+       de menús o ver notificaciones pendientes. Si se quiere cambiar alguna
+       imágen ir a 'Design'.  
+*/
+
 public class Header extends javax.swing.JPanel {
 
     public Header() {
@@ -26,25 +35,30 @@ public class Header extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        cmdMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/menu.png"))); // NOI18N
+        cmdMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.png"))); // NOI18N
+        cmdMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdMenuActionPerformed(evt);
+            }
+        });
 
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/profile.jpg"))); // NOI18N
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarioMarcela3.jpg"))); // NOI18N
 
         lbUserName.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lbUserName.setForeground(new java.awt.Color(127, 127, 127));
-        lbUserName.setText("User Name");
+        lbUserName.setText("Marcela03");
 
         lbRole.setForeground(new java.awt.Color(127, 127, 127));
-        lbRole.setText("Admin");
+        lbRole.setText("Usuario");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         buttonBadges1.setForeground(new java.awt.Color(250, 49, 49));
-        buttonBadges1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/notification.png"))); // NOI18N
+        buttonBadges1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notification.png"))); // NOI18N
         buttonBadges1.setBadges(12);
 
         buttonBadges2.setForeground(new java.awt.Color(63, 178, 232));
-        buttonBadges2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/message.png"))); // NOI18N
+        buttonBadges2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/message.png"))); // NOI18N
         buttonBadges2.setBadges(5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -54,7 +68,7 @@ public class Header extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
                 .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(buttonBadges1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -85,6 +99,10 @@ public class Header extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.ButtonBadges buttonBadges1;

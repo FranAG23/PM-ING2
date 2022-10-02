@@ -1,5 +1,9 @@
 package com.raven.component;
 
+/*
+    Por el momento no es importante saber que hace esta clase. 
+*/
+
 import com.raven.model.ModelCard;
 import java.awt.Color;
 import java.awt.GradientPaint;

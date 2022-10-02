@@ -4,8 +4,10 @@ import com.raven.component.Header;
 import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
 import com.raven.event.EventShowPopupMenu;
-import com.raven.form.Form1;
+import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
+import com.raven.form.FormularioAltaProducto;
+import com.raven.form.FormularioAltaVenta;
 import com.raven.form.MainForm;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
@@ -19,12 +21,33 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/*
+    DESCRIPCIÓN:
+
+        La ventana JFrame contiene un objeto JLayeredPane llamado 'bg', sobre el
+        el que se colocan los elementos principales de la interfaz, como el pa- 
+        nel de menús, el encabezado y el formulario. Los objetos JLayeredPane
+        funcionan como objetos JPanel, pero permiten especificar una 
+        'profundidad' a sus elementos.       
+*/
 public class Main extends javax.swing.JFrame {
 
+    // Un objeto MigLayout permite diseñar un Jpanel con código. Permite 
+    // configuraciones imposibles de realizar con el editor de Netbeans. 
+    // Una guia para entender esta componente se encuentra en:
+    // http://www.migcalendar.com/miglayout/mavensite/docs/cheatsheet.html. 
     private MigLayout layout;
+    
+    // Menú de opciones. 
     private Menu menu;
+    
+    // Encabezado
     private Header header;
+    
+    // Formulario principal
     private MainForm main;
+    
+    // Objeto usado para las animaciones. 
     private Animator animator;
 
     public Main() {
@@ -32,25 +55,47 @@ public class Main extends javax.swing.JFrame {
         init();
     }
 
+    // Función que inicializa componentes creadas por Raven. 
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         menu = new Menu();
         header = new Header();
         main = new MainForm();
+
+        // Agregamos el evento menuSelected al objeto menú. Este a su vez 
+        // se lo pasa a los objetos MenuItem para que puedan llamarlo cuando 
+        // el usuario clickea un menú o submenú. 
         menu.addEvent(new EventMenuSelected() {
-            @Override
+            @Override    
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
+                
+                // En esta sección elegimos el formulario a mostrar por pantalla
+                // en base al menú seleccionado. 
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new Form_Home());
+                        main.showForm(new FormularioAltaProducto());
                     } else if (subMenuIndex == 1) {
-                        main.showForm(new Form1());
+                        main.showForm(new FormularioConsultarVenta());
                     }
                 }
+                else if(menuIndex == 1){
+                if (subMenuIndex == 0) {
+                        main.showForm(new FormularioAltaVenta());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new FormularioConsultarVenta());
+                    }
+                }
+                else if (menuIndex == 2)
+                    main.showForm(new Form_Home()); 
             }
         });
+        
+        // Agregamos el evento showPopup al objeto menú para que este pueda 
+        // invocarlo. El código de showPopup muestra en pantalla los submenús 
+        // de algún menú clickeado por el usuario. Solo se invoca cuando el 
+        // panel de menús no está desplegado totalmente en pantalla.
         menu.addEventShowPopup(new EventShowPopupMenu() {
             @Override
             public void showPopup(Component com) {
@@ -62,10 +107,21 @@ public class Main extends javax.swing.JFrame {
                 popup.setVisible(true);
             }
         });
+        
+        // Iniciar los menús del panel de menús. 
         menu.initMenuItem();
-        bg.add(menu, "w 230!, spany 2");    // Span Y 2cell
+        
+        // Los significados de estas configuraciones son:
+        // w: ancho del componente.
+        // h: alto del componente.
+        // !: NI IDEA
+        // spany: NI IDEA. 
+        // wrap: envuelve a todo el jpanel. 
+        bg.add(menu, "w 230!, spany 2");    
         bg.add(header, "h 50!, wrap");
         bg.add(main, "w 100%, h 100%");
+        
+        // Estos métodos son ejecutados automáticamente por la clase Animator.
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -80,24 +136,42 @@ public class Main extends javax.swing.JFrame {
             }
 
             @Override
+            // Método ejecutado cuando termina la animación que abre/cierra el
+            // panel de menús. 
             public void end() {
+                // Indicar que el panel de menús está abierto/cerrado. 
                 menu.setShowMenu(!menu.isShowMenu());
+                // Habilitar animaciones de menú.
                 menu.setEnableMenu(true);
             }
-
         };
-        animator = new Animator(500, target);
+        
+        // Configuraciones de la animación que muestra/esconde el panel de 
+        // opciones. Si queremos cambiar la velocidad de la animación, hay que 
+        // modificar el primer campo del constructor. 
+        animator = new Animator(300, target);
         animator.setResolution(0);
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
+        
+        // Agregamos un 'listener' que detecta las acciones que el usuario hace
+        // sobre el encabezado de la aplicación. Cuando se detecta una acción, 
+        // se ejecuta el código de actionPerformed(). 
         header.addMenuEvent(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                // Si la animación de abrir/cerrar no está corriendo,
                 if (!animator.isRunning()) {
+                    // entonces comenzar animación.
                     animator.start();
-                }
+                }  
+                
+                // Deshabilitar animaciones de menú momentaneamente.
                 menu.setEnableMenu(false);
+                
+                // Si el panel de menús está en pantalla,
                 if (menu.isShowMenu()) {
+                    // entonces cerrar cada menú abierto. 
                     menu.hideallMenu();
                 }
             }

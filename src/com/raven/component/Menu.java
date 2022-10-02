@@ -1,6 +1,6 @@
 package com.raven.component;
 
-import com.raven.event.EventMenu;
+import com.raven.event.EventMenuPressed;
 import com.raven.event.EventMenuSelected;
 import com.raven.event.EventShowPopupMenu;
 import com.raven.model.ModelMenu;
@@ -18,6 +18,12 @@ import net.miginfocom.swing.MigLayout;
 
 public class Menu extends javax.swing.JPanel {
 
+    private final MigLayout layout;
+    private EventMenuSelected event;
+    private EventShowPopupMenu eventShowPopup;
+    private boolean enableMenu = true;
+    private boolean showMenu = true;
+    
     public boolean isShowMenu() {
         return showMenu;
     }
@@ -38,12 +44,6 @@ public class Menu extends javax.swing.JPanel {
         this.eventShowPopup = eventShowPopup;
     }
 
-    private final MigLayout layout;
-    private EventMenuSelected event;
-    private EventShowPopupMenu eventShowPopup;
-    private boolean enableMenu = true;
-    private boolean showMenu = true;
-
     public Menu() {
         initComponents();
         setOpaque(false);
@@ -51,54 +51,63 @@ public class Menu extends javax.swing.JPanel {
         sp.setVerticalScrollBar(new ScrollBarCustom());
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
         panel.setLayout(layout);
+      //  profile1.escalarImagen();
     }
 
+    // Método invocado por la clase Main para agregar los menús. Si queremos 
+    // cambiar el nombre o imágen de un menú hay que tocar este método.
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/1.png")), "Dashboard", "Home", "Buttons", "Cards", "Tabs", "Accordions", "Modals"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/2.png")), "Charts", "Morris", "Flot", "Line"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/3.png")), "Report", "Income", "Expense", "Profit"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/4.png")), "Message", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/5.png")), "Staff", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/6.png")), "Student", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/7.png")), "Library", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/8.png")), "Holiday", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/9.png")), "Calendar", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/10.png")), "Chat App", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/11.png")), "Contace", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/12.png")), "File Manager", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/13.png")), "Our Centres"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/com/raven/icon/14.png")), "Gallery"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/imagenes/7.png")), "Productos", "Alta Producto"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/imagenes/3.png")), "Ventas", "Alta Venta", "Consultar Venta"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/imagenes/14.png")), "Formulario Prueba"));
     }
 
+    // Este método simplemente agrega el menú al panel principal. 
     private void addMenu(ModelMenu menu) {
-        panel.add(new MenuItem(menu, getEventMenu(), event, panel.getComponentCount()), "h 40!");
+        panel.add(new MenuItem(menu, getEventMenu(), event,
+                 panel.getComponentCount()), "h 40!");
     }
 
-    private EventMenu getEventMenu() {
-        return new EventMenu() {
+    private EventMenuPressed getEventMenu() {
+        return new EventMenuPressed() {
             @Override
             public boolean menuPressed(Component com, boolean open) {
+                // Si las animaciones de menú estan habilitadas:
                 if (enableMenu) {
+                    // Si el panel de menús está desplegado en pantalla: 
                     if (isShowMenu()) {
+                        // Si se intenta abrir el menú:
                         if (open) {
+                            // Ejecutar animación que abre el menú.
                             new MenuAnimation(layout, com).openMenu();
                         } else {
+                            // Si no, ejectuar animación que cierra el menú. 
                             new MenuAnimation(layout, com).closeMenu();
                         }
+                        // Devolver que el panel de menús se muestra en pantalla. 
                         return true;
                     } else {
+                        // Si no, mostrar la componente popup. 
                         eventShowPopup.showPopup(com);
                     }
                 }
+                // Devolver que el panel de menús está escondido. 
                 return false;
             }
         };
     }
 
+    // Este método es invocado por la clase Main, y ocurre cuando el usuario
+    // aprieta el botón para esconder el panel de menús. Pliega cada menú que
+    // se encuentre abierto. 
     public void hideallMenu() {
+        // Para cada componente del panel:
         for (Component com : panel.getComponents()) {
+            // transformarlo a un objeto del tipo MenuItem.
             MenuItem item = (MenuItem) com;
+            // Si el menú está abierto,
             if (item.isOpen()) {
+                // entonces ejecutar la animación de plegado.
                 new MenuAnimation(layout, com, 500).closeMenu();
                 item.setOpen(false);
             }
@@ -149,14 +158,31 @@ public class Menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
+    // Este método pinta al panel de opciones en pantalla. Si quisieramos 
+    // cambiar el color del panel tenemos que tocar este método.
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gra = new GradientPaint(0, 0, new Color(33, 105, 249), getWidth(), 0, new Color(93, 58, 196));
-        g2.setPaint(gra);
+        
+        // El método setRenderingHint() cambia el renderizado del objeto. 
+        // La configuración ANTIALIASING_ON indica que queremos gráficos "suaves". 
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                           RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        // Con este objeto pintamos el objeto con un color degradado. Para obte-
+        // ner colores degradados ir al siguiente link: https://uigradients.com/#ClearSky
+        // Escribir los códigos en los campos Color.decode(). 
+        GradientPaint g = new GradientPaint(0, 0, Color.decode("#ee9ca7"), 0, getHeight(), Color.decode("#ffdde1")); 
+        // En el código original de Raven aparece esta sentencia:
+        // GradientPaint gra = new GradientPaint(0, 0, new Color(33, 105, 249), getWidth(), 0, new Color(93, 58, 196));
+       
+        g2.setPaint(g);
+        
+        // Pinta al objeto con el color actual de g2. 
         g2.fillRect(0, 0, getWidth(), getHeight());
+        profile1.escalarImagen();
         super.paintComponent(grphcs);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panel;

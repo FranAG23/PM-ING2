@@ -2,6 +2,16 @@ package com.raven.model;
 
 import javax.swing.Icon;
 
+/*
+    DESCRIPCIÓN
+
+        Cada objeto de esta clase es el modelo de algún menú que aparece en el 
+        panel de menús de nuestra aplicación. En la arquitectura VISTA-MODELO-CONTROLADOR,
+        el modelo tiene la responsabilidad de actualizar las estructuras de datos
+        que contienen los objetos a mostrar por pantalla. 
+
+*/
+
 public class ModelMenu {
 
     public Icon getIcon() {
