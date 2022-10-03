@@ -171,7 +171,7 @@ public class Menu extends javax.swing.JPanel {
         // Con este objeto pintamos el objeto con un color degradado. Para obte-
         // ner colores degradados ir al siguiente link: https://uigradients.com/#ClearSky
         // Escribir los códigos en los campos Color.decode(). 
-        GradientPaint g = new GradientPaint(0, 0, Color.decode("#ee9ca7"), 0, getHeight(), Color.decode("#ffdde1")); 
+        GradientPaint g = new GradientPaint(0, 0, Color.decode("#cba09a"), 0, getHeight(), Color.decode("#ee9ca7"));  
         // En el código original de Raven aparece esta sentencia:
         // GradientPaint gra = new GradientPaint(0, 0, new Color(33, 105, 249), getWidth(), 0, new Color(93, 58, 196));
        
