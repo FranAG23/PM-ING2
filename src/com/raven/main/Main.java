@@ -189,6 +189,7 @@ public class Main extends javax.swing.JFrame {
         bg = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Malaika Store");
 
         bg.setBackground(new java.awt.Color(245, 245, 245));
         bg.setOpaque(true);
