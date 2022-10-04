@@ -40,12 +40,15 @@
 	CREATE TABLE Venta
 	(
 		vID				SERIAL			NOT NULL	PRIMARY KEY,
+		sID SERIAL NOT NULL,
 		vNombreCliente	VARCHAR(40)		NOT NULL,
 		vEnvioGratis	BOOLEAN			NOT NULL,
 		vImporte		REAL			NOT NULL,
 		vFecha			DATE			NOT NULL,
 		vMetodoPago		VARCHAR(20)		NOT NULL,
 		vEstadoVenta	VARCHAR(20)		NOT NULL
+		
+		FOREIGN KEY (sID) REFERENCES Sucursal 
 	);
 	
 ---------------------------------------------------------------------------------------------------------------------------------------------

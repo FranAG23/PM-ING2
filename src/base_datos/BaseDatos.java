@@ -18,38 +18,32 @@ public class BaseDatos {
     // Constructor privado
     
     private BaseDatos(String usuario, String password, String baseDatos, String ip, String puerto) {
-        
         BaseDatos.usuario = usuario;
         BaseDatos.password = password;
         BaseDatos.url = "jdbc:postgresql://"+ip+":"+puerto+"/"+baseDatos;
     }
 	
-	public static BaseDatos getInstance() {
-		
-            if (INSTANCIA == null) {
-                // Cambiar parámetros según la base de datos
-                INSTANCIA = new BaseDatos("postgres", "tomitomi123", "postgres", "localhost", "5432");
-            }
-            return INSTANCIA;
-	}
+    public static BaseDatos getInstance() {		
+        if (INSTANCIA == null) {
+            // Cambiar parámetros según la base de datos
+            INSTANCIA = new BaseDatos("postgres", "tomitomi123", "postgres", "localhost", "5432");
+        }
+        return INSTANCIA;
+    }
     
     // Otros métodos
     
-    public Connection establecerConexion() {
-        
+    public Connection establecerConexion() {  
         if (con==null) {
             try {
                 Class.forName("org.postgresql.Driver");
                 con = DriverManager.getConnection(url, usuario, password);
             } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("Error en la clase BaseDatos, en el método establecerConexion()"); 
                 e.printStackTrace();
             }
         }
         return con;
-        
-        
-        
-        
     }
     
 }

@@ -69,7 +69,6 @@ public class Venta {
     public Reserva getReserva() {return reserva;}
     public void setReserva(Reserva reserva) {this.reserva = reserva;}
     
-    public ArrayList<ItemVenta> getItems() {return items;}
+    public ArrayList<ItemVenta> getItems(){ return items; }
     public void setItems(ArrayList<ItemVenta> items) {this.items = items;}
-    
 }

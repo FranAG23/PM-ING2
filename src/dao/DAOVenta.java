@@ -18,7 +18,6 @@ public class DAOVenta implements InterfazDAOVenta {
 
     @Override
     public boolean registrar(Venta v) {
-        
         boolean exito = false;
         PreparedStatement pst = null;
         Connection con = null;

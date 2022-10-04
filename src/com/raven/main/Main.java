@@ -73,22 +73,28 @@ public class Main extends javax.swing.JFrame {
                 
                 // En esta sección elegimos el formulario a mostrar por pantalla
                 // en base al menú seleccionado. 
-                if (menuIndex == 0) {
-                    if (subMenuIndex == 0) {
-;                        main.showForm(new FormularioAltaProducto());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new FormularioConsultarVenta());
-                    }
+                switch(menuIndex){
+                    case 0:
+                        switch(subMenuIndex){
+                            case 0:
+                                main.showForm(new FormularioAltaProducto());
+                                break;
+                        }
+                        break; 
+                    case 1:
+                        switch(subMenuIndex){
+                            case 0:
+                                main.showForm(new FormularioAltaVenta());
+                                break;
+                            case 1:
+                                main.showForm(new FormularioConsultarVenta()); 
+                                break; 
+                        }
+                        break;
+                    case 2:
+                        main.showForm(new Form_Home());
+                        break; 
                 }
-                else if(menuIndex == 1){
-                if (subMenuIndex == 0) {
-                        main.showForm(new FormularioAltaVenta());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new FormularioConsultarVenta());
-                    }
-                }
-                else if (menuIndex == 2)
-                    main.showForm(new Form_Home()); 
             }
         });
         
