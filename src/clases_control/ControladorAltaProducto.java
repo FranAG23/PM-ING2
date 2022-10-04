@@ -8,7 +8,7 @@ public class ControladorAltaProducto {
     
     public ControladorAltaProducto(FormularioAltaProducto f, Producto p) {
         
-        // Hacer alta excepto si p no tiene disponibilidades 
+        // Hacer alta excepto si p no tiene disponibilidades o el nombre es ""
     }
     
 }
