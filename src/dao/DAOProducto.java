@@ -9,9 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DAOProducto implements InterfazDAOProducto {
-
+    ArrayList<Producto> P = new ArrayList<Producto>();
     @Override
     public boolean registrar(Producto p) {
         
@@ -82,8 +83,14 @@ public class DAOProducto implements InterfazDAOProducto {
     }
 
     @Override
-    public Producto obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public ArrayList<Producto> obtener(String Nombre) {
+        
+        
+        return P;    
+    }
+
+    public Producto ObtenerInfo(int IDAux) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

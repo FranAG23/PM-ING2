@@ -8,6 +8,7 @@ import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaProducto;
 import com.raven.form.FormularioAltaVenta;
+import com.raven.form.FormularioConsultarProducto;
 import com.raven.form.MainForm;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
@@ -75,25 +76,30 @@ public class Main extends javax.swing.JFrame {
                 // en base al menú seleccionado. 
                 switch(menuIndex){
                     case 0:
+                        main.showForm(new Form_Home());
+                        break;
+                    case 1:
                         switch(subMenuIndex){
                             case 0:
                                 main.showForm(new FormularioAltaProducto());
                                 break;
+                            case 1:
+                                main.showForm(new FormularioConsultarProducto()); 
+                                break;
                         }
                         break; 
-                    case 1:
+                        
+                    case 2:
                         switch(subMenuIndex){
                             case 0:
                                 main.showForm(new FormularioAltaVenta());
                                 break;
                             case 1:
                                 main.showForm(new FormularioConsultarVenta()); 
-                                break; 
+                                break;
+                            
                         }
                         break;
-                    case 2:
-                        main.showForm(new Form_Home());
-                        break; 
                 }
             }
         });

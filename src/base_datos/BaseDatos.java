@@ -26,7 +26,7 @@ public class BaseDatos {
     public static BaseDatos getInstance() {		
         if (INSTANCIA == null) {
             // Cambiar parámetros según la base de datos
-            INSTANCIA = new BaseDatos("postgres", "tomitomi123", "postgres", "localhost", "5432");
+            INSTANCIA = new BaseDatos("postgres", "hgfsd1234", "PM-2", "localhost", "5432");
         }
         return INSTANCIA;
     }

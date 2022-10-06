@@ -167,7 +167,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("(opcional)");
 
-        button1.setBackground(new java.awt.Color(51, 255, 102));
+        button1.setBackground(new java.awt.Color(238, 156, 167));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Aceptar");
         button1.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
@@ -263,10 +263,9 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 307, Short.MAX_VALUE)
-                                            .addComponent(jTextField5))
+                                        .addComponent(jTextField1)
+                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel9)
                                             .addGap(130, 130, 130))
