@@ -7,7 +7,6 @@ import clases_entidad.Producto;
 import clases_entidad.Sucursal;
 import java.awt.Component;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
 
 public class FormularioAltaProducto extends javax.swing.JPanel {
 
@@ -696,6 +695,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         jDialog1.setLocationRelativeTo(null);
         jDialog1.setVisible(true);
         // Emitir algún sonido?
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
