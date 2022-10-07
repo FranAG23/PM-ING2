@@ -23,7 +23,6 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         }
         
         // Esconder carteles de datos ingresados inválidos
-        
         resetCarteles();
         
         setOpaque(false);
@@ -33,6 +32,10 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        button2 = new com.raven.swing.Button();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -71,6 +74,58 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         jLabel31 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        jDialog1.setMinimumSize(new java.awt.Dimension(345, 106));
+        jDialog1.setUndecorated(true);
+        jDialog1.setPreferredSize(null);
+        jDialog1.setResizable(false);
+        jDialog1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jDialog1FocusLost(evt);
+            }
+        });
+        jDialog1.getContentPane().setLayout(null);
+
+        jPanel2.setBackground(new java.awt.Color(238, 156, 167));
+
+        jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("¡Producto registrado exitosamente!");
+
+        button2.setText("OK");
+        button2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
+        jDialog1.getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 350, 110);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -551,6 +606,14 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         
     }//GEN-LAST:event_button1ActionPerformed
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        jDialog1.setVisible(false);
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void jDialog1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDialog1FocusLost
+        jDialog1.setVisible(false);
+    }//GEN-LAST:event_jDialog1FocusLost
+
     public void avisarNombreInvalido() {
         
         jTextField1.setText("");
@@ -630,14 +693,18 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     
     public void mostrarCartelAltaExitosa() {
         
-        // IMPLEMENTAR
+        jDialog1.setLocationRelativeTo(null);
+        jDialog1.setVisible(true);
+        // Emitir algún sonido?
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.Button button1;
+    private com.raven.swing.Button button2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -645,6 +712,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -660,6 +728,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

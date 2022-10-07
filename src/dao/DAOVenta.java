@@ -5,6 +5,7 @@ import base_datos.BaseDatos;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
 import clases_entidad.Reserva;
+import clases_entidad.Sucursal;
 import clases_entidad.Venta;
 import clases_entidad.auxiliares.ItemLista;
 import java.sql.Connection;
@@ -29,13 +30,18 @@ public class DAOVenta implements InterfazDAOVenta {
             
             // Insertar en tabla Venta
             
-            pst = con.prepareStatement("INSERT INTO Venta VALUES (DEFAULT,?,?,?,?,?,?)");
-            pst.setString(1, v.getNombreCliente());
-            pst.setBoolean(2, v.getEnvioGratis());
-            pst.setFloat(3, v.getImporte());
-            pst.setDate(4, new java.sql.Date(v.getFecha().getTime()));
-            pst.setString(5, v.getMetodoPago().toString());
-            pst.setString(6, v.getEstado().toString());
+            pst = con.prepareStatement("INSERT INTO Venta VALUES (DEFAULT,?,?,?,?,?,?,?)");
+            if (v.getSucursal().getUbicacion().equals("San Luis")) {
+                pst.setInt(1, 1); // Si se realizó en San Luis (sID = 1)
+            } else {
+                pst.setInt(1, 2); // Si se realizó en Neuquén (sID = 2)
+            }
+            pst.setString(2, v.getNombreCliente());
+            pst.setBoolean(3, v.getEnvioGratis());
+            pst.setFloat(4, v.getImporte());
+            pst.setDate(5, new java.sql.Date(v.getFecha().getTime()));
+            pst.setString(6, v.getMetodoPago().toString());
+            pst.setString(7, v.getEstado().toString());
             pst.executeUpdate();
             
             // Obtener el ID de la venta recién insertada
@@ -103,6 +109,14 @@ public class DAOVenta implements InterfazDAOVenta {
                 v.setEnvioGratis(rs.getBoolean("vEnvioGratis"));
                 v.setImporte(rs.getFloat("vImporte"));
                 v.setFecha(new java.util.Date(rs.getDate("vFecha").getTime()));
+                Sucursal s = new Sucursal();
+                if (rs.getInt("sID")==1) {
+                    s.setUbicacion("San Luis");
+                } else {
+                    s.setUbicacion("Neuquen");
+                }
+                v.setSucursal(s);
+                
                 if (rs.getString("vMetodoPago").equals("Efectivo")) {
                     v.setMetodoPago(Venta.MetodoPago.EFECTIVO);
                 } 
