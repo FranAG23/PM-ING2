@@ -1,8 +1,12 @@
 
 package com.raven.form;
 
+import clases_control.ControladorAltaProducto;
+import clases_entidad.Disponibilidad;
 import clases_entidad.Producto;
+import clases_entidad.Sucursal;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 public class FormularioAltaProducto extends javax.swing.JPanel {
@@ -18,6 +22,9 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             c.setEnabled(false);
         }
         
+        // Esconder carteles de datos ingresados inválidos
+        
+        resetCarteles();
         
         setOpaque(false);
     }
@@ -171,6 +178,11 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Aceptar");
         button1.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Nombre inválido");
@@ -254,23 +266,28 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(130, 130, 130))
+                                    .addComponent(jSeparator1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(143, 143, 143))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(160, 160, 160)))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 307, Short.MAX_VALUE)
-                                            .addComponent(jTextField5))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(130, 130, 130))
-                                        .addComponent(jSeparator1)))
+                                            .addComponent(jTextField1)
+                                            .addComponent(jComboBox1, 0, 295, Short.MAX_VALUE)
+                                            .addComponent(jTextField5))))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -381,9 +398,9 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             
         }
         
-        setCartelPrecioInvalidoSanLuis(false);
-        setCartelStockInvalidoSanLuis(false);
-        setCartelStockMinimoInvalidoSanLuis(false);
+        jLabel26.setVisible(false);
+        jLabel27.setVisible(false);
+        jLabel28.setVisible(false);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
@@ -401,33 +418,219 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
         }
         
-        setCartelPrecioInvalidoNeuquen(false);
-        setCartelStockInvalidoNeuquen(false);
-        setCartelStockMinimoInvalidoNeuquen(false);
+        jLabel29.setVisible(false);
+        jLabel30.setVisible(false);
+        jLabel31.setVisible(false);
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    public void setCartelPrecioInvalidoSanLuis(boolean b) {
-        jLabel26.setVisible(b);
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        
+        // En este método se valida si se tienen los datos necesarios para construir el 
+        // Producto que se pasa como parámetro al ControladorAltaProducto. Ahi es donde
+        // se comprueba que los datos sean válidos para dar el Producto de alta.
+        
+        boolean invalido = false;
+        String s;
+        float precioVentaSanLuis = 0;
+        float precioVentaNeuquen = 0;
+        int stockActualSanLuis = 0;
+        int stockActualNeuquen = 0;
+        int stockMinimoSanLuis = 0;
+        int stockMinimoNeuquen = 0;
+        
+        resetCarteles();
+        
+        if (jTextField1.getText().isBlank()) {
+            avisarNombreInvalido();
+            invalido = true;
+        }
+        
+        if (jCheckBox1.isSelected()) {
+            try {
+                s = jTextField2.getText();
+                s = s.replace(',', '.');
+                precioVentaSanLuis = Float.parseFloat(s);
+            } catch (NumberFormatException e) {
+                avisarPrecioInvalidoSanLuis();
+                invalido = true;
+            }
+            
+            try {
+                stockActualSanLuis = Integer.parseInt(jTextField3.getText());
+            } catch (NumberFormatException e) {
+                avisarStockInvalidoSanLuis();
+                invalido = true;
+            }
+            
+            try {
+                if (! jTextField4.getText().isBlank()) {
+                    stockMinimoSanLuis = Integer.parseInt(jTextField4.getText());
+                }
+            } catch (NumberFormatException e) {
+                avisarStockMinimoInvalidoSanLuis();
+                invalido = true;
+            }
+        }
+        
+        if (jCheckBox2.isSelected()) {
+            try {
+                s = jTextField8.getText();
+                s = s.replace(',', '.');
+                
+                precioVentaNeuquen = Float.parseFloat(s);
+            } catch (NumberFormatException e) {
+                avisarPrecioInvalidoNeuquen();
+                invalido = true;
+            }
+            
+            try {
+                stockActualNeuquen = Integer.parseInt(jTextField9.getText());
+            } catch (NumberFormatException e) {
+                avisarStockInvalidoNeuquen();
+                invalido = true;
+            }
+            
+            try {
+                if (! jTextField10.getText().isBlank()) {
+                    stockMinimoNeuquen = Integer.parseInt(jTextField10.getText());
+                }
+            } catch (NumberFormatException e) {
+                avisarStockMinimoInvalidoNeuquen();
+                invalido = true;
+            }
+        }
+        
+        if (! invalido) {
+            
+            // Crear Producto y enviar al controlador
+            
+            Producto p = new Producto();
+            p.setNombre(jTextField1.getText());
+            p.setDescripcion(jTextField5.getText());
+            switch (jComboBox1.getSelectedIndex()) {
+                case 0 -> p.setCategoria(Producto.CategoriaProducto.ACCESORIO);
+                case 1 -> p.setCategoria(Producto.CategoriaProducto.LENCERIA);
+                case 2 -> p.setCategoria(Producto.CategoriaProducto.MARROQUINERIA);
+                case 3 -> p.setCategoria(Producto.CategoriaProducto.PAPELERIA);
+                default -> p.setCategoria(Producto.CategoriaProducto.VARIOS);
+            }
+            
+            ArrayList<Disponibilidad> arrd = new ArrayList<>();
+            
+            if (jCheckBox1.isSelected()) {
+                Disponibilidad dsl = new Disponibilidad();
+                dsl.setProducto(p);
+                dsl.setPrecioVenta(precioVentaSanLuis);
+                dsl.setStockActual(stockActualSanLuis);
+                dsl.setTieneStockMinimo(! jTextField4.getText().isBlank());
+                dsl.setStockMinimo(stockMinimoSanLuis);
+                Sucursal suc = new Sucursal();
+                suc.setUbicacion("San Luis");
+                dsl.setSucursal(suc);
+                arrd.add(dsl);
+            }
+            
+            if (jCheckBox2.isSelected()) {
+                Disponibilidad dn = new Disponibilidad();
+                dn.setProducto(p);
+                dn.setPrecioVenta(precioVentaNeuquen);
+                dn.setStockActual(stockActualNeuquen);
+                dn.setTieneStockMinimo(! jTextField10.getText().isBlank());
+                dn.setStockMinimo(stockMinimoNeuquen);
+                Sucursal suc = new Sucursal();
+                suc.setUbicacion("Neuquen");
+                dn.setSucursal(suc);
+                arrd.add(dn);
+            }
+            
+            p.setDisponibilidades(arrd);
+            
+            // Llamar al controlador
+            new ControladorAltaProducto(this, p);
+        }
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
+    public void avisarNombreInvalido() {
+        
+        jTextField1.setText("");
+        jLabel8.setVisible(true);
     }
     
-    public void setCartelStockInvalidoSanLuis(boolean b) {
-        jLabel27.setVisible(b);
+    public void avisarNingunaDisponibilidad() {
+        
+        jLabel9.setVisible(true);
     }
     
-    public void setCartelStockMinimoInvalidoSanLuis(boolean b) {
-        jLabel28.setVisible(b);
+    public void avisarPrecioInvalidoSanLuis() {
+       
+        jTextField2.setText("");
+        jLabel26.setVisible(true);
     }
     
-    public void setCartelPrecioInvalidoNeuquen(boolean b) {
-        jLabel29.setVisible(b);
+    public void avisarStockInvalidoSanLuis() {
+        
+        jTextField3.setText("");
+        jLabel27.setVisible(true);
     }
     
-    public void setCartelStockInvalidoNeuquen(boolean b) {
-        jLabel30.setVisible(b);
+    public void avisarStockMinimoInvalidoSanLuis() {
+       
+        jTextField4.setText("");
+        jLabel28.setVisible(true);
     }
     
-    public void setCartelStockMinimoInvalidoNeuquen(boolean b) {
-        jLabel31.setVisible(b);
+    public void avisarPrecioInvalidoNeuquen() {
+        
+        jTextField8.setText("");
+        jLabel29.setVisible(true);
+    }
+    
+    public void avisarStockInvalidoNeuquen() {
+       
+        jTextField9.setText("");
+        jLabel30.setVisible(true);
+    }
+    
+    public void avisarStockMinimoInvalidoNeuquen() {
+       
+        jTextField10.setText("");
+        jLabel31.setVisible(true);
+    }
+    
+    public void resetCarteles() {
+        
+        jLabel8.setVisible(false);
+        jLabel9.setVisible(false);
+        
+        jLabel26.setVisible(false);
+        jLabel27.setVisible(false);
+        jLabel28.setVisible(false);
+        
+        jLabel29.setVisible(false);
+        jLabel30.setVisible(false);
+        jLabel31.setVisible(false);
+    }
+    
+    public void resetCampos() {
+        
+        jTextField1.setText("");
+        jComboBox1.setSelectedIndex(0);
+        jTextField5.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
+        jTextField10.setText("");
+        
+        if (jCheckBox1.isSelected()) jCheckBox1.doClick();
+        if (jCheckBox2.isSelected()) jCheckBox2.doClick();
+    }
+    
+    public void mostrarCartelAltaExitosa() {
+        
+        // IMPLEMENTAR
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

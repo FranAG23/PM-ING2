@@ -4,7 +4,6 @@ package dao;
 import base_datos.BaseDatos;
 import clases_entidad.Disponibilidad;
 import clases_entidad.Producto;
-import clases_entidad.Sucursal.Ciudad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,9 +42,9 @@ public class DAOProducto implements InterfazDAOProducto {
             
             for (Disponibilidad d : p.getDisponibilidades()) {
                 
-                pst = con.prepareStatement("INSERT INTO Disponibilidad VALUES (DEFAULT,?,?,?,?,?)");
+                pst = con.prepareStatement("INSERT INTO Disponibilidad VALUES (DEFAULT,?,?,?,?,?,?)");
                 pst.setInt(1, pID);
-                if (d.getSucursal().getUbicacion() == Ciudad.SAN_LUIS) {
+                if (d.getSucursal().getUbicacion().equals("San Luis")) {
                     // Si está disponible en San Luis (sID = 1)
                     pst.setInt(2,1);
                 } else {
