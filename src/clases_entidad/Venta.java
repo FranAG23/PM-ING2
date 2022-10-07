@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Venta {
-    
+
+    public void addItem(ItemVenta item) {
+        items.add(item);
+    }
+  
     // Definición de MetodoPago (tipo enumerado)
     
     public enum MetodoPago {
@@ -35,11 +39,13 @@ public class Venta {
     
     private int id;
     private String nombreCliente;
+    private String apellidoCliente; 
     private boolean envioGratis;
     private float importe;
     private Date fecha;
     private MetodoPago metodoPago;
     private EstadoVenta estado;
+    private Sucursal sucursal; 
     private Reserva reserva;
     private ArrayList<ItemVenta> items;
     
@@ -50,6 +56,9 @@ public class Venta {
 
     public String getNombreCliente() {return nombreCliente;}
     public void setNombreCliente(String nombreCliente) {this.nombreCliente = nombreCliente;}
+    
+    public String getApellidoCliente() {return apellidoCliente;}
+    public void setApellidoCliente(String apellidoCliente) {this.apellidoCliente = apellidoCliente;}
 
     public boolean getEnvioGratis() {return envioGratis;}
     public void setEnvioGratis(boolean envioGratis) {this.envioGratis = envioGratis;}
@@ -71,4 +80,7 @@ public class Venta {
     
     public ArrayList<ItemVenta> getItems(){ return items; }
     public void setItems(ArrayList<ItemVenta> items) {this.items = items;}
+    
+    public Sucursal getSucursal(){return sucursal;}
+    public void setSucursal(Sucursal sucursal){this.sucursal = sucursal;}
 }

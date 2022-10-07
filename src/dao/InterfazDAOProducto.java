@@ -2,6 +2,7 @@
 package dao;
 
 import clases_entidad.Producto;
+import java.util.ArrayList;
 
 public interface InterfazDAOProducto {
     
@@ -12,5 +13,5 @@ public interface InterfazDAOProducto {
     boolean eliminar(int id);
     
     Producto obtener(int id);
-    
+    ArrayList<Producto> obtener(String Nombre);
 }

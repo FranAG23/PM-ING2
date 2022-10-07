@@ -1,7 +1,7 @@
 
 package dao;
 
-import base_datos.BaseDatos;
+import base_datos.ConexionBD;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
 import clases_entidad.Reserva;
@@ -15,58 +15,74 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DAOVenta implements InterfazDAOVenta {
-
+    private final String nombreTablaVentas = "Ventas"; 
+    private final String nombreTablaItemsVenta = "ItemsVenta"; 
+    private final int colIDVentaEnVentas = 0;
+    private final int colNomCliente = 1;
+    private final int colApeCliente = 2;
+    private final int colEnvioGratis = 3;
+    private final int colImporte = 4; 
+    private final int colFechaPago = 5; 
+    private final int colMetodoPago = 6; 
+    private final int colEstadoVenta = 7; 
+    private final int colIDSucursal = 8;     
+    private final int colIDItemVenta = 0; 
+    private final int colCantidad = 1;
+    private final int colPrecioUnidad = 2;
+    private final int colIDVentaEnItemsVenta = 3;
+    private final int colIDProducto = 4; 
+    private final String queryParaInsertarEnTablaVentas = "INSERT INTO " + nombreTablaVentas + " VALUES (DEFAULT,?,?,?,?,?,?,?,?)"; 
+    private final String queryParaGenerarIDVenta = "SELECT CURRVAL('Ventas_IDVenta_seq')"; 
+    private final String queryParaInsertarEnTablaItemsVenta = "INSERT INTO " + nombreTablaItemsVenta + " VALUES (DEFAULT,?,?,?,?)";
+    private final String queryParaGenerarIDItemVenta = "SELECT CURRVAL('ItemsVenta_IDItemVenta_seq')"; 
+    
     @Override
-    public boolean registrar(Venta v) {
+    public boolean registrar(Venta venta) {
         boolean exito = false;
         PreparedStatement pst = null;
-        Connection con = null;
         ResultSet rs = null;
-        int vID;
-        
-        try {
-            con = BaseDatos.getInstance().establecerConexion();
+        ConexionBD conexionBD = ConexionBD.obtenerInstancia(); 
+        int IDVenta;
+        try {       
+            conexionBD.establecerConexion();
             
-            // Insertar en tabla Venta
-            
-            pst = con.prepareStatement("INSERT INTO Venta VALUES (DEFAULT,?,?,?,?,?,?)");
-            pst.setString(1, v.getNombreCliente());
-            pst.setBoolean(2, v.getEnvioGratis());
-            pst.setFloat(3, v.getImporte());
-            pst.setDate(4, new java.sql.Date(v.getFecha().getTime()));
-            pst.setString(5, v.getMetodoPago().toString());
-            pst.setString(6, v.getEstado().toString());
+            // En este bloque de código inserto los atributos de venta en la tabla de ventas:
+            pst = conexionBD.prepararSentencia(queryParaInsertarEnTablaVentas);
+            pst.setInt(colIDSucursal, venta.getSucursal().getID());
+            pst.setString(colNomCliente, venta.getNombreCliente());
+            pst.setString(colApeCliente, venta.getApellidoCliente());
+            pst.setBoolean(colEnvioGratis, venta.getEnvioGratis());
+            pst.setFloat(colImporte, venta.getImporte());
+            pst.setDate(colFechaPago, new java.sql.Date(venta.getFecha().getTime()));
+            pst.setString(colMetodoPago, venta.getMetodoPago().toString());
+            pst.setString(colEstadoVenta, venta.getEstado().toString());
             pst.executeUpdate();
             
-            // Obtener el ID de la venta recién insertada
             
-            pst = con.prepareStatement("SELECT CURRVAL('Venta_vID_seq')");
+            // Aquí recupero el ID de venta generado anteriormente para luego insertarlo en la tabla de items de venta.            
+            pst = conexionBD.prepararSentencia(queryParaGenerarIDVenta);
             rs = pst.executeQuery();
             rs.next();
-            vID = rs.getInt(1);
+            IDVenta = rs.getInt(1);
             
-            // Insertar en tabla ItemVenta
-                    
-            for (ItemVenta i : v.getItems()) {
-                
-                pst = con.prepareStatement("INSERT INTO ItemVenta VALUES (DEFAULT,?,?,?,?)");
-                // En cada item de v debe venir su producto con su ID
-                pst.setInt(1, i.getProducto().getId());
-                pst.setInt(2, i.getCantidad());
-                pst.setFloat(3, i.getPrecioUnidad());
-                pst.setInt(4, vID);
+            // En este bloque de código inserto cada uno de los items de venta en la tabla de items de venta. 
+            for (ItemVenta itemVenta : venta.getItems()) {
+                pst = conexionBD.prepararSentencia(queryParaInsertarEnTablaItemsVenta);
+                pst.setInt(colIDProducto, itemVenta.getProducto().getId());
+                pst.setInt(colIDVentaEnItemsVenta, IDVenta);
+                pst.setInt(colCantidad, itemVenta.getCantidad());
+                pst.setFloat(colPrecioUnidad, itemVenta.getPrecioUnidad());
                 pst.executeUpdate();
             }
-            
             exito = true;
-            
         } catch (SQLException e){
             e.printStackTrace();
         } finally {
             try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
             try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+            conexionBD.cerrarConexion();
         }
-        
+        conexionBD.cerrarConexion();
         return exito;
     }
 
@@ -89,7 +105,7 @@ public class DAOVenta implements InterfazDAOVenta {
         ResultSet rs = null;
         
         try {
-            con = BaseDatos.getInstance().establecerConexion();
+            
             
             // Obtener datos de tabla Venta
             

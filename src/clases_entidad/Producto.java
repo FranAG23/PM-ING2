@@ -1,4 +1,3 @@
-
 package clases_entidad;
 
 import java.util.ArrayList;

@@ -1,21 +1,28 @@
 package com.raven.main;
 
+import base_datos.ConexionBD;
+import clases_entidad.ItemVenta;
+import clases_entidad.Producto;
+import clases_entidad.Sucursal;
+import clases_entidad.Venta;
 import com.raven.component.Header;
 import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
 import com.raven.event.EventShowPopupMenu;
-import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
-import com.raven.form.FormularioAltaProducto;
 import com.raven.form.FormularioAltaVenta;
 import com.raven.form.MainForm;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
 import com.raven.swing.icon.GoogleMaterialDesignIcons;
 import com.raven.swing.icon.IconFontSwing;
+import dao.DAOVenta;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Date;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -77,21 +84,11 @@ public class Main extends javax.swing.JFrame {
                     case 0:
                         switch(subMenuIndex){
                             case 0:
-                                main.showForm(new FormularioAltaProducto());
-                                break;
-                        }
-                        break; 
-                    case 1:
-                        switch(subMenuIndex){
-                            case 0:
                                 main.showForm(new FormularioAltaVenta());
                                 break;
-                            case 1:
-                                main.showForm(new FormularioConsultarVenta()); 
-                                break; 
                         }
                         break;
-                    case 2:
+                    case 1:
                         main.showForm(new Form_Home());
                         break; 
                 }
@@ -254,7 +251,43 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Main().setVisible(true);
+                new Main().setVisible(true);  
+                /*
+                Sucursal sucursal = new Sucursal();
+                sucursal.setID(1); 
+                sucursal.setUbicacion("San Luis");
+                
+                Producto prod1 = new Producto(); 
+                prod1.setId(1);
+                Producto prod2 = new Producto(); 
+                prod2.setId(2);
+                
+                ItemVenta item1 = new ItemVenta();
+                item1.setCantidad(3);
+                item1.setPrecioUnidad(3);
+                item1.setProducto(prod1);
+                
+                ItemVenta item2 = new ItemVenta();
+                item2.setCantidad(88);
+                item2.setPrecioUnidad(88);
+                item2.setProducto(prod2);
+                
+                
+                Venta venta = new Venta();
+                venta.setItems(new ArrayList<ItemVenta>());
+                venta.setNombreCliente("nombreB");
+                venta.setApellidoCliente("apellidoB");
+                venta.setEnvioGratis(true);
+                venta.setEstado(Venta.EstadoVenta.COMPLETADA);
+                venta.setImporte(100);
+                venta.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
+                venta.setFecha(new Date());
+                venta.setSucursal(sucursal);
+                venta.addItem(item1);
+                venta.addItem(item2);
+                
+                DAOVenta daoventa = new DAOVenta();
+                daoventa.registrar(venta);*/
             }
         });
     }
