@@ -29,7 +29,29 @@ public class Producto {
     private CategoriaProducto categoria;
     private ArrayList<Disponibilidad> disponibilidades;
     
-    // Getters y Setters
+    public Producto(){
+        this.id = -1; 
+        this.nombre = "Indefinido";
+        this.descripcion =  "Indefinido";
+        this.categoria = CategoriaProducto.ACCESORIO; 
+        disponibilidades = null; 
+    }
+    
+    public Producto(Producto producto){
+        this.id = producto.getId(); 
+        this.nombre = producto.getNombre();
+        this.descripcion =  producto.getDescripcion();
+        this.categoria = producto.getCategoria();
+        disponibilidades = producto.getDisponibilidades(); 
+    }
+    
+    public Producto(int id, String nombre, String descripcion, CategoriaProducto categoria){
+        this.id = id; 
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.categoria = categoria; 
+        disponibilidades = null; 
+    }
     
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}

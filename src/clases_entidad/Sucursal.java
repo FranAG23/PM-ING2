@@ -2,11 +2,23 @@
 package clases_entidad;
 
 public class Sucursal {
-    
-    // Atributos
     private int id; 
     private String ubicacion;
-    // Getters y Setters
+    
+    public Sucursal(){
+        id = -1;
+        ubicacion = "Indefinido";
+    }
+    
+    public Sucursal(int id, String ubicacion){
+        this.id = id;
+        this.ubicacion = ubicacion;
+    }
+    
+    public Sucursal(Sucursal sucursal){
+        this.id = sucursal.getID();
+        this.ubicacion = sucursal.getUbicacion();
+    }
     
     public String getUbicacion() {return ubicacion;}
     public void setUbicacion(String ubicacion) {this.ubicacion = ubicacion;}

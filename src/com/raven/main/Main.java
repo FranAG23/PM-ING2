@@ -1,28 +1,21 @@
 package com.raven.main;
 
-import base_datos.ConexionBD;
-import clases_entidad.ItemVenta;
-import clases_entidad.Producto;
-import clases_entidad.Sucursal;
-import clases_entidad.Venta;
+import clases_entidad.auxiliares.RenglonTablaAltaVenta;
 import com.raven.component.Header;
 import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
 import com.raven.event.EventShowPopupMenu;
-import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaVenta;
 import com.raven.form.MainForm;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
 import com.raven.swing.icon.GoogleMaterialDesignIcons;
 import com.raven.swing.icon.IconFontSwing;
-import dao.DAOVenta;
+import managers.ManagerVenta;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -88,9 +81,6 @@ public class Main extends javax.swing.JFrame {
                                 break;
                         }
                         break;
-                    case 1:
-                        main.showForm(new Form_Home());
-                        break; 
                 }
             }
         });
@@ -182,7 +172,7 @@ public class Main extends javax.swing.JFrame {
         //  Init google icon font
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         //  Start with this form
-        main.showForm(new Form_Home());
+        main.showForm(new FormularioAltaVenta());
     }
 
     @SuppressWarnings("unchecked")
@@ -252,42 +242,6 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void run() {
                 new Main().setVisible(true);  
-                /*
-                Sucursal sucursal = new Sucursal();
-                sucursal.setID(1); 
-                sucursal.setUbicacion("San Luis");
-                
-                Producto prod1 = new Producto(); 
-                prod1.setId(1);
-                Producto prod2 = new Producto(); 
-                prod2.setId(2);
-                
-                ItemVenta item1 = new ItemVenta();
-                item1.setCantidad(3);
-                item1.setPrecioUnidad(3);
-                item1.setProducto(prod1);
-                
-                ItemVenta item2 = new ItemVenta();
-                item2.setCantidad(88);
-                item2.setPrecioUnidad(88);
-                item2.setProducto(prod2);
-                
-                
-                Venta venta = new Venta();
-                venta.setItems(new ArrayList<ItemVenta>());
-                venta.setNombreCliente("nombreB");
-                venta.setApellidoCliente("apellidoB");
-                venta.setEnvioGratis(true);
-                venta.setEstado(Venta.EstadoVenta.COMPLETADA);
-                venta.setImporte(100);
-                venta.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
-                venta.setFecha(new Date());
-                venta.setSucursal(sucursal);
-                venta.addItem(item1);
-                venta.addItem(item2);
-                
-                DAOVenta daoventa = new DAOVenta();
-                daoventa.registrar(venta);*/
             }
         });
     }

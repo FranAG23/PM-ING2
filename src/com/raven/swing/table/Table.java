@@ -80,6 +80,11 @@ public class Table extends JTable {
         mod.addRow(row);
     }
 
+    public void deleteRow(int row) {
+        DefaultTableModel mod = (DefaultTableModel) getModel();
+        mod.removeRow(row);
+    }
+    
     public void fixTable(JScrollPane scroll) {
         scroll.getViewport().setBackground(Color.WHITE);
         scroll.setVerticalScrollBar(new ScrollBarCustom());

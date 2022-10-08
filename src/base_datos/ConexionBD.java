@@ -29,15 +29,14 @@ public class ConexionBD{
     }
     
     public void establecerConexion(){  
-        if (conexion == null){
-            try {
-
-                Class.forName("org.postgresql.Driver");
-                conexion = DriverManager.getConnection(url, usuario, password);
-            } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println("ERROR en public Connection establecerConexion() de clase ConexionBD");
-                Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try{
+            if (conexion == null || conexion.isClosed() ){ 
+                    Class.forName("org.postgresql.Driver");
+                    conexion = DriverManager.getConnection(url, usuario, password);
+                } 
+         } catch (ClassNotFoundException | SQLException ex) {
+             System.out.println("Error en public PreparedStatement prepararSentencia() de clase ConexionBD");
+           Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     

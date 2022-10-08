@@ -1,31 +1,104 @@
 package managers;
 
+import clases_entidad.ItemVenta;
+import clases_entidad.Producto;
+import clases_entidad.Sucursal;
+import clases_entidad.Venta;
+import clases_entidad.Venta.EstadoVenta;
+import clases_entidad.Venta.MetodoPago;
+import clases_entidad.auxiliares.RenglonTablaAltaVenta;
+import com.raven.form.FormularioAltaVenta;
 import dao.DAOVenta;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
+import java.util.ArrayList;
+import java.util.Date;
 
-public class ManagerVenta {
-    DAOVenta daoVenta; 
+public class ManagerVenta 
+{
+    DAOVenta daoVenta;
+    FormularioAltaVenta formulario;
+    
+    public ManagerVenta(FormularioAltaVenta formulario) {
+        this.formulario = formulario;
+    }
+     
+
     /*
-    private javax.swing.JButton botonCompletarVenta;
-    private javax.swing.JTextField campoApellido;
-    private javax.swing.JCheckBox campoEnvioGratis;
-    private javax.swing.JComboBox<String> campoMetodoPago;
-    private javax.swing.JTextField campoNombre;
-    private javax.swing.JComboBox<String> campoSucursal;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+        Descripción: Recibe los datos que le trasmite la interfaz y los valida para luego construir un objeto
+        de tipo Venta. En caso de que los datos no sean correctos, invoca a la interfaz para que se 
+        desplieguen mensajes de error. En caso de que los datos sean correctos, invoca a daoVenta para que 
+        inserte el objeto en la base de datos. 
+    
+        Precondiciones: listaRenglones no es null. 
     */
-    
-    
-    ManagerVenta(){}
-    /*
-    public void altaVenta(JTextField campoCliente, JTextField campoApellido, JComboBox ){
-    
-    }*/
+    public void altaVenta(String nombreCliente, String apellidoCliente, boolean envioGratis, float importe,
+                          String strMetodoPago, String ubiSucursal, ArrayList<RenglonTablaAltaVenta> listaRenglones)
+    {        
+       daoVenta = new DAOVenta();
+       boolean datosValidadosCorrectamente = true;
+       boolean exitoInsercionBD;
+
+       Producto producto; 
+       ItemVenta item;
+       Sucursal sucursal; 
+       Venta venta; 
+       ArrayList<ItemVenta> itemsVenta = new ArrayList<>();
+       MetodoPago metodoPago; 
+       EstadoVenta estadoVenta;
+      
+       // Validacion de datos:
+       if(nombreCliente.isEmpty()|| nombreCliente.length() > 20){
+           formulario.mostrarErrorNombre();
+           datosValidadosCorrectamente = false; 
+       }
+       if(apellidoCliente.isEmpty() || apellidoCliente.length() > 20){
+           formulario.mostrarErrorApellido();
+           datosValidadosCorrectamente = false;
+       }
+       if(listaRenglones.isEmpty()){
+           formulario.mostrarErrorTablaVacia();
+           datosValidadosCorrectamente = false; 
+       }
+       
+       if(datosValidadosCorrectamente)
+       {
+            // Construcción del objeto sucursal: 
+            sucursal = new Sucursal(1, ubiSucursal);
+
+            // Construcción de los objetos item, producto y itemsVenta: 
+            for(RenglonTablaAltaVenta renglon: listaRenglones){
+                // Construcción del objeto producto:
+                producto = new Producto(renglon.getIDProducto(), renglon.getNombreProducto(), "Indefinido", 
+                                        Producto.CategoriaProducto.ACCESORIO);
+
+                // Construcción del objeto item:
+                item = new ItemVenta(renglon.getCantidad(), renglon.getPrecioPorUnidad(), producto);
+
+                // Agregamos un nuevo item de venta a nuestra lista: 
+                itemsVenta.add(item);
+            }
+
+            // Construcción del objeto venta:
+            // Conversión de string a enumerado MetodoPago: 
+            metodoPago = MetodoPago.valueOf(strMetodoPago);
+            // Hasta que no agreguemos el CU "Alta Reserva", nuestras ventas estarán siempre completas:
+            estadoVenta = EstadoVenta.COMPLETADA;
+            venta = new Venta(nombreCliente, apellidoCliente, envioGratis, importe,  new Date(),
+                              metodoPago, estadoVenta, sucursal, itemsVenta);
+
+            // Dar de alta venta en Base de datos:
+            exitoInsercionBD = daoVenta.registrar(venta);
+
+            // Si la insercion en la BD fue exitosa,
+            if(exitoInsercionBD){
+                // reiniciar campos de la GUI. 
+                formulario.reiniciarCampos();
+                // entonces mostrar un cartel de éxito.
+                formulario.mostrarCartelExito();
+            }
+            else{
+                // Si no, mostrar cartel de fracaso.
+                formulario.mostrarCartelFracaso();
+            }
+       }
+    }
 }

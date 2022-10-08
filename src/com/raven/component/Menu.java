@@ -58,7 +58,6 @@ public class Menu extends javax.swing.JPanel {
     // cambiar el nombre o imágen de un menú hay que tocar este método.
     public void initMenuItem() {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/imagenes/3.png")), "Ventas", "Registrar Venta"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/imagenes/14.png")), "Formulario Prueba"));
     }
 
     // Este método simplemente agrega el menú al panel principal. 

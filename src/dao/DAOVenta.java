@@ -53,7 +53,7 @@ public class DAOVenta implements InterfazDAOVenta {
             pst.setString(colApeCliente, venta.getApellidoCliente());
             pst.setBoolean(colEnvioGratis, venta.getEnvioGratis());
             pst.setFloat(colImporte, venta.getImporte());
-            pst.setDate(colFechaPago, new java.sql.Date(venta.getFecha().getTime()));
+            pst.setDate(colFechaPago, new java.sql.Date(venta.getFechaPago().getTime()));
             pst.setString(colMetodoPago, venta.getMetodoPago().toString());
             pst.setString(colEstadoVenta, venta.getEstado().toString());
             pst.executeUpdate();
@@ -66,7 +66,7 @@ public class DAOVenta implements InterfazDAOVenta {
             IDVenta = rs.getInt(1);
             
             // En este bloque de código inserto cada uno de los items de venta en la tabla de items de venta. 
-            for (ItemVenta itemVenta : venta.getItems()) {
+            for (ItemVenta itemVenta : venta.getItemsVenta()) {
                 pst = conexionBD.prepararSentencia(queryParaInsertarEnTablaItemsVenta);
                 pst.setInt(colIDProducto, itemVenta.getProducto().getId());
                 pst.setInt(colIDVentaEnItemsVenta, IDVenta);
@@ -118,7 +118,7 @@ public class DAOVenta implements InterfazDAOVenta {
                 v.setNombreCliente(rs.getString("vNombreCliente"));
                 v.setEnvioGratis(rs.getBoolean("vEnvioGratis"));
                 v.setImporte(rs.getFloat("vImporte"));
-                v.setFecha(new java.util.Date(rs.getDate("vFecha").getTime()));
+                v.setFechaPago(new java.util.Date(rs.getDate("vFecha").getTime()));
                 if (rs.getString("vMetodoPago").equals("Efectivo")) {
                     v.setMetodoPago(Venta.MetodoPago.EFECTIVO);
                 } 
@@ -164,7 +164,7 @@ public class DAOVenta implements InterfazDAOVenta {
             
             // Obtener ID y nombre de producto de cada ItemVenta
             
-            for (ItemVenta i : v.getItems()) {
+            for (ItemVenta i : v.getItemsVenta()) {
                 
                 pst = con.prepareStatement("SELECT Producto.pID, pNombre FROM ItemVenta, Producto WHERE"+
                                             " (ivID = ? and ItemVenta.pID = Producto.pID)");

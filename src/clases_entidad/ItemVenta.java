@@ -9,6 +9,14 @@ public class ItemVenta {
     private int cantidad;
     private float precioUnidad;
     private Producto producto;
+
+    public ItemVenta(){}
+    
+    public ItemVenta(int cantidad, float precioPorUnidad, Producto producto) {
+        this.cantidad = cantidad;
+        this.precioUnidad = precioPorUnidad;
+        this.producto = new Producto(producto);
+    }
     
     // Getters y Setters
     

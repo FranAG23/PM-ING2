@@ -4,24 +4,15 @@ package clases_entidad;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Venta {
-
-    public void addItem(ItemVenta item) {
-        items.add(item);
-    }
-  
-    // Definición de MetodoPago (tipo enumerado)
-    
+public class Venta {  
     public enum MetodoPago {
         EFECTIVO, MERCADOPAGO;
         @Override
         public String toString() {
-            if (this==EFECTIVO) return "Efectivo";
-            else return "MercadoPago";
+            if (this==EFECTIVO) return "EFECTIVO";
+            else return "MERCADOPAGO";
         }
     }
-    
-    // Definición de EstadoVenta (tipo enumerado)
     
     public enum EstadoVenta {
         COMPLETADA, CANCELADA, EN_RESERVA;
@@ -35,51 +26,125 @@ public class Venta {
         }
     }
     
-    // Atributos
-    
     private int id;
     private String nombreCliente;
     private String apellidoCliente; 
     private boolean envioGratis;
     private float importe;
-    private Date fecha;
+    private Date fechaPago;
     private MetodoPago metodoPago;
     private EstadoVenta estado;
     private Sucursal sucursal; 
     private Reserva reserva;
-    private ArrayList<ItemVenta> items;
+    private ArrayList<ItemVenta> itemsVenta;
     
-    // Getters y Setters
+    public Venta(){
+        nombreCliente = "Indefinido";
+        apellidoCliente = "Indefinido";
+        envioGratis = false;
+        importe = -1; 
+        fechaPago = new Date();
+        metodoPago = MetodoPago.EFECTIVO;
+        estado = EstadoVenta.CANCELADA;
+        sucursal = null; 
+        reserva = null; 
+        itemsVenta = new ArrayList<>();
+    }
+
+    public Venta(String nombreCliente, String apellidoCliente, boolean envioGratis, float importe, Date fechaPago,
+                MetodoPago metodoPago, EstadoVenta estado, Sucursal sucursal, ArrayList<ItemVenta> itemsVenta)
+    {
+        this.nombreCliente = nombreCliente;
+        this.apellidoCliente = apellidoCliente;
+        this.envioGratis = envioGratis;
+        this.importe = importe;
+        this.fechaPago = fechaPago;
+        this.metodoPago = metodoPago;
+        this.estado = estado;
+        this.sucursal = new Sucursal(sucursal); 
+        this.itemsVenta = new ArrayList<>(itemsVenta);
+    }
     
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
-
-    public String getNombreCliente() {return nombreCliente;}
-    public void setNombreCliente(String nombreCliente) {this.nombreCliente = nombreCliente;}
+    public int getId(){
+        return id;
+    }
     
-    public String getApellidoCliente() {return apellidoCliente;}
-    public void setApellidoCliente(String apellidoCliente) {this.apellidoCliente = apellidoCliente;}
-
-    public boolean getEnvioGratis() {return envioGratis;}
-    public void setEnvioGratis(boolean envioGratis) {this.envioGratis = envioGratis;}
-
-    public float getImporte() {return importe;}
-    public void setImporte(float importe) {this.importe = importe;}
-
-    public Date getFecha() {return fecha;}
-    public void setFecha(Date fecha) {this.fecha = fecha;}
-
-    public MetodoPago getMetodoPago() {return metodoPago;}
-    public void setMetodoPago(MetodoPago metodoPago) {this.metodoPago = metodoPago;}
-
-    public EstadoVenta getEstado() {return estado;}
-    public void setEstado(EstadoVenta estado) {this.estado = estado;}
-
-    public Reserva getReserva() {return reserva;}
-    public void setReserva(Reserva reserva) {this.reserva = reserva;}
+    public int setId(){
+        return id;
+    }
     
-    public ArrayList<ItemVenta> getItems(){ return items; }
-    public void setItems(ArrayList<ItemVenta> items) {this.items = items;}
+    public void setId(int id){
+        this.id = id;
+    }
+    public String getNombreCliente(){
+        return nombreCliente;
+    }
+    public void setNombreCliente(String nombreCliente){
+        this.nombreCliente = nombreCliente;
+    }
+    
+    public String getApellidoCliente(){
+        return apellidoCliente;
+    }
+    
+    public void setApellidoCliente(String apellidoCliente){
+        this.apellidoCliente = apellidoCliente;
+    }
+
+    public boolean getEnvioGratis(){
+        return envioGratis;
+    }
+    
+    public void setEnvioGratis(boolean envioGratis){
+        this.envioGratis = envioGratis;
+    }
+    
+    public float getImporte(){
+        return importe;
+    }
+    
+    public void setImporte(float importe){
+        this.importe = importe;
+    }
+
+    public Date getFechaPago(){
+        return fechaPago;
+    }
+    public void setFechaPago(Date fecha){
+        this.fechaPago = fecha;
+    }
+
+    public MetodoPago getMetodoPago(){
+        return metodoPago;
+    }
+    
+    public void setMetodoPago(MetodoPago metodoPago){
+        this.metodoPago = metodoPago;
+    }
+
+    public EstadoVenta getEstado(){
+        return estado;
+    }
+    
+    public void setEstado(EstadoVenta estado){
+        this.estado = estado;
+    }
+
+    public Reserva getReserva(){
+        return reserva;
+    }
+    
+    public void setReserva(Reserva reserva){
+        this.reserva = reserva;
+    }
+
+    public ArrayList<ItemVenta> getItemsVenta(){
+        return new ArrayList<>(itemsVenta);
+    }
+    
+    public void setItems(ArrayList<ItemVenta> nuevo){
+        itemsVenta = new ArrayList<>(nuevo); 
+    }
     
     public Sucursal getSucursal(){return sucursal;}
     public void setSucursal(Sucursal sucursal){this.sucursal = sucursal;}
