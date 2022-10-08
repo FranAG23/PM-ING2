@@ -1,7 +1,7 @@
 
 package com.raven.form;
 
-import clases_control.ControladorAltaProducto;
+import clases_control.ManagerProducto;
 import clases_entidad.Disponibilidad;
 import clases_entidad.Producto;
 import clases_entidad.Sucursal;
@@ -480,7 +480,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         
         // En este método se valida si se tienen los datos necesarios para construir el 
-        // Producto que se pasa como parámetro al ControladorAltaProducto. Ahi es donde
+        // Producto que se pasa como parámetro al ManagerProducto. Ahi es donde
         // se comprueba que los datos sean válidos para dar el Producto de alta.
         
         boolean invalido = false;
@@ -600,7 +600,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             p.setDisponibilidades(arrd);
             
             // Llamar al controlador
-            new ControladorAltaProducto(this, p);
+            new ManagerProducto().alta(this, p);
         }
         
     }//GEN-LAST:event_button1ActionPerformed

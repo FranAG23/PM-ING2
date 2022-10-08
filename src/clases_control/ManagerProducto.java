@@ -6,14 +6,14 @@ import clases_entidad.Producto;
 import com.raven.form.FormularioAltaProducto;
 import dao.DAOProducto;
 
-public class ControladorAltaProducto {
+public class ManagerProducto {
     
-    public ControladorAltaProducto(FormularioAltaProducto f, Producto p) {
+    public void alta(FormularioAltaProducto f, Producto p) {
         
         // Hacer alta excepto si p no tiene disponibilidades, o algún núm. es <0
         boolean valido = true;
         
-        if (p.getDisponibilidades().size() == 0) {
+        if (p.getDisponibilidades().isEmpty()) {
             f.avisarNingunaDisponibilidad();
             valido = false;
         }
@@ -52,11 +52,12 @@ public class ControladorAltaProducto {
         
         if (valido) {
             
-            new DAOProducto().registrar(p);
-            
             f.resetCampos();
             f.resetCarteles();
-            f.mostrarCartelAltaExitosa();
+            
+            if (new DAOProducto().registrar(p)) {
+                f.mostrarCartelAltaExitosa();
+            }
         }
     }
     
