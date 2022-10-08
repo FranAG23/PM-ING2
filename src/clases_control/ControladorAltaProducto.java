@@ -51,7 +51,9 @@ public class ControladorAltaProducto {
         }
         
         if (valido) {
+            
             new DAOProducto().registrar(p);
+            
             f.resetCampos();
             f.resetCarteles();
             f.mostrarCartelAltaExitosa();
