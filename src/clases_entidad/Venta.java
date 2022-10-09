@@ -45,7 +45,7 @@ public class Venta {
     private ArrayList<ItemVenta> items;
     private Sucursal sucursal;
     
-    // Constructor
+    // Constructores
 
     public Venta(   int id, 
                     String nombreCliente,
@@ -71,7 +71,7 @@ public class Venta {
         this.items = items;
         this.sucursal = sucursal;
     }
-    
+
     // Getters y Setters
     
     public int getId() {return id;}

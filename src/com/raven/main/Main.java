@@ -7,7 +7,7 @@ import com.raven.event.EventShowPopupMenu;
 //import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaProducto;
-//import com.raven.form.FormularioAltaVenta;
+import com.raven.form.FormularioAltaVenta;
 import com.raven.form.MainForm;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
@@ -84,7 +84,7 @@ public class Main extends javax.swing.JFrame {
                     case 1:
                         switch(subMenuIndex){
                             case 0:
-                                //main.showForm(new FormularioAltaVenta());
+                                main.showForm(new FormularioAltaVenta());
                                 break;
                             case 1:
                                 //main.showForm(new FormularioConsultarVenta()); 
