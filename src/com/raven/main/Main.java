@@ -9,6 +9,7 @@ import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaProducto;
 import com.raven.form.FormularioAltaVenta;
 import com.raven.form.MainForm;
+import com.raven.form.panelConScrollAltaVenta;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
 import com.raven.swing.icon.GoogleMaterialDesignIcons;
@@ -84,7 +85,7 @@ public class Main extends javax.swing.JFrame {
                     case 1:
                         switch(subMenuIndex){
                             case 0:
-                                main.showForm(new FormularioAltaVenta());
+                                main.showForm(new panelConScrollAltaVenta());
                                 break;
                             case 1:
                                 //main.showForm(new FormularioConsultarVenta()); 
