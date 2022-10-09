@@ -16,6 +16,7 @@ public class Table extends JTable {
 
     public Table() {
         setShowHorizontalLines(true);
+        setShowVerticalLines(true);
         setGridColor(new Color(230, 230, 230));
         setRowHeight(40);
         getTableHeader().setReorderingAllowed(false);
@@ -79,6 +80,7 @@ public class Table extends JTable {
         DefaultTableModel mod = (DefaultTableModel) getModel();
         mod.addRow(row);
     }
+    
 
     public void fixTable(JScrollPane scroll) {
         scroll.getViewport().setBackground(Color.WHITE);

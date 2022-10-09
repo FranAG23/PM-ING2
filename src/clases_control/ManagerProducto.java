@@ -3,13 +3,16 @@ package clases_control;
 
 import clases_entidad.Disponibilidad;
 import clases_entidad.Producto;
+import clases_entidad.Sucursal;
 import com.raven.form.FormularioAltaProducto;
+import com.raven.form.FormularioAltaVenta;
 import dao.DAOProducto;
+import java.util.ArrayList;
 
 public class ManagerProducto {
+    DAOProducto daoProducto = null; 
     
     public boolean alta(FormularioAltaProducto f, Producto p) {
-        
         // Hacer alta excepto si p no tiene disponibilidades, el nombre es "", o algún núm. es <0
         
         boolean valido = true;
@@ -73,4 +76,34 @@ public class ManagerProducto {
         return false;
     }
     
+
+    public void buscarProductosConStock(FormularioAltaVenta formulario, Producto producto, Sucursal sucursal){
+        boolean validacionExitosa = true;
+        ArrayList<Producto> listaProductos = new ArrayList<>(); 
+        Disponibilidad disp; 
+        formulario.limpiarTablaBuscador();
+        formulario.esconderErrorBuscadorNombre(); 
+        formulario.esconderErrorBuscadorVacio();
+      
+        
+        if(producto.getNombre().isBlank() || producto.getNombre().length() > 30){
+            validacionExitosa = false;
+            formulario.mostrarErrorBuscadorNombre();
+        }  
+        
+        if(validacionExitosa){
+            if(daoProducto == null)
+                daoProducto = new DAOProducto(); 
+            listaProductos = daoProducto.obtenerProductosConDisponibilidad(producto, sucursal);
+            if(listaProductos.isEmpty())
+                formulario.mostrarErrorBuscadorVacio();
+            else{
+                for(Producto prod: listaProductos){
+                    disp = prod.getDisponibilidades().get(0);
+                    formulario.agregarRenglonTabla(prod, disp);
+                }
+            }
+                
+        }
+    }
 }

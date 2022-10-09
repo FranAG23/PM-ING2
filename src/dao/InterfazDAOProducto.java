@@ -2,6 +2,8 @@
 package dao;
 
 import clases_entidad.Producto;
+import clases_entidad.Sucursal;
+import java.util.ArrayList;
 
 public interface InterfazDAOProducto {
     
@@ -13,4 +15,6 @@ public interface InterfazDAOProducto {
     
     Producto obtener(int id);
     
+    void obtenerProductoPorNombre(Producto buscado, Producto resultado);
+    ArrayList<Producto> obtenerProductosConDisponibilidad(Producto buscado, Sucursal sucursal);
 }

@@ -66,4 +66,20 @@ public class Producto {
     public ArrayList<Disponibilidad> getDisponibilidades() {return disponibilidades;}
     public void setDisponibilidades(ArrayList<Disponibilidad> disponibilidades) {this.disponibilidades = disponibilidades;}
 
+    // Otros metodos
+    
+    public static CategoriaProducto strAEnumCategoria(String str){
+        CategoriaProducto retorno; 
+        if(str.equals("Lencería"))
+            retorno = CategoriaProducto.LENCERIA; 
+        else if(str.equals("Accesorio"))
+            retorno = CategoriaProducto.ACCESORIO; 
+        else if(str.equals("Papelería"))
+            retorno = CategoriaProducto.PAPELERIA; 
+        else if(str.equals("Marroquinería"))
+            retorno = CategoriaProducto.MARROQUINERIA;
+        else 
+            retorno = CategoriaProducto.VARIOS; 
+        return retorno; 
+    }
 }

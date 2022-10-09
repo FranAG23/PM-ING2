@@ -45,6 +45,9 @@ public class ManagerVenta
        MetodoPago metodoPago; 
        EstadoVenta estadoVenta;
       
+       // Esconder mensajes de error antiguos:
+       formulario.esconderCartelesDeError();
+       
        // Validacion de datos:
        if(nombreCliente.isEmpty()|| nombreCliente.length() > 30){
            formulario.mostrarErrorNombre();

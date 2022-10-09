@@ -5,6 +5,7 @@ public class Disponibilidad {
 
     // Atributos
 
+    int id; 
     private float precioVenta;
     private int stockActual;
     private boolean tieneStockMinimo;
@@ -28,6 +29,9 @@ public class Disponibilidad {
         this.sucursal = sucursal;
         this.producto = producto;
     }
+
+    public Disponibilidad(){
+    }
     
     // Getters y Setters
 	
@@ -48,5 +52,13 @@ public class Disponibilidad {
     
     public Producto getProducto() {return producto;}
     public void setProducto(Producto producto) {this.producto = producto;}
+
+    public void setID(int id) {
+       this.id = id;
+    }
+    
+    public int getID(){
+        return id;
+    }
 
 }

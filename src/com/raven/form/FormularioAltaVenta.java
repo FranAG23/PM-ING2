@@ -1,13 +1,22 @@
 package com.raven.form;
+import clases_control.ManagerProducto;
 import clases_entidad.Venta; 
 import clases_entidad.auxiliares.RenglonTablaAltaVenta;
 import clases_control.ManagerVenta;
+import clases_entidad.Disponibilidad;
+import clases_entidad.ItemVenta;
+import clases_entidad.Producto;
+import clases_entidad.Sucursal;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FormularioAltaVenta extends javax.swing.JPanel {
+    ArrayList<Producto> productosCorrientes; 
+    ArrayList<ItemVenta> itemsCorrientes; 
+    
     ManagerVenta managerVenta = null; 
+    ManagerProducto managerProducto = null;
     
     public FormularioAltaVenta() {
         initComponents();
@@ -16,9 +25,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoMetodoPago.addItem(Venta.MetodoPago.MERCADOPAGO.toString());
         campoSucursal.addItem("San Luis");
         campoSucursal.setEnabled(false);     
-        cartelErrorNombre.setText(" ");
-        cartelErrorApellido.setText(" ");
-        cartelErrorTablaVacia.setText(" ");
+        esconderCartelesDeError();
     }
    
     @SuppressWarnings("unchecked")
@@ -45,10 +52,10 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        campoApellido1 = new javax.swing.JTextField();
-        button1 = new com.raven.swing.Button();
+        campoBuscador = new javax.swing.JTextField();
+        botonBuscar = new com.raven.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new com.raven.swing.table.Table();
+        tablaBuscador = new com.raven.swing.table.Table();
         jLabel11 = new javax.swing.JLabel();
         botonAgregarItem = new com.raven.swing.Button();
         campoApellido2 = new javax.swing.JTextField();
@@ -59,8 +66,10 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         cartelErrorTablaVacia = new javax.swing.JLabel();
         botonEliminarItem = new com.raven.swing.Button();
         jSeparator3 = new javax.swing.JSeparator();
-        botonCompletarVenta = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botonRegistrarReserva = new com.raven.swing.Button();
+        botonRegistrarVenta = new com.raven.swing.Button();
+        cartelErrorBuscadorNombre = new javax.swing.JLabel();
+        cartelErrorBuscadorVacio = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -94,6 +103,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel3.setText("Nombre del cliente");
 
+        campoNombre.setBackground(new java.awt.Color(204, 204, 255));
         campoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNombreActionPerformed(evt);
@@ -103,22 +113,28 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel6.setText("Apellido del cliente");
 
+        campoApellido.setBackground(new java.awt.Color(204, 204, 255));
+
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel7.setText("¿La venta es con envío gratis?");
 
+        campoMetodoPago.setBackground(new java.awt.Color(204, 204, 255));
+
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel8.setText("Método de pago");
+
+        campoSucursal.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Sucursal");
 
         cartelErrorApellido.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelErrorApellido.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorApellido.setText("El apellido debe tener entre 0 y 30 caracteres");
+        cartelErrorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
 
         cartelErrorNombre.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelErrorNombre.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorNombre.setText("El nombre debe tener entre 0 y 30 caracteres");
+        cartelErrorNombre.setText("El nombre debe tener entre 1 y 30 caracteres");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
         jLabel4.setText("Datos básicos");
@@ -129,30 +145,37 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel10.setText("Nombre del producto");
 
-        button1.setBackground(new java.awt.Color(238, 156, 167));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Buscar");
-        button1.setToolTipText("");
-        button1.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        campoBuscador.setBackground(new java.awt.Color(204, 204, 255));
+        campoBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                campoBuscadorActionPerformed(evt);
             }
         });
 
-        table1.setModel(new javax.swing.table.DefaultTableModel(
+        botonBuscar.setBackground(new java.awt.Color(238, 156, 167));
+        botonBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        botonBuscar.setText("Buscar");
+        botonBuscar.setToolTipText("");
+        botonBuscar.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        tablaBuscador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Categoria", "Stock actual", "Precio venta (unidad)"
+                "Nombre", "Categoria", "Descripcion", "Stock actual", "Precio venta (unidad)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -163,12 +186,13 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        table1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaBuscador.getTableHeader().setReorderingAllowed(false);
+        tablaBuscador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table1MouseClicked(evt);
+                tablaBuscadorMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(table1);
+        jScrollPane1.setViewportView(tablaBuscador);
 
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel11.setText("Cantidad a vender");
@@ -183,6 +207,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 botonAgregarItemActionPerformed(evt);
             }
         });
+
+        campoApellido2.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
         jLabel9.setText("Items de venta agregados");
@@ -225,19 +251,35 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             }
         });
 
-        botonCompletarVenta.setText("Completar Venta");
-        botonCompletarVenta.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistrarReserva.setBackground(new java.awt.Color(238, 156, 167));
+        botonRegistrarReserva.setForeground(new java.awt.Color(255, 255, 255));
+        botonRegistrarReserva.setText("Registrar reserva\n");
+        botonRegistrarReserva.setToolTipText("");
+        botonRegistrarReserva.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        botonRegistrarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCompletarVentaActionPerformed(evt);
+                botonRegistrarReservaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Registrar Reserva");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistrarVenta.setBackground(new java.awt.Color(51, 255, 102));
+        botonRegistrarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        botonRegistrarVenta.setText("Registrar venta");
+        botonRegistrarVenta.setToolTipText("");
+        botonRegistrarVenta.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        botonRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonRegistrarVentaActionPerformed(evt);
             }
         });
+
+        cartelErrorBuscadorNombre.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        cartelErrorBuscadorNombre.setForeground(new java.awt.Color(255, 51, 51));
+        cartelErrorBuscadorNombre.setText("El nombre debe tener entre 1 y 80 caracteres");
+
+        cartelErrorBuscadorVacio.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        cartelErrorBuscadorVacio.setForeground(new java.awt.Color(255, 51, 51));
+        cartelErrorBuscadorVacio.setText("No se encontraron productos ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -247,69 +289,74 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGap(80, 80, 80)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(campoApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(592, 592, 592))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cartelErrorApellido)
-                                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                                    .addComponent(campoApellido)
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(campoSucursal, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cartelErrorNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(74, 74, 74)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(209, 209, 209)
-                                        .addComponent(campoEnvioGratis))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(80, 80, 80)
-                                        .addComponent(campoMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(32, Short.MAX_VALUE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(cartelErrorTablaVacia)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jButton4)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addGap(80, 80, 80)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(592, 592, 592))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(campoBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cartelErrorBuscadorVacio)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(cartelErrorApellido)
+                                                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                                    .addComponent(campoApellido)
+                                                    .addComponent(campoSucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(cartelErrorNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(74, 74, 74)
+                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                                        .addComponent(jLabel7)
+                                                        .addGap(209, 209, 209)
+                                                        .addComponent(campoEnvioGratis))
+                                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                                        .addComponent(jLabel8)
+                                                        .addGap(80, 80, 80)
+                                                        .addComponent(campoMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(cartelErrorBuscadorNombre))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(botonRegistrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonCompletarVenta))
-                            .addComponent(jSeparator3)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator2)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(100, 100, 100)
                                 .addComponent(campoApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botonAgregarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jScrollPane2))
                         .addGap(32, 32, 32))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cartelErrorTablaVacia)
+                .addGap(389, 389, 389))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,11 +391,14 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
-                .addGap(32, 32, 32)
+                .addGap(8, 8, 8)
+                .addComponent(cartelErrorBuscadorNombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(campoApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelErrorBuscadorVacio))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -359,20 +409,20 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(cartelErrorTablaVacia))
-                .addGap(32, 32, 32)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cartelErrorTablaVacia)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCompletarVenta)
-                    .addComponent(jButton4))
-                .addGap(32, 32, 32))
+                    .addComponent(botonRegistrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -402,15 +452,42 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     }
     
     public void mostrarErrorNombre(){
-        cartelErrorNombre.setText("El nombre debe tener entre 0 y 20 caracteres");
+        cartelErrorNombre.setText("El nombre debe tener entre 1 y 30 caracteres");
     }
     
     public void mostrarErrorApellido(){
-        cartelErrorApellido.setText("El apellido debe tener entre 0 y 20 caracteres");
+        cartelErrorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
     }
     
     public void mostrarErrorTablaVacia(){
         cartelErrorTablaVacia.setText("Debe ingresar al menos un item de venta");
+    }
+    
+     public void mostrarErrorBuscadorVacio(){
+        cartelErrorBuscadorVacio.setText("No se encontraron productos");
+    }
+    
+    public void mostrarErrorBuscadorNombre(){
+        cartelErrorBuscadorNombre.setText("El nombre debe tener entre 1 y 80 caracteres");
+    }
+    
+    public void esconderErrorBuscadorNombre(){
+        cartelErrorBuscadorNombre.setText(" ");
+    }
+    
+    public void esconderErrorBuscadorVacio(){
+        cartelErrorBuscadorVacio.setText(" ");
+    }
+    
+    public void limpiarTablaBuscador(){
+        DefaultTableModel model = (DefaultTableModel)tablaBuscador.getModel();
+        while(model.getRowCount() != 0)
+            model.removeRow(0);
+    }
+    
+    public void agregarRenglonTabla(Producto prod, Disponibilidad disp){  
+            tablaBuscador.addRow(new Object[]{prod.getNombre(), prod.getCategoria().toString(), prod.getDescripcion(), 
+                   disp.getStockActual(), disp.getPrecioVenta()});
     }
     
     public void reiniciarCampos(){
@@ -421,7 +498,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoMetodoPago.setSelectedIndex(0);
         while(model.getRowCount() != 0)
             model.removeRow(0);
-        
+        esconderCartelesDeError();
     }
     
     public
@@ -433,11 +510,59 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
 
     }//GEN-LAST:event_campoNombreActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    public void esconderCartelesDeError(){
+        // Reiniciar carteles de error:
+        cartelErrorNombre.setText(" ");
+        cartelErrorApellido.setText(" ");
+        cartelErrorTablaVacia.setText(" ");
+        cartelErrorBuscadorNombre.setText(" ");
+        cartelErrorBuscadorVacio.setText(" ");
+    }
+    
+    private void campoSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSucursalActionPerformed
+    }//GEN-LAST:event_campoSucursalActionPerformed
 
-    private void botonCompletarVentaActionPerformed(java.awt.event.ActionEvent evt){        
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        // Construir objeto producto:
+        Producto producto = new Producto();
+        producto.setNombre(campoBuscador.getText());
+        // Construir objeto sucursal:
+        Sucursal sucursal = new Sucursal(1, "San Luis"); 
+
+        // Si manager no está consturido,
+        if(managerProducto == null)
+            // entonces crear nuevo manager. 
+            managerProducto = new ManagerProducto();
+        // Buscar productos con nombre similar al ingresado que tengan disponibilidad
+        // en la sucursal indicada. 
+        managerProducto.buscarProductosConStock(this, producto, sucursal);
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void tablaBuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBuscadorMouseClicked
+
+    }//GEN-LAST:event_tablaBuscadorMouseClicked
+
+    private void botonAgregarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarItemActionPerformed
+        DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
+        model.addRow(new Object[]{(int)1,"",(int)0,(float)0,(float)0});
+    }//GEN-LAST:event_botonAgregarItemActionPerformed
+
+    private void botonEliminarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarItemActionPerformed
+        // Obtener modelo de tabla de items.
+       DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
+       // Obtener fila seleccionada de tabla.
+       int filaSeleccionada = tablaItems.getSelectedRow();
+       // Si hay una fila seleccionada,
+       if(filaSeleccionada != -1)
+           // entonces borrar esa fila. 
+           model.removeRow(tablaItems.getSelectedRow());
+    }//GEN-LAST:event_botonEliminarItemActionPerformed
+
+    private void botonRegistrarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonRegistrarReservaActionPerformed
+
+    private void botonRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarVentaActionPerformed
         managerVenta = new ManagerVenta(this);
         ArrayList<RenglonTablaAltaVenta> listRenglones = new ArrayList<>();
         RenglonTablaAltaVenta renglon;
@@ -465,7 +590,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             renglon.setCantidad((int) model.getValueAt(i, 2));
             
             renglon.setPrecioPorUnidad((float) (model.getValueAt(i, 3)));
-            listRenglones.add(renglon);       
+            listRenglones.add(renglon);
         }
         
         // Reiniciar carteles de error:
@@ -476,52 +601,31 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         // Trasmitir datos a manager de ventas:
         managerVenta.altaVenta(nomCliente, apeCliente, envioGratis, 1000, 
                                 strMetodoPago, strUbiSucursal, listRenglones);
-    }
+    }//GEN-LAST:event_botonRegistrarVentaActionPerformed
 
-    private void campoSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSucursalActionPerformed
-    }//GEN-LAST:event_campoSucursalActionPerformed
-
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-
-    }//GEN-LAST:event_button1ActionPerformed
-
-    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
-
-    }//GEN-LAST:event_table1MouseClicked
-
-    private void botonAgregarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarItemActionPerformed
-        DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
-        model.addRow(new Object[]{(int)1,"",(int)0,(float)0,(float)0});
-    }//GEN-LAST:event_botonAgregarItemActionPerformed
-
-    private void botonEliminarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarItemActionPerformed
-        // Obtener modelo de tabla de items.
-       DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
-       // Obtener fila seleccionada de tabla.
-       int filaSeleccionada = tablaItems.getSelectedRow();
-       // Si hay una fila seleccionada,
-       if(filaSeleccionada != -1)
-           // entonces borrar esa fila. 
-           model.removeRow(tablaItems.getSelectedRow());
-    }//GEN-LAST:event_botonEliminarItemActionPerformed
+    private void campoBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoBuscadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.Button botonAgregarItem;
-    private javax.swing.JButton botonCompletarVenta;
+    private com.raven.swing.Button botonBuscar;
     private com.raven.swing.Button botonEliminarItem;
-    private com.raven.swing.Button button1;
+    private com.raven.swing.Button botonRegistrarReserva;
+    private com.raven.swing.Button botonRegistrarVenta;
     private javax.swing.JTextField campoApellido;
-    private javax.swing.JTextField campoApellido1;
     private javax.swing.JTextField campoApellido2;
+    private javax.swing.JTextField campoBuscador;
     private javax.swing.JCheckBox campoEnvioGratis;
     private javax.swing.JComboBox<String> campoMetodoPago;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JComboBox<String> campoSucursal;
     private javax.swing.JLabel cartelErrorApellido;
+    private javax.swing.JLabel cartelErrorBuscadorNombre;
+    private javax.swing.JLabel cartelErrorBuscadorVacio;
     private javax.swing.JLabel cartelErrorNombre;
     private javax.swing.JLabel cartelErrorTablaVacia;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -540,8 +644,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JScrollPane panelTabla;
+    private com.raven.swing.table.Table tablaBuscador;
     private javax.swing.JTable tablaItems;
-    private com.raven.swing.table.Table table1;
     // End of variables declaration//GEN-END:variables
 }

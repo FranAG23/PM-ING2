@@ -1,5 +1,8 @@
 package com.raven.main;
 
+import clases_entidad.Disponibilidad;
+import clases_entidad.Producto;
+import clases_entidad.Sucursal;
 import com.raven.component.Header;
 import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
@@ -7,16 +10,17 @@ import com.raven.event.EventShowPopupMenu;
 //import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaProducto;
-import com.raven.form.FormularioAltaVenta;
 import com.raven.form.MainForm;
 import com.raven.form.panelConScrollAltaVenta;
 import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
 import com.raven.swing.icon.GoogleMaterialDesignIcons;
 import com.raven.swing.icon.IconFontSwing;
+import dao.DAOProducto;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -256,7 +260,38 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void run() {
                 new Main().setVisible(true);
+                /*
+                DAOProducto daoprod = new DAOProducto();
+                //Crear lista resultado:
+                ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+                
+                // Crear sucursal:
+                Sucursal sucursal = new Sucursal(1,"San Luis");
+                
+                // Crear producto: 
+                Producto prod = new Producto();
+                prod.setNombre("prod");
+               
+                // Testeo:
+                listaProductos = daoprod.obtenerProductosConDisponibilidad(prod, sucursal);
+                
+                // Imprimir resultados:
+                for(Producto p: listaProductos){
+                    System.out.println(p.getId());
+                    System.out.println(p.getNombre()); 
+                    System.out.println(p.getCategoria().toString()); 
+                    System.out.println(p.getDescripcion()); 
+                    for(Disponibilidad d: p.getDisponibilidades()){
+                        System.out.println(d.getID()); 
+                        System.out.println(d.getPrecioVenta()); 
+                        System.out.println(d.getStockActual()); 
+                        System.out.println(d.getStockMinimo()); 
+                        System.out.println(d.getTieneStockMinimo()); 
+                    }
+                    System.out.println("-..-");
+                }*/
             }
+            
         });
     }
 
