@@ -10,7 +10,6 @@ public class Disponibilidad {
     private boolean tieneStockMinimo;
     private int stockMinimo;
     private Sucursal sucursal;
-    private Producto producto;
 
     // Getters y Setters
 	
@@ -28,8 +27,5 @@ public class Disponibilidad {
 
     public Sucursal getSucursal() {return sucursal;}
     public void setSucursal(Sucursal sucursal) {this.sucursal = sucursal;}
-    
-    public Producto getProducto() {return producto;}
-    public void setProducto(Producto producto) {this.producto = producto;}
 
 }

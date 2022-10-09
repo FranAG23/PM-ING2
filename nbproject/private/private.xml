@@ -5,12 +5,18 @@
             <url>src/com/raven/main/Main.java</url>
             <bookmark id="1">
                 <name/>
-                <line>100</line>
+                <line>105</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Franco/Facultad/Ingenieria%20en%20software%202/Practico%20de%20maquina/Neatbens/PM-ING2-ConsultarProducto/src/com/raven/form/FormularioAltaVenta.java</file>
+            <file>file:/C:/Franco/Facultad/Ingenieria%20en%20software%202/Practico%20de%20maquina/Neatbens/PM-ING2-ConsultarProducto/src/com/raven/form/Form_Home.java</file>
+            <file>file:/C:/Franco/Facultad/Ingenieria%20en%20software%202/Practico%20de%20maquina/Neatbens/PM-ING2-ConsultarProducto/src/com/raven/form/FormularioConsultarProducto.java</file>
+            <file>file:/C:/Franco/Facultad/Ingenieria%20en%20software%202/Practico%20de%20maquina/Neatbens/PM-ING2-ConsultarProducto/src/dao/DAOProducto.java</file>
+            <file>file:/C:/Franco/Facultad/Ingenieria%20en%20software%202/Practico%20de%20maquina/Neatbens/PM-ING2-ConsultarProducto/src/com/raven/form/FormularioConsultarVenta.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -42,7 +42,6 @@ public class Venta {
     private EstadoVenta estado;
     private Reserva reserva;
     private ArrayList<ItemVenta> items;
-    private Sucursal sucursal;
     
     // Getters y Setters
     
@@ -72,8 +71,4 @@ public class Venta {
     
     public ArrayList<ItemVenta> getItems(){ return items; }
     public void setItems(ArrayList<ItemVenta> items) {this.items = items;}
-    
-    public Sucursal getSucursal() {return sucursal;}
-    public void setSucursal(Sucursal sucursal) {this.sucursal = sucursal;}
-    
 }

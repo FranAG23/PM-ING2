@@ -4,13 +4,15 @@ package dao;
 import base_datos.BaseDatos;
 import clases_entidad.Disponibilidad;
 import clases_entidad.Producto;
+import clases_entidad.Sucursal.Ciudad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DAOProducto implements InterfazDAOProducto {
-
+    ArrayList<Producto> P = new ArrayList<Producto>();
     @Override
     public boolean registrar(Producto p) {
         
@@ -21,7 +23,6 @@ public class DAOProducto implements InterfazDAOProducto {
         int pID;
         
         try {
-            
             con = BaseDatos.getInstance().establecerConexion();
             
             // Insertar en tabla Producto
@@ -41,14 +42,25 @@ public class DAOProducto implements InterfazDAOProducto {
             
             // Insertar en tabla Disponibilidad 
             
-            exito = true;
-            
             for (Disponibilidad d : p.getDisponibilidades()) {
-
-                if (! new DAODisponibilidad().registrar(d, pID)) {
-                    exito = false;
+                
+                pst = con.prepareStatement("INSERT INTO Disponibilidad VALUES (DEFAULT,?,?,?,?,?)");
+                pst.setInt(1, pID);
+                if (d.getSucursal().getUbicacion() == Ciudad.SAN_LUIS) {
+                    // Si está disponible en San Luis (sID = 1)
+                    pst.setInt(2,1);
+                } else {
+                    // Si está disponible en Neuquén (sID = 2)
+                    pst.setInt(2,2);
                 }
+                pst.setFloat(3, d.getPrecioVenta());
+                pst.setInt(4,d.getStockActual());
+                pst.setInt(5, d.getStockMinimo());
+                pst.setBoolean(6, d.getTieneStockMinimo());
+                pst.executeUpdate();
             }
+            
+            exito = true;
             
         } catch (SQLException e){
             e.printStackTrace();
@@ -71,8 +83,14 @@ public class DAOProducto implements InterfazDAOProducto {
     }
 
     @Override
-    public Producto obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public ArrayList<Producto> obtener(String Nombre) {
+        
+        
+        return P;    
+    }
+
+    public Producto ObtenerInfo(int IDAux) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

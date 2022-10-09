@@ -14,7 +14,7 @@
 	);
 	
 ---------------------------------------------------------------------------------------------------------------------------------------------
-
+	
 	CREATE TABLE Producto
 	(
 		pID				SERIAL			NOT NULL	PRIMARY KEY,
@@ -40,13 +40,13 @@
 	CREATE TABLE Venta
 	(
 		vID				SERIAL			NOT NULL	PRIMARY KEY,
-		sID 			INT				NOT NULL,
+		sID SERIAL NOT NULL,
 		vNombreCliente	VARCHAR(40)		NOT NULL,
 		vEnvioGratis	BOOLEAN			NOT NULL,
 		vImporte		REAL			NOT NULL,
 		vFecha			DATE			NOT NULL,
 		vMetodoPago		VARCHAR(20)		NOT NULL,
-		vEstadoVenta	VARCHAR(20)		NOT NULL,
+		vEstadoVenta	VARCHAR(20)		NOT NULL
 		
 		FOREIGN KEY (sID) REFERENCES Sucursal 
 	);
@@ -127,8 +127,13 @@
 	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 	
-	INSERT INTO Sucursal VALUES (DEFAULT, 'San Luis'), (DEFAULT, 'Neuquen');
-	
+	INSERT INTO Sucursal VALUES (DEFAULT, 'SAN_LUIS'), (DEFAULT, 'NEUQUEN');
+---------------------------------------------------------------------------------------------------------------------------------------------
+    --Funcion de similaridad 
+	CREATE EXTENSION pg_trgm;
+	select *
+	from producto
+	where (similarity(pnombre,'cua')>=0.3)
 ---------------------------------------------------------------------------------------------------------------------------------------------
 	
 	-- Para limpiar la base de datos por completo:

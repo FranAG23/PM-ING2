@@ -10,26 +10,23 @@ public class BaseDatos {
     // Atributos
     
     private static BaseDatos INSTANCIA = null;	// SINGLETON
-    
-    private Connection con = null;
-    private final String usuario;
-    private final String password;
-    private final String url;
+    private static Connection con;
+    private static String usuario;
+    private static String password;
+    private static String url;
     
     // Constructor privado
     
     private BaseDatos(String usuario, String password, String baseDatos, String ip, String puerto) {
-        
-        this.usuario = usuario;
-        this.password = password;
-        this.url = "jdbc:postgresql://"+ip+":"+puerto+"/"+baseDatos;
+        BaseDatos.usuario = usuario;
+        BaseDatos.password = password;
+        BaseDatos.url = "jdbc:postgresql://"+ip+":"+puerto+"/"+baseDatos;
     }
 	
     public static BaseDatos getInstance() {		
-        
         if (INSTANCIA == null) {
             // Cambiar parámetros según la base de datos
-            INSTANCIA = new BaseDatos("postgres", "tomitomi123", "postgres", "localhost", "5432");
+            INSTANCIA = new BaseDatos("postgres", "hgfsd1234", "PM-2", "localhost", "5432");
         }
         return INSTANCIA;
     }
@@ -47,17 +44,6 @@ public class BaseDatos {
             }
         }
         return con;
-    }
-    
-    public void cerrarConexion() {
-        
-        if (con != null)
-         try {
-             con.close();
-        } catch (SQLException e) {
-            System.out.println("Error en la clase BaseDatos, en el método cerrarConexion()");
-            e.printStackTrace();
-        }
     }
     
 }
