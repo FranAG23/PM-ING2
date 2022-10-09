@@ -46,11 +46,11 @@ public class ManagerVenta
        EstadoVenta estadoVenta;
       
        // Validacion de datos:
-       if(nombreCliente.isEmpty()|| nombreCliente.length() > 20){
+       if(nombreCliente.isEmpty()|| nombreCliente.length() > 30){
            formulario.mostrarErrorNombre();
            datosValidadosCorrectamente = false; 
        }
-       if(apellidoCliente.isEmpty() || apellidoCliente.length() > 20){
+       if(apellidoCliente.isEmpty() || apellidoCliente.length() > 30){
            formulario.mostrarErrorApellido();
            datosValidadosCorrectamente = false;
        }
@@ -68,10 +68,10 @@ public class ManagerVenta
             for(RenglonTablaAltaVenta renglon: listaRenglones){
                 // Construcción del objeto producto:
                 producto = new Producto(renglon.getIDProducto(), renglon.getNombreProducto(), "Indefinido", 
-                                        Producto.CategoriaProducto.ACCESORIO);
+                                        Producto.CategoriaProducto.ACCESORIO, null);
 
                 // Construcción del objeto item:
-                item = new ItemVenta(renglon.getCantidad(), renglon.getPrecioPorUnidad(), producto);
+                item = new ItemVenta(-1,renglon.getCantidad(), renglon.getPrecioPorUnidad(), producto);
 
                 // Agregamos un nuevo item de venta a nuestra lista: 
                 itemsVenta.add(item);
@@ -79,11 +79,11 @@ public class ManagerVenta
 
             // Construcción del objeto venta:
             // Conversión de string a enumerado MetodoPago: 
-            metodoPago = MetodoPago.valueOf(strMetodoPago);
+            metodoPago = Venta.stringAMetodoPago(strMetodoPago);
             // Hasta que no agreguemos el CU "Alta Reserva", nuestras ventas estarán siempre completas:
             estadoVenta = EstadoVenta.COMPLETADA;
-            venta = new Venta(nombreCliente, apellidoCliente, envioGratis, importe,  new Date(),
-                              metodoPago, estadoVenta, sucursal, itemsVenta);
+            venta = new Venta(-1, nombreCliente, apellidoCliente, envioGratis, importe,  new Date(),
+                              metodoPago, estadoVenta, null, itemsVenta, sucursal);
 
             // Dar de alta venta en Base de datos:
             exitoInsercionBD = daoVenta.registrar(venta);

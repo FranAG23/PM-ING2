@@ -204,11 +204,11 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
 
         cartelErrorApellido.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelErrorApellido.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorApellido.setText("El apellido debe tener entre 0 y 20 caracteres");
+        cartelErrorApellido.setText("El apellido debe tener entre 0 y 30 caracteres");
 
         cartelErrorNombre.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelErrorNombre.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorNombre.setText("El nombre debe tener entre 0 y 20 caracteres");
+        cartelErrorNombre.setText("El nombre debe tener entre 0 y 30 caracteres");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -234,11 +234,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                             .addComponent(campoNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoApellido))
                         .addGap(18, 18, 18))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cartelErrorNombre)
-                            .addComponent(cartelErrorApellido))
-                        .addGap(0, 0, 0))))
+                    .addComponent(cartelErrorNombre)
+                    .addComponent(cartelErrorApellido)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

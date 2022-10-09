@@ -15,26 +15,27 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DAOVenta implements InterfazDAOVenta {
-    private final String nombreTablaVentas = "Ventas"; 
-    private final String nombreTablaItemsVenta = "ItemsVenta"; 
+    private final String nombreTablaVentas = "Venta"; 
+    private final String nombreTablaItemsVenta = "ItemVenta"; 
     private final int colIDVentaEnVentas = 0;
-    private final int colNomCliente = 1;
-    private final int colApeCliente = 2;
-    private final int colEnvioGratis = 3;
-    private final int colImporte = 4; 
-    private final int colFechaPago = 5; 
-    private final int colMetodoPago = 6; 
-    private final int colEstadoVenta = 7; 
-    private final int colIDSucursal = 8;     
+    private final int colIDSucursal = 1;  
+    private final int colNomCliente = 2;
+    private final int colApeCliente = 3;
+    private final int colEnvioGratis = 4;
+    private final int colImporte = 5; 
+    private final int colFechaPago = 6; 
+    private final int colMetodoPago = 7; 
+    private final int colEstadoVenta = 8; 
+       
     private final int colIDItemVenta = 0; 
-    private final int colCantidad = 1;
-    private final int colPrecioUnidad = 2;
-    private final int colIDVentaEnItemsVenta = 3;
-    private final int colIDProducto = 4; 
+    private final int colIDProducto = 1; 
+    private final int colCantidad = 2;
+    private final int colPrecioUnidad = 3;
+    private final int colIDVentaEnItemsVenta = 4;
+    
     private final String queryParaInsertarEnTablaVentas = "INSERT INTO " + nombreTablaVentas + " VALUES (DEFAULT,?,?,?,?,?,?,?,?)"; 
-    private final String queryParaGenerarIDVenta = "SELECT CURRVAL('Ventas_IDVenta_seq')"; 
+    private final String queryParaGenerarIDVenta = "SELECT CURRVAL('Venta_vID_seq')"; 
     private final String queryParaInsertarEnTablaItemsVenta = "INSERT INTO " + nombreTablaItemsVenta + " VALUES (DEFAULT,?,?,?,?)";
-    private final String queryParaGenerarIDItemVenta = "SELECT CURRVAL('ItemsVenta_IDItemVenta_seq')"; 
     
     @Override
     public boolean registrar(Venta venta) {
@@ -168,7 +169,7 @@ public class DAOVenta implements InterfazDAOVenta {
             
             // Obtener ID y nombre de producto de cada ItemVenta
             
-            for (ItemVenta i : v.getItemsVenta()) {
+            for (ItemVenta i : v.getItems()) {
                 
                 pst = con.prepareStatement("SELECT Producto.pID, pNombre FROM ItemVenta, Producto WHERE"+
                                             " (ivID = ? and ItemVenta.pID = Producto.pID)");

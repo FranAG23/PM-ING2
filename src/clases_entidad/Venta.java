@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Venta {
+
+    public Venta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     // Definición de MetodoPago (tipo enumerado)
     
@@ -107,4 +111,15 @@ public class Venta {
     public Sucursal getSucursal() {return sucursal;}
     public void setSucursal(Sucursal sucursal) {this.sucursal = sucursal;}
     
+    // Otros métodos
+    public static MetodoPago stringAMetodoPago(String str){
+        MetodoPago retorno = null; 
+        if("Efectivo".equals(str)){
+           retorno = MetodoPago.EFECTIVO;
+        }
+        else if("MercadoPago".equals(str)){
+           retorno = MetodoPago.MERCADOPAGO; 
+        }
+        return retorno; 
+    }
 }
