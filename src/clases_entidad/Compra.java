@@ -1,7 +1,7 @@
-
 package clases_entidad;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Compra extends Egreso {
     
@@ -9,6 +9,20 @@ public class Compra extends Egreso {
     
     private String nombreProveedor;
     private ArrayList<ItemCompra> items;
+    
+    // Constructor
+
+    public Compra(  String nombreProveedor, 
+                    ArrayList<ItemCompra> items, 
+                    int id, 
+                    float montoTotal, 
+                    Date fecha, 
+                    Sucursal sucursal   ) {
+        
+        super(id, montoTotal, fecha, sucursal);
+        this.nombreProveedor = nombreProveedor;
+        this.items = items;
+    }
     
     // Getters y Setters
     

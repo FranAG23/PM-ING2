@@ -10,6 +10,16 @@ public class ItemVenta {
     private float precioUnidad;
     private Producto producto;
     
+    // Constructor
+
+    public ItemVenta(int id, int cantidad, float precioUnidad, Producto producto) {
+        
+        this.id = id;
+        this.cantidad = cantidad;
+        this.precioUnidad = precioUnidad;
+        this.producto = producto;
+    }
+    
     // Getters y Setters
     
     public int getId() {return id;}

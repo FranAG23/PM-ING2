@@ -9,7 +9,7 @@
 
 	CREATE TABLE Sucursal
 	(
-		sID				SERIAL			NOT NULL	PRIMARY KEY,
+		sID				INT				NOT NULL	PRIMARY KEY,
 		sCiudad			VARCHAR(20)		NOT NULL
 	);
 	
@@ -39,14 +39,15 @@
 
 	CREATE TABLE Venta
 	(
-		vID				SERIAL			NOT NULL	PRIMARY KEY,
-		sID 			INT				NOT NULL,
-		vNombreCliente	VARCHAR(40)		NOT NULL,
-		vEnvioGratis	BOOLEAN			NOT NULL,
-		vImporte		REAL			NOT NULL,
-		vFecha			DATE			NOT NULL,
-		vMetodoPago		VARCHAR(20)		NOT NULL,
-		vEstadoVenta	VARCHAR(20)		NOT NULL,
+		vID					SERIAL			NOT NULL	PRIMARY KEY,
+		sID 				INT				NOT NULL,
+		vNombreCliente		VARCHAR(30)		NOT NULL,
+		vApellidoCliente 	VARCHAR(30)		NOT NULL,
+		vEnvioGratis		BOOLEAN			NOT NULL,
+		vImporte			REAL			NOT NULL,
+		vFecha				DATE			NOT NULL,
+		vMetodoPago			VARCHAR(20)		NOT NULL,
+		vEstadoVenta		VARCHAR(20)		NOT NULL,
 		
 		FOREIGN KEY (sID) REFERENCES Sucursal 
 	);
@@ -127,7 +128,7 @@
 	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 	
-	INSERT INTO Sucursal VALUES (DEFAULT, 'San Luis'), (DEFAULT, 'Neuquen');
+	INSERT INTO Sucursal VALUES (1, 'San Luis'), (2, 'Neuquen');
 	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 	

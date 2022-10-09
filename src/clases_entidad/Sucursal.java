@@ -7,6 +7,13 @@ public class Sucursal {
     
     private String ubicacion;
     
+    // Constructor
+
+    public Sucursal(String ubicacion) {
+        
+        this.ubicacion = ubicacion;
+    }
+    
     // Getters y Setters
     
     public String getUbicacion() {return ubicacion;}

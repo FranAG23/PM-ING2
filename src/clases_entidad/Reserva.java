@@ -10,7 +10,16 @@ public class Reserva {
     private long telefonoCliente;
     private float seña;
     private Date fecha;
+    
+    // Constructor
 
+    public Reserva(long telefonoCliente, float seña, Date fecha) {
+       
+        this.telefonoCliente = telefonoCliente;
+        this.seña = seña;
+        this.fecha = fecha;
+    }
+    
     // Getters y Setters
 
     public long getTelefonoCliente() {return telefonoCliente;}

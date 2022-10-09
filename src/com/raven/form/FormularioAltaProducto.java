@@ -35,6 +35,10 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         button2 = new com.raven.swing.Button();
+        jDialog2 = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        button3 = new com.raven.swing.Button();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -76,7 +80,6 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
 
         jDialog1.setMinimumSize(new java.awt.Dimension(345, 106));
         jDialog1.setUndecorated(true);
-        jDialog1.setPreferredSize(null);
         jDialog1.setResizable(false);
         jDialog1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -125,6 +128,57 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
 
         jDialog1.getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 350, 110);
+
+        jDialog2.setMinimumSize(new java.awt.Dimension(345, 106));
+        jDialog2.setUndecorated(true);
+        jDialog2.setResizable(false);
+        jDialog2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jDialog2FocusLost(evt);
+            }
+        });
+        jDialog2.getContentPane().setLayout(null);
+
+        jPanel5.setBackground(new java.awt.Color(238, 156, 167));
+
+        jLabel17.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Error al registrar el producto!");
+
+        button3.setText("OK");
+        button3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(60, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
+        jDialog2.getContentPane().add(jPanel5);
+        jPanel5.setBounds(0, 0, 350, 110);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -483,6 +537,8 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         // Producto que se pasa como parámetro al ManagerProducto. Ahi es donde
         // se comprueba que los datos sean válidos para dar el Producto de alta.
         
+        // EN RESUMEN: INTERFAZ VALIDA LA SINTAXIS, MANAGER VALIDA LA SEMÁNTICA
+        
         boolean invalido = false;
         String s;
         float precioVentaSanLuis = 0;
@@ -493,11 +549,6 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         int stockMinimoNeuquen = 0;
         
         resetCarteles();
-        
-        if (jTextField1.getText().isBlank()) {
-            avisarNombreInvalido();
-            invalido = true;
-        }
         
         if (jCheckBox1.isSelected()) {
             try {
@@ -558,46 +609,50 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             
             // Crear Producto y enviar al controlador
             
-            Producto p = new Producto();
-            p.setNombre(jTextField1.getText());
-            p.setDescripcion(jTextField5.getText());
-            switch (jComboBox1.getSelectedIndex()) {
-                case 0 -> p.setCategoria(Producto.CategoriaProducto.ACCESORIO);
-                case 1 -> p.setCategoria(Producto.CategoriaProducto.LENCERIA);
-                case 2 -> p.setCategoria(Producto.CategoriaProducto.MARROQUINERIA);
-                case 3 -> p.setCategoria(Producto.CategoriaProducto.PAPELERIA);
-                default -> p.setCategoria(Producto.CategoriaProducto.VARIOS);
-            }
+            Producto.CategoriaProducto cat;
+            cat = switch (jComboBox1.getSelectedIndex()) {
+                case 0 -> Producto.CategoriaProducto.ACCESORIO;
+                case 1 -> Producto.CategoriaProducto.LENCERIA;
+                case 2 -> Producto.CategoriaProducto.MARROQUINERIA;
+                case 3 -> Producto.CategoriaProducto.PAPELERIA;
+                default -> Producto.CategoriaProducto.VARIOS;
+            };
             
             ArrayList<Disponibilidad> arrd = new ArrayList<>();
             
             if (jCheckBox1.isSelected()) {
-                Disponibilidad dsl = new Disponibilidad();
-                dsl.setProducto(p);
-                dsl.setPrecioVenta(precioVentaSanLuis);
-                dsl.setStockActual(stockActualSanLuis);
-                dsl.setTieneStockMinimo(! jTextField4.getText().isBlank());
-                dsl.setStockMinimo(stockMinimoSanLuis);
-                Sucursal suc = new Sucursal();
-                suc.setUbicacion("San Luis");
-                dsl.setSucursal(suc);
+                
+                Disponibilidad dsl = new Disponibilidad(    precioVentaSanLuis, 
+                                                            stockActualSanLuis, 
+                                                            (! jTextField4.getText().isBlank()),
+                                                            stockMinimoSanLuis,
+                                                            new Sucursal("San Luis"),
+                                                            null);
+                
                 arrd.add(dsl);
             }
             
             if (jCheckBox2.isSelected()) {
-                Disponibilidad dn = new Disponibilidad();
-                dn.setProducto(p);
-                dn.setPrecioVenta(precioVentaNeuquen);
-                dn.setStockActual(stockActualNeuquen);
-                dn.setTieneStockMinimo(! jTextField10.getText().isBlank());
-                dn.setStockMinimo(stockMinimoNeuquen);
-                Sucursal suc = new Sucursal();
-                suc.setUbicacion("Neuquen");
-                dn.setSucursal(suc);
+                
+                Disponibilidad dn = new Disponibilidad( precioVentaNeuquen, 
+                                                        stockActualNeuquen, 
+                                                        (! jTextField10.getText().isBlank()),
+                                                        stockMinimoNeuquen,
+                                                        new Sucursal("Neuquen"),
+                                                        null);
+                
                 arrd.add(dn);
             }
             
-            p.setDisponibilidades(arrd);
+            Producto p = new Producto(  0,
+                                        jTextField1.getText(),
+                                        jTextField5.getText(),
+                                        cat,
+                                        arrd    );
+            
+            for (Disponibilidad d : p.getDisponibilidades()) {
+                d.setProducto(p);
+            }
             
             // Llamar al controlador
             new ManagerProducto().alta(this, p);
@@ -612,6 +667,14 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private void jDialog1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDialog1FocusLost
         jDialog1.setVisible(false);
     }//GEN-LAST:event_jDialog1FocusLost
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        jDialog2.setVisible(false);
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void jDialog2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDialog2FocusLost
+        jDialog2.setVisible(false);
+    }//GEN-LAST:event_jDialog2FocusLost
 
     public void avisarNombreInvalido() {
         
@@ -694,17 +757,23 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         
         jDialog1.setLocationRelativeTo(null);
         jDialog1.setVisible(true);
-        // Emitir algún sonido?
+    }
+    
+    public void mostrarCartelAltaNoExitosa() {
         
+        jDialog2.setLocationRelativeTo(null);
+        jDialog2.setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.Button button1;
     private com.raven.swing.Button button2;
+    private com.raven.swing.Button button3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -713,6 +782,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -731,6 +801,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;

@@ -1,12 +1,26 @@
 
 package clases_entidad;
 
+import java.util.Date;
+
 public class Gasto extends Egreso {
     
     // Atributos
     
     private String nombre;
     private String descripcion;
+
+    public Gasto(   String nombre, 
+                    String descripcion, 
+                    int id, 
+                    float montoTotal, 
+                    Date fecha, 
+                    Sucursal sucursal   ) {
+        
+        super(id, montoTotal, fecha, sucursal);
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
     
     // Getters y Setters
 

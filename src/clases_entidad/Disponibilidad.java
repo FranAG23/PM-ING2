@@ -12,6 +12,23 @@ public class Disponibilidad {
     private Sucursal sucursal;
     private Producto producto;
 
+    // Constructor
+
+    public Disponibilidad(  float precioVenta, 
+                            int stockActual, 
+                            boolean tieneStockMinimo, 
+                            int stockMinimo, 
+                            Sucursal sucursal, 
+                            Producto producto   ) {
+        
+        this.precioVenta = precioVenta;
+        this.stockActual = stockActual;
+        this.tieneStockMinimo = tieneStockMinimo;
+        this.stockMinimo = stockMinimo;
+        this.sucursal = sucursal;
+        this.producto = producto;
+    }
+    
     // Getters y Setters
 	
     public float getPrecioVenta() {return precioVenta;}

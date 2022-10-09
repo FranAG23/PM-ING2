@@ -8,10 +8,16 @@ import dao.DAOProducto;
 
 public class ManagerProducto {
     
-    public void alta(FormularioAltaProducto f, Producto p) {
+    public boolean alta(FormularioAltaProducto f, Producto p) {
         
-        // Hacer alta excepto si p no tiene disponibilidades, o algún núm. es <0
+        // Hacer alta excepto si p no tiene disponibilidades, el nombre es "", o algún núm. es <0
+        
         boolean valido = true;
+        
+        if (p.getNombre().isBlank()) {
+            f.avisarNombreInvalido();
+            valido = false;
+        }
         
         if (p.getDisponibilidades().isEmpty()) {
             f.avisarNingunaDisponibilidad();
@@ -57,8 +63,14 @@ public class ManagerProducto {
             
             if (new DAOProducto().registrar(p)) {
                 f.mostrarCartelAltaExitosa();
+                return true;
+            }
+            else {
+                f.mostrarCartelAltaNoExitosa();
             }
         }
+        
+        return false;
     }
     
 }

@@ -29,6 +29,21 @@ public class Producto {
     private String descripcion;
     private CategoriaProducto categoria;
     private ArrayList<Disponibilidad> disponibilidades;
+
+    // Constructor
+    
+    public Producto(    int id, 
+                        String nombre, 
+                        String descripcion, 
+                        CategoriaProducto categoria, 
+                        ArrayList<Disponibilidad> disponibilidades  ) {
+        
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.categoria = categoria;
+        this.disponibilidades = disponibilidades;
+    }
     
     // Getters y Setters
     

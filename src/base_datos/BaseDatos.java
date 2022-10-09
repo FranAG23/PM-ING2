@@ -37,15 +37,17 @@ public class BaseDatos {
     // Otros métodos
     
     public Connection establecerConexion() {  
-        if (con==null) {
-            try {
+        
+        try {
+            if (con==null || con.isClosed()) {
                 Class.forName("org.postgresql.Driver");
                 con = DriverManager.getConnection(url, usuario, password);
-            } catch (ClassNotFoundException | SQLException e) {
-                System.out.println("Error en la clase BaseDatos, en el método establecerConexion()"); 
-                e.printStackTrace();
             }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error en la clase BaseDatos, en el método establecerConexion()"); 
+            e.printStackTrace();
         }
+        
         return con;
     }
     

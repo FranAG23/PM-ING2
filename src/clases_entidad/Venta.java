@@ -35,6 +35,7 @@ public class Venta {
     
     private int id;
     private String nombreCliente;
+    private String apellidoCliente;
     private boolean envioGratis;
     private float importe;
     private Date fecha;
@@ -44,6 +45,33 @@ public class Venta {
     private ArrayList<ItemVenta> items;
     private Sucursal sucursal;
     
+    // Constructor
+
+    public Venta(   int id, 
+                    String nombreCliente,
+                    String apellidoCliente, 
+                    boolean envioGratis, 
+                    float importe, 
+                    Date fecha, 
+                    MetodoPago metodoPago, 
+                    EstadoVenta estado, 
+                    Reserva reserva, 
+                    ArrayList<ItemVenta> items, 
+                    Sucursal sucursal   ) {
+        
+        this.id = id;
+        this.nombreCliente = nombreCliente;
+        this.apellidoCliente = apellidoCliente;
+        this.envioGratis = envioGratis;
+        this.importe = importe;
+        this.fecha = fecha;
+        this.metodoPago = metodoPago;
+        this.estado = estado;
+        this.reserva = reserva;
+        this.items = items;
+        this.sucursal = sucursal;
+    }
+    
     // Getters y Setters
     
     public int getId() {return id;}
@@ -51,6 +79,9 @@ public class Venta {
 
     public String getNombreCliente() {return nombreCliente;}
     public void setNombreCliente(String nombreCliente) {this.nombreCliente = nombreCliente;}
+    
+    public String getApellidoCliente() {return apellidoCliente;}
+    public void setApellidoCliente(String apellidoCliente) {this.apellidoCliente = apellidoCliente;}
 
     public boolean getEnvioGratis() {return envioGratis;}
     public void setEnvioGratis(boolean envioGratis) {this.envioGratis = envioGratis;}

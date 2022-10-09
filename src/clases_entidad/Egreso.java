@@ -12,6 +12,16 @@ public class Egreso {
     private Date fecha;
     private Sucursal sucursal;
   
+    // Constructor
+
+    public Egreso(int id, float montoTotal, Date fecha, Sucursal sucursal) {
+        
+        this.id = id;
+        this.montoTotal = montoTotal;
+        this.fecha = fecha;
+        this.sucursal = sucursal;
+    }
+    
     // Getters y Setters
 
     public int getId() {return id;}
