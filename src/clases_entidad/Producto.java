@@ -4,10 +4,6 @@ package clases_entidad;
 import java.util.ArrayList;
 
 public class Producto {
-
-    public Producto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     // Definición de CategoriaProducto (tipo enumerado)
     
@@ -47,6 +43,10 @@ public class Producto {
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.disponibilidades = disponibilidades;
+    }
+    
+    public Producto() {
+        
     }
     
     // Getters y Setters

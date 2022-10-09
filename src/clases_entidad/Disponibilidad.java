@@ -1,4 +1,4 @@
-
+    
 package clases_entidad;
 
 public class Disponibilidad {

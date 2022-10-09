@@ -66,7 +66,7 @@ public class ManagerProducto {
                 return true;
             }
             else {
-                f.mostrarCartelAltaNoExitosa();
+                f.mostrarCartelAltaFallida();
             }
         }
         

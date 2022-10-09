@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Venta {
-
-    public Venta() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     // Definición de MetodoPago (tipo enumerado)
     
@@ -49,7 +45,7 @@ public class Venta {
     private ArrayList<ItemVenta> items;
     private Sucursal sucursal;
     
-    // Constructores
+    // Constructor
 
     public Venta(   int id, 
                     String nombreCliente,
@@ -76,6 +72,10 @@ public class Venta {
         this.sucursal = sucursal;
     }
 
+    public Venta() {
+        
+    }
+    
     // Getters y Setters
     
     public int getId() {return id;}

@@ -14,10 +14,10 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         initComponents();
         
         // Oscurecer formularios de Disponibilidad
-        for (Component c : jPanel4.getComponents()) {
+        for (Component c : panelDatosSanLuis.getComponents()) {
             c.setEnabled(false);
         }
-        for (Component c : jPanel6.getComponents()) {
+        for (Component c : panelDatosNeuquen.getComponents()) {
             c.setEnabled(false);
         }
         
@@ -31,440 +31,440 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        button2 = new com.raven.swing.Button();
-        jDialog2 = new javax.swing.JDialog();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        button3 = new com.raven.swing.Button();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jLabel11 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        button1 = new com.raven.swing.Button();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        dialogAltaExitosa = new javax.swing.JDialog();
+        panelDialogAltaExitosa = new javax.swing.JPanel();
+        labelAltaExitosa = new javax.swing.JLabel();
+        botonAltaExitosa = new com.raven.swing.Button();
+        dialogAltaFallida = new javax.swing.JDialog();
+        panelDialogAltaFallida = new javax.swing.JPanel();
+        labelAltaFallida = new javax.swing.JLabel();
+        botonAltaFallida = new com.raven.swing.Button();
+        panelContenidoFormulario = new javax.swing.JPanel();
+        labelNombre = new javax.swing.JLabel();
+        labelCategoria = new javax.swing.JLabel();
+        labelDescripcion = new javax.swing.JLabel();
+        campoNombre = new javax.swing.JTextField();
+        campoCategoria = new javax.swing.JComboBox<>();
+        checkDisponibilidadSanLuis = new javax.swing.JCheckBox();
+        panelDatosSanLuis = new javax.swing.JPanel();
+        labelPrecioSanLuis = new javax.swing.JLabel();
+        campoPrecioSanLuis = new javax.swing.JTextField();
+        labelStockSanLuis = new javax.swing.JLabel();
+        labelStockMinimoSanLuis = new javax.swing.JLabel();
+        campoStockSanLuis = new javax.swing.JTextField();
+        campoStockMinimoSanLuis = new javax.swing.JTextField();
+        labelOpcionalStockMinimoSanLuis = new javax.swing.JLabel();
+        cartelPrecioInvalidoSanLuis = new javax.swing.JLabel();
+        cartelStockInvalidoSanLuis = new javax.swing.JLabel();
+        cartelStockMinimoInvalidoSanLuis = new javax.swing.JLabel();
+        checkDisponibilidadNeuquen = new javax.swing.JCheckBox();
+        labelOpcionalDescripcion = new javax.swing.JLabel();
+        separador = new javax.swing.JSeparator();
+        botonAceptar = new com.raven.swing.Button();
+        cartelNombreInvalido = new javax.swing.JLabel();
+        campoDescripcion = new javax.swing.JTextField();
+        cartelNingunaDisponibilidad = new javax.swing.JLabel();
+        panelDatosNeuquen = new javax.swing.JPanel();
+        labelPrecioNeuquen = new javax.swing.JLabel();
+        campoPrecioNeuquen = new javax.swing.JTextField();
+        labelStockNeuquen = new javax.swing.JLabel();
+        labelStockMinimoNeuquen = new javax.swing.JLabel();
+        campoStockNeuquen = new javax.swing.JTextField();
+        campoStockMinimoNeuquen = new javax.swing.JTextField();
+        labelOpcionalStockMinimoNeuquen = new javax.swing.JLabel();
+        cartelPrecioInvalidoNeuquen = new javax.swing.JLabel();
+        cartelStockInvalidoNeuquen = new javax.swing.JLabel();
+        cartelStockMinimoInvalidoNeuquen = new javax.swing.JLabel();
+        panelTituloFormulario = new javax.swing.JPanel();
+        tituloFormulario = new javax.swing.JLabel();
 
-        jDialog1.setMinimumSize(new java.awt.Dimension(345, 106));
-        jDialog1.setUndecorated(true);
-        jDialog1.setResizable(false);
-        jDialog1.addFocusListener(new java.awt.event.FocusAdapter() {
+        dialogAltaExitosa.setMinimumSize(new java.awt.Dimension(345, 106));
+        dialogAltaExitosa.setUndecorated(true);
+        dialogAltaExitosa.setResizable(false);
+        dialogAltaExitosa.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jDialog1FocusLost(evt);
+                dialogAltaExitosaFocusLost(evt);
             }
         });
-        jDialog1.getContentPane().setLayout(null);
+        dialogAltaExitosa.getContentPane().setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(238, 156, 167));
+        panelDialogAltaExitosa.setBackground(new java.awt.Color(238, 156, 167));
 
-        jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("¡Producto registrado exitosamente!");
+        labelAltaExitosa.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelAltaExitosa.setForeground(new java.awt.Color(255, 255, 255));
+        labelAltaExitosa.setText("¡Producto registrado exitosamente!");
 
-        button2.setText("OK");
-        button2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        botonAltaExitosa.setText("OK");
+        botonAltaExitosa.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        botonAltaExitosa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                botonAltaExitosaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDialogAltaExitosaLayout = new javax.swing.GroupLayout(panelDialogAltaExitosa);
+        panelDialogAltaExitosa.setLayout(panelDialogAltaExitosaLayout);
+        panelDialogAltaExitosaLayout.setHorizontalGroup(
+            panelDialogAltaExitosaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDialogAltaExitosaLayout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDialogAltaExitosaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogAltaExitosaLayout.createSequentialGroup()
+                        .addComponent(labelAltaExitosa, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogAltaExitosaLayout.createSequentialGroup()
+                        .addComponent(botonAltaExitosa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        panelDialogAltaExitosaLayout.setVerticalGroup(
+            panelDialogAltaExitosaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogAltaExitosaLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel16)
+                .addComponent(labelAltaExitosa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAltaExitosa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
-        jDialog1.getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 350, 110);
+        dialogAltaExitosa.getContentPane().add(panelDialogAltaExitosa);
+        panelDialogAltaExitosa.setBounds(0, 0, 350, 110);
 
-        jDialog2.setMinimumSize(new java.awt.Dimension(345, 106));
-        jDialog2.setUndecorated(true);
-        jDialog2.setResizable(false);
-        jDialog2.addFocusListener(new java.awt.event.FocusAdapter() {
+        dialogAltaFallida.setMinimumSize(new java.awt.Dimension(345, 106));
+        dialogAltaFallida.setUndecorated(true);
+        dialogAltaFallida.setResizable(false);
+        dialogAltaFallida.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jDialog2FocusLost(evt);
+                dialogAltaFallidaFocusLost(evt);
             }
         });
-        jDialog2.getContentPane().setLayout(null);
+        dialogAltaFallida.getContentPane().setLayout(null);
 
-        jPanel5.setBackground(new java.awt.Color(238, 156, 167));
+        panelDialogAltaFallida.setBackground(new java.awt.Color(238, 156, 167));
 
-        jLabel17.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Error al registrar el producto!");
+        labelAltaFallida.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelAltaFallida.setForeground(new java.awt.Color(255, 255, 255));
+        labelAltaFallida.setText("Error al registrar el producto!");
 
-        button3.setText("OK");
-        button3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        button3.addActionListener(new java.awt.event.ActionListener() {
+        botonAltaFallida.setText("OK");
+        botonAltaFallida.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        botonAltaFallida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
+                botonAltaFallidaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDialogAltaFallidaLayout = new javax.swing.GroupLayout(panelDialogAltaFallida);
+        panelDialogAltaFallida.setLayout(panelDialogAltaFallidaLayout);
+        panelDialogAltaFallidaLayout.setHorizontalGroup(
+            panelDialogAltaFallidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDialogAltaFallidaLayout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDialogAltaFallidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogAltaFallidaLayout.createSequentialGroup()
+                        .addComponent(botonAltaFallida, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogAltaFallidaLayout.createSequentialGroup()
+                        .addComponent(labelAltaFallida, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        panelDialogAltaFallidaLayout.setVerticalGroup(
+            panelDialogAltaFallidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogAltaFallidaLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel17)
+                .addComponent(labelAltaFallida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAltaFallida, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
-        jDialog2.getContentPane().add(jPanel5);
-        jPanel5.setBounds(0, 0, 350, 110);
+        dialogAltaFallida.getContentPane().add(panelDialogAltaFallida);
+        panelDialogAltaFallida.setBounds(0, 0, 350, 110);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        panelContenidoFormulario.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel2.setText("Nombre");
+        labelNombre.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelNombre.setText("Nombre");
 
-        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel3.setText("Categoría");
+        labelCategoria.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelCategoria.setText("Categoría");
 
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setText("Descripción");
+        labelDescripcion.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelDescripcion.setText("Descripción");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Lencería", "Marroquinería", "Papelería", "Varios" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        campoCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Lencería", "Marroquinería", "Papelería", "Varios" }));
+        campoCategoria.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jCheckBox1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jCheckBox1.setText("Disponible en San Luis");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkDisponibilidadSanLuis.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        checkDisponibilidadSanLuis.setText("Disponible en San Luis");
+        checkDisponibilidadSanLuis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkDisponibilidadSanLuisActionPerformed(evt);
             }
         });
 
-        jPanel4.setOpaque(false);
+        panelDatosSanLuis.setOpaque(false);
 
-        jLabel5.setText("Precio de venta");
+        labelPrecioSanLuis.setText("Precio de venta");
 
-        jLabel6.setText("Stock actual");
+        labelStockSanLuis.setText("Stock actual");
 
-        jLabel7.setText("Stock mínimo");
+        labelStockMinimoSanLuis.setText("Stock mínimo");
 
-        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel12.setText("(opcional)");
+        labelOpcionalStockMinimoSanLuis.setForeground(new java.awt.Color(102, 102, 102));
+        labelOpcionalStockMinimoSanLuis.setText("(opcional)");
 
-        jLabel26.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel26.setText("Precio inválido");
+        cartelPrecioInvalidoSanLuis.setForeground(new java.awt.Color(255, 0, 0));
+        cartelPrecioInvalidoSanLuis.setText("Precio inválido");
 
-        jLabel27.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel27.setText("Cantidad inválida");
+        cartelStockInvalidoSanLuis.setForeground(new java.awt.Color(255, 0, 0));
+        cartelStockInvalidoSanLuis.setText("Cantidad inválida");
 
-        jLabel28.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel28.setText("Cantidad inválida");
+        cartelStockMinimoInvalidoSanLuis.setForeground(new java.awt.Color(255, 0, 0));
+        cartelStockMinimoInvalidoSanLuis.setText("Cantidad inválida");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDatosSanLuisLayout = new javax.swing.GroupLayout(panelDatosSanLuis);
+        panelDatosSanLuis.setLayout(panelDatosSanLuisLayout);
+        panelDatosSanLuisLayout.setHorizontalGroup(
+            panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPrecioSanLuis)
+                    .addComponent(labelStockSanLuis)
+                    .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
+                        .addComponent(labelStockMinimoSanLuis)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12)))
+                        .addComponent(labelOpcionalStockMinimoSanLuis)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(campoStockSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoStockMinimoSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPrecioSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel28))
+                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cartelStockInvalidoSanLuis)
+                    .addComponent(cartelPrecioInvalidoSanLuis)
+                    .addComponent(cartelStockMinimoInvalidoSanLuis))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        panelDatosSanLuisLayout.setVerticalGroup(
+            panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26))
+                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPrecioSanLuis)
+                    .addComponent(campoPrecioSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelPrecioInvalidoSanLuis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
+                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelStockSanLuis)
+                    .addComponent(campoStockSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelStockInvalidoSanLuis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel28))
+                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoStockMinimoSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelOpcionalStockMinimoSanLuis)
+                    .addComponent(labelStockMinimoSanLuis)
+                    .addComponent(cartelStockMinimoInvalidoSanLuis))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jCheckBox2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jCheckBox2.setText("Disponible en Neuquén");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        checkDisponibilidadNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        checkDisponibilidadNeuquen.setText("Disponible en Neuquén");
+        checkDisponibilidadNeuquen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                checkDisponibilidadNeuquenActionPerformed(evt);
             }
         });
 
-        jLabel11.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel11.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setText("(opcional)");
+        labelOpcionalDescripcion.setBackground(new java.awt.Color(153, 153, 153));
+        labelOpcionalDescripcion.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelOpcionalDescripcion.setForeground(new java.awt.Color(102, 102, 102));
+        labelOpcionalDescripcion.setText("(opcional)");
 
-        button1.setBackground(new java.awt.Color(51, 255, 102));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Aceptar");
-        button1.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptar.setBackground(new java.awt.Color(51, 255, 102));
+        botonAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        botonAceptar.setText("Aceptar");
+        botonAceptar.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                botonAceptarActionPerformed(evt);
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel8.setText("Nombre inválido");
+        cartelNombreInvalido.setForeground(new java.awt.Color(255, 0, 0));
+        cartelNombreInvalido.setText("Nombre inválido");
 
-        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel9.setText("El producto debe estar disponible en al menos una sucursal");
+        cartelNingunaDisponibilidad.setForeground(new java.awt.Color(255, 0, 0));
+        cartelNingunaDisponibilidad.setText("El producto debe estar disponible en al menos una sucursal");
 
-        jPanel6.setOpaque(false);
+        panelDatosNeuquen.setOpaque(false);
 
-        jLabel10.setText("Precio de venta");
+        labelPrecioNeuquen.setText("Precio de venta");
 
-        jLabel13.setText("Stock actual");
+        labelStockNeuquen.setText("Stock actual");
 
-        jLabel14.setText("Stock mínimo");
+        labelStockMinimoNeuquen.setText("Stock mínimo");
 
-        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("(opcional)");
+        labelOpcionalStockMinimoNeuquen.setForeground(new java.awt.Color(102, 102, 102));
+        labelOpcionalStockMinimoNeuquen.setText("(opcional)");
 
-        jLabel29.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel29.setText("Precio inválido");
+        cartelPrecioInvalidoNeuquen.setForeground(new java.awt.Color(255, 0, 0));
+        cartelPrecioInvalidoNeuquen.setText("Precio inválido");
 
-        jLabel30.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel30.setText("Cantidad inválida");
+        cartelStockInvalidoNeuquen.setForeground(new java.awt.Color(255, 0, 0));
+        cartelStockInvalidoNeuquen.setText("Cantidad inválida");
 
-        jLabel31.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel31.setText("Cantidad inválida");
+        cartelStockMinimoInvalidoNeuquen.setForeground(new java.awt.Color(255, 0, 0));
+        cartelStockMinimoInvalidoNeuquen.setText("Cantidad inválida");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDatosNeuquenLayout = new javax.swing.GroupLayout(panelDatosNeuquen);
+        panelDatosNeuquen.setLayout(panelDatosNeuquenLayout);
+        panelDatosNeuquenLayout.setHorizontalGroup(
+            panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel13)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPrecioNeuquen)
+                    .addComponent(labelStockNeuquen)
+                    .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
+                        .addComponent(labelStockMinimoNeuquen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)))
+                        .addComponent(labelOpcionalStockMinimoNeuquen)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoStockNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoStockMinimoNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPrecioNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel31))
+                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cartelStockInvalidoNeuquen)
+                    .addComponent(cartelPrecioInvalidoNeuquen)
+                    .addComponent(cartelStockMinimoInvalidoNeuquen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        panelDatosNeuquenLayout.setVerticalGroup(
+            panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29))
+                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPrecioNeuquen)
+                    .addComponent(campoPrecioNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelPrecioInvalidoNeuquen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30))
+                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelStockNeuquen)
+                    .addComponent(campoStockNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelStockInvalidoNeuquen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel31))
+                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoStockMinimoNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelOpcionalStockMinimoNeuquen)
+                    .addComponent(labelStockMinimoNeuquen)
+                    .addComponent(cartelStockMinimoInvalidoNeuquen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelContenidoFormularioLayout = new javax.swing.GroupLayout(panelContenidoFormulario);
+        panelContenidoFormulario.setLayout(panelContenidoFormularioLayout);
+        panelContenidoFormularioLayout.setHorizontalGroup(
+            panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                        .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                                .addComponent(labelDescripcion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
+                                .addComponent(labelOpcionalDescripcion))
+                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelContenidoFormularioLayout.createSequentialGroup()
+                                        .addComponent(cartelNingunaDisponibilidad)
                                         .addGap(130, 130, 130))
-                                    .addComponent(jSeparator1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
+                                    .addComponent(separador)
+                                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                                        .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoFormularioLayout.createSequentialGroup()
+                                                .addComponent(labelCategoria)
                                                 .addGap(143, 143, 143))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
+                                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                                                .addComponent(labelNombre)
                                                 .addGap(160, 160, 160)))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1)
-                                            .addComponent(jComboBox1, 0, 295, Short.MAX_VALUE)
-                                            .addComponent(jTextField5))))
+                                        .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(campoNombre)
+                                            .addComponent(campoCategoria, 0, 295, Short.MAX_VALUE)
+                                            .addComponent(campoDescripcion))))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel8))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCheckBox2)
+                                .addComponent(cartelNombreInvalido))
+                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                                .addComponent(checkDisponibilidadNeuquen)
                                 .addGap(40, 40, 40)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
+                                .addComponent(panelDatosNeuquen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                                .addComponent(checkDisponibilidadSanLuis)
                                 .addGap(43, 43, 43)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panelDatosSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelContenidoFormularioLayout.setVerticalGroup(
+            panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNombre)
+                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelNombreInvalido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCategoria)
+                    .addComponent(campoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelOpcionalDescripcion)
+                    .addComponent(labelDescripcion)
+                    .addComponent(campoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                .addComponent(cartelNingunaDisponibilidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDatosSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkDisponibilidadSanLuis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkDisponibilidadNeuquen)
+                    .addComponent(panelDatosNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(238, 156, 167));
+        panelTituloFormulario.setBackground(new java.awt.Color(238, 156, 167));
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Registrar Producto");
+        tituloFormulario.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+        tituloFormulario.setForeground(new java.awt.Color(255, 255, 255));
+        tituloFormulario.setText("Registrar Producto");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTituloFormularioLayout = new javax.swing.GroupLayout(panelTituloFormulario);
+        panelTituloFormulario.setLayout(panelTituloFormularioLayout);
+        panelTituloFormularioLayout.setHorizontalGroup(
+            panelTituloFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTituloFormularioLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1)
+                .addComponent(tituloFormulario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panelTituloFormularioLayout.setVerticalGroup(
+            panelTituloFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTituloFormularioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addComponent(tituloFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -475,63 +475,63 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelContenidoFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTituloFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelTituloFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelContenidoFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void checkDisponibilidadSanLuisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDisponibilidadSanLuisActionPerformed
         
         // Disponible en San Luis
         
-        if (jCheckBox1.isSelected()) {
-            for (Component c : jPanel4.getComponents()) {
+        if (checkDisponibilidadSanLuis.isSelected()) {
+            for (Component c : panelDatosSanLuis.getComponents()) {
                 c.setEnabled(true);
             }
         }
         else {
-            for (Component c : jPanel4.getComponents()) {
+            for (Component c : panelDatosSanLuis.getComponents()) {
                 c.setEnabled(false);
             }
             
         }
         
-        jLabel26.setVisible(false);
-        jLabel27.setVisible(false);
-        jLabel28.setVisible(false);
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        cartelPrecioInvalidoSanLuis.setVisible(false);
+        cartelStockInvalidoSanLuis.setVisible(false);
+        cartelStockMinimoInvalidoSanLuis.setVisible(false);
+    }//GEN-LAST:event_checkDisponibilidadSanLuisActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void checkDisponibilidadNeuquenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDisponibilidadNeuquenActionPerformed
         
         // Disponible en Neuquén
         
-        if (jCheckBox2.isSelected()) {
-            for (Component c : jPanel6.getComponents()) {
+        if (checkDisponibilidadNeuquen.isSelected()) {
+            for (Component c : panelDatosNeuquen.getComponents()) {
                 c.setEnabled(true);
             }
         }
         else {
-            for (Component c : jPanel6.getComponents()) {
+            for (Component c : panelDatosNeuquen.getComponents()) {
                 c.setEnabled(false);
             }
         }
         
-        jLabel29.setVisible(false);
-        jLabel30.setVisible(false);
-        jLabel31.setVisible(false);
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+        cartelPrecioInvalidoNeuquen.setVisible(false);
+        cartelStockInvalidoNeuquen.setVisible(false);
+        cartelStockMinimoInvalidoNeuquen.setVisible(false);
+    }//GEN-LAST:event_checkDisponibilidadNeuquenActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         
         // En este método se valida si se tienen los datos necesarios para construir el 
         // Producto que se pasa como parámetro al ManagerProducto. Ahi es donde
@@ -550,9 +550,9 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         
         resetCarteles();
         
-        if (jCheckBox1.isSelected()) {
+        if (checkDisponibilidadSanLuis.isSelected()) {
             try {
-                s = jTextField2.getText();
+                s = campoPrecioSanLuis.getText();
                 s = s.replace(',', '.');
                 precioVentaSanLuis = Float.parseFloat(s);
             } catch (NumberFormatException e) {
@@ -561,15 +561,15 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
             
             try {
-                stockActualSanLuis = Integer.parseInt(jTextField3.getText());
+                stockActualSanLuis = Integer.parseInt(campoStockSanLuis.getText());
             } catch (NumberFormatException e) {
                 avisarStockInvalidoSanLuis();
                 invalido = true;
             }
             
             try {
-                if (! jTextField4.getText().isBlank()) {
-                    stockMinimoSanLuis = Integer.parseInt(jTextField4.getText());
+                if (! campoStockMinimoSanLuis.getText().isBlank()) {
+                    stockMinimoSanLuis = Integer.parseInt(campoStockMinimoSanLuis.getText());
                 }
             } catch (NumberFormatException e) {
                 avisarStockMinimoInvalidoSanLuis();
@@ -577,9 +577,9 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
         }
         
-        if (jCheckBox2.isSelected()) {
+        if (checkDisponibilidadNeuquen.isSelected()) {
             try {
-                s = jTextField8.getText();
+                s = campoPrecioNeuquen.getText();
                 s = s.replace(',', '.');
                 
                 precioVentaNeuquen = Float.parseFloat(s);
@@ -589,15 +589,15 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
             
             try {
-                stockActualNeuquen = Integer.parseInt(jTextField9.getText());
+                stockActualNeuquen = Integer.parseInt(campoStockNeuquen.getText());
             } catch (NumberFormatException e) {
                 avisarStockInvalidoNeuquen();
                 invalido = true;
             }
             
             try {
-                if (! jTextField10.getText().isBlank()) {
-                    stockMinimoNeuquen = Integer.parseInt(jTextField10.getText());
+                if (! campoStockMinimoNeuquen.getText().isBlank()) {
+                    stockMinimoNeuquen = Integer.parseInt(campoStockMinimoNeuquen.getText());
                 }
             } catch (NumberFormatException e) {
                 avisarStockMinimoInvalidoNeuquen();
@@ -610,7 +610,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             // Crear Producto y enviar al controlador
             
             Producto.CategoriaProducto cat;
-            cat = switch (jComboBox1.getSelectedIndex()) {
+            cat = switch (campoCategoria.getSelectedIndex()) {
                 case 0 -> Producto.CategoriaProducto.ACCESORIO;
                 case 1 -> Producto.CategoriaProducto.LENCERIA;
                 case 2 -> Producto.CategoriaProducto.MARROQUINERIA;
@@ -620,11 +620,11 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             
             ArrayList<Disponibilidad> arrd = new ArrayList<>();
             
-            if (jCheckBox1.isSelected()) {
+            if (checkDisponibilidadSanLuis.isSelected()) {
                 
                 Disponibilidad dsl = new Disponibilidad(    precioVentaSanLuis, 
                                                             stockActualSanLuis, 
-                                                            (! jTextField4.getText().isBlank()),
+                                                            (! campoStockMinimoSanLuis.getText().isBlank()),
                                                             stockMinimoSanLuis,
                                                             new Sucursal("San Luis"),
                                                             null);
@@ -632,11 +632,11 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                 arrd.add(dsl);
             }
             
-            if (jCheckBox2.isSelected()) {
+            if (checkDisponibilidadNeuquen.isSelected()) {
                 
                 Disponibilidad dn = new Disponibilidad( precioVentaNeuquen, 
                                                         stockActualNeuquen, 
-                                                        (! jTextField10.getText().isBlank()),
+                                                        (! campoStockMinimoNeuquen.getText().isBlank()),
                                                         stockMinimoNeuquen,
                                                         new Sucursal("Neuquen"),
                                                         null);
@@ -645,8 +645,8 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
             
             Producto p = new Producto(  0,
-                                        jTextField1.getText(),
-                                        jTextField5.getText(),
+                                        campoNombre.getText(),
+                                        campoDescripcion.getText(),
                                         cat,
                                         arrd    );
             
@@ -658,159 +658,159 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             new ManagerProducto().alta(this, p);
         }
         
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        jDialog1.setVisible(false);
-    }//GEN-LAST:event_button2ActionPerformed
+    private void botonAltaExitosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaExitosaActionPerformed
+            dialogAltaExitosa.setVisible(false);
+    }//GEN-LAST:event_botonAltaExitosaActionPerformed
 
-    private void jDialog1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDialog1FocusLost
-        jDialog1.setVisible(false);
-    }//GEN-LAST:event_jDialog1FocusLost
+    private void dialogAltaExitosaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dialogAltaExitosaFocusLost
+        dialogAltaExitosa.setVisible(false);
+    }//GEN-LAST:event_dialogAltaExitosaFocusLost
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        jDialog2.setVisible(false);
-    }//GEN-LAST:event_button3ActionPerformed
+    private void botonAltaFallidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaFallidaActionPerformed
+        dialogAltaFallida.setVisible(false);
+    }//GEN-LAST:event_botonAltaFallidaActionPerformed
 
-    private void jDialog2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDialog2FocusLost
-        jDialog2.setVisible(false);
-    }//GEN-LAST:event_jDialog2FocusLost
+    private void dialogAltaFallidaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dialogAltaFallidaFocusLost
+        dialogAltaFallida.setVisible(false);
+    }//GEN-LAST:event_dialogAltaFallidaFocusLost
 
     public void avisarNombreInvalido() {
         
-        jTextField1.setText("");
-        jLabel8.setVisible(true);
+        campoNombre.setText("");
+        cartelNombreInvalido.setVisible(true);
     }
     
     public void avisarNingunaDisponibilidad() {
         
-        jLabel9.setVisible(true);
+        cartelNingunaDisponibilidad.setVisible(true);
     }
     
     public void avisarPrecioInvalidoSanLuis() {
        
-        jTextField2.setText("");
-        jLabel26.setVisible(true);
+        campoPrecioSanLuis.setText("");
+        cartelPrecioInvalidoSanLuis.setVisible(true);
     }
     
     public void avisarStockInvalidoSanLuis() {
         
-        jTextField3.setText("");
-        jLabel27.setVisible(true);
+        campoStockSanLuis.setText("");
+        cartelStockInvalidoSanLuis.setVisible(true);
     }
     
     public void avisarStockMinimoInvalidoSanLuis() {
        
-        jTextField4.setText("");
-        jLabel28.setVisible(true);
+        campoStockMinimoSanLuis.setText("");
+        cartelStockMinimoInvalidoSanLuis.setVisible(true);
     }
     
     public void avisarPrecioInvalidoNeuquen() {
         
-        jTextField8.setText("");
-        jLabel29.setVisible(true);
+        campoPrecioNeuquen.setText("");
+        cartelPrecioInvalidoNeuquen.setVisible(true);
     }
     
     public void avisarStockInvalidoNeuquen() {
        
-        jTextField9.setText("");
-        jLabel30.setVisible(true);
+        campoStockNeuquen.setText("");
+        cartelStockInvalidoNeuquen.setVisible(true);
     }
     
     public void avisarStockMinimoInvalidoNeuquen() {
        
-        jTextField10.setText("");
-        jLabel31.setVisible(true);
+        campoStockMinimoNeuquen.setText("");
+        cartelStockMinimoInvalidoNeuquen.setVisible(true);
     }
     
     public void resetCarteles() {
         
-        jLabel8.setVisible(false);
-        jLabel9.setVisible(false);
+        cartelNombreInvalido.setVisible(false);
+        cartelNingunaDisponibilidad.setVisible(false);
         
-        jLabel26.setVisible(false);
-        jLabel27.setVisible(false);
-        jLabel28.setVisible(false);
+        cartelPrecioInvalidoSanLuis.setVisible(false);
+        cartelStockInvalidoSanLuis.setVisible(false);
+        cartelStockMinimoInvalidoSanLuis.setVisible(false);
         
-        jLabel29.setVisible(false);
-        jLabel30.setVisible(false);
-        jLabel31.setVisible(false);
+        cartelPrecioInvalidoNeuquen.setVisible(false);
+        cartelStockInvalidoNeuquen.setVisible(false);
+        cartelStockMinimoInvalidoNeuquen.setVisible(false);
     }
     
     public void resetCampos() {
         
-        jTextField1.setText("");
-        jComboBox1.setSelectedIndex(0);
-        jTextField5.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField8.setText("");
-        jTextField9.setText("");
-        jTextField10.setText("");
+        campoNombre.setText("");
+        campoCategoria.setSelectedIndex(0);
+        campoDescripcion.setText("");
+        campoPrecioSanLuis.setText("");
+        campoStockSanLuis.setText("");
+        campoStockMinimoSanLuis.setText("");
+        campoPrecioNeuquen.setText("");
+        campoStockNeuquen.setText("");
+        campoStockMinimoNeuquen.setText("");
         
-        if (jCheckBox1.isSelected()) jCheckBox1.doClick();
-        if (jCheckBox2.isSelected()) jCheckBox2.doClick();
+        if (checkDisponibilidadSanLuis.isSelected()) checkDisponibilidadSanLuis.doClick();
+        if (checkDisponibilidadNeuquen.isSelected()) checkDisponibilidadNeuquen.doClick();
     }
     
     public void mostrarCartelAltaExitosa() {
         
-        jDialog1.setLocationRelativeTo(null);
-        jDialog1.setVisible(true);
+        dialogAltaExitosa.setLocationRelativeTo(null);
+        dialogAltaExitosa.setVisible(true);
     }
     
-    public void mostrarCartelAltaNoExitosa() {
+    public void mostrarCartelAltaFallida() {
         
-        jDialog2.setLocationRelativeTo(null);
-        jDialog2.setVisible(true);
+        dialogAltaFallida.setLocationRelativeTo(null);
+        dialogAltaFallida.setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.swing.Button button1;
-    private com.raven.swing.Button button2;
-    private com.raven.swing.Button button3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JDialog jDialog2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private com.raven.swing.Button botonAceptar;
+    private com.raven.swing.Button botonAltaExitosa;
+    private com.raven.swing.Button botonAltaFallida;
+    private javax.swing.JComboBox<String> campoCategoria;
+    private javax.swing.JTextField campoDescripcion;
+    private javax.swing.JTextField campoNombre;
+    private javax.swing.JTextField campoPrecioNeuquen;
+    private javax.swing.JTextField campoPrecioSanLuis;
+    private javax.swing.JTextField campoStockMinimoNeuquen;
+    private javax.swing.JTextField campoStockMinimoSanLuis;
+    private javax.swing.JTextField campoStockNeuquen;
+    private javax.swing.JTextField campoStockSanLuis;
+    private javax.swing.JLabel cartelNingunaDisponibilidad;
+    private javax.swing.JLabel cartelNombreInvalido;
+    private javax.swing.JLabel cartelPrecioInvalidoNeuquen;
+    private javax.swing.JLabel cartelPrecioInvalidoSanLuis;
+    private javax.swing.JLabel cartelStockInvalidoNeuquen;
+    private javax.swing.JLabel cartelStockInvalidoSanLuis;
+    private javax.swing.JLabel cartelStockMinimoInvalidoNeuquen;
+    private javax.swing.JLabel cartelStockMinimoInvalidoSanLuis;
+    private javax.swing.JCheckBox checkDisponibilidadNeuquen;
+    private javax.swing.JCheckBox checkDisponibilidadSanLuis;
+    private javax.swing.JDialog dialogAltaExitosa;
+    private javax.swing.JDialog dialogAltaFallida;
+    private javax.swing.JLabel labelAltaExitosa;
+    private javax.swing.JLabel labelAltaFallida;
+    private javax.swing.JLabel labelCategoria;
+    private javax.swing.JLabel labelDescripcion;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelOpcionalDescripcion;
+    private javax.swing.JLabel labelOpcionalStockMinimoNeuquen;
+    private javax.swing.JLabel labelOpcionalStockMinimoSanLuis;
+    private javax.swing.JLabel labelPrecioNeuquen;
+    private javax.swing.JLabel labelPrecioSanLuis;
+    private javax.swing.JLabel labelStockMinimoNeuquen;
+    private javax.swing.JLabel labelStockMinimoSanLuis;
+    private javax.swing.JLabel labelStockNeuquen;
+    private javax.swing.JLabel labelStockSanLuis;
+    private javax.swing.JPanel panelContenidoFormulario;
+    private javax.swing.JPanel panelDatosNeuquen;
+    private javax.swing.JPanel panelDatosSanLuis;
+    private javax.swing.JPanel panelDialogAltaExitosa;
+    private javax.swing.JPanel panelDialogAltaFallida;
+    private javax.swing.JPanel panelTituloFormulario;
+    private javax.swing.JSeparator separador;
+    private javax.swing.JLabel tituloFormulario;
     // End of variables declaration//GEN-END:variables
 }

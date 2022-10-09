@@ -11,7 +11,7 @@ public class Reserva {
     private float seña;
     private Date fecha;
     
-    // Constructores
+    // Constructor
 
     public Reserva(long telefonoCliente, float seña, Date fecha) {
        
@@ -21,7 +21,7 @@ public class Reserva {
     }
 
     public Reserva() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     // Getters y Setters
