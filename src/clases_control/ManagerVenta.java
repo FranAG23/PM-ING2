@@ -20,6 +20,10 @@ public class ManagerVenta
     public ManagerVenta(FormularioAltaVenta formulario) {
         this.formulario = formulario;
     }
+
+    public ManagerVenta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
      
 
     /*
@@ -100,8 +104,10 @@ public class ManagerVenta
             }
             else{
                 // Si no, mostrar cartel de fracaso.
-                formulario.mostrarCartelFracaso();
+               // formulario.mostrarCartelFracaso();
             }
        }
     }
-}
+    
+   }
+

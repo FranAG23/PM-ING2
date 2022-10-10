@@ -77,11 +77,11 @@ public class ManagerProducto {
     }
     
 
-    public void buscarProductosConStock(FormularioAltaVenta formulario, Producto producto, Sucursal sucursal){
+    public ArrayList<Producto> buscarProductosConStock(FormularioAltaVenta formulario, Producto producto, Sucursal sucursal){
         boolean validacionExitosa = true;
         ArrayList<Producto> listaProductos = new ArrayList<>(); 
         Disponibilidad disp; 
-        formulario.limpiarTablaBuscador();
+        formulario.borrarFilasDeProductos();
         formulario.esconderErrorBuscadorNombre(); 
         formulario.esconderErrorBuscadorVacio();
       
@@ -96,14 +96,15 @@ public class ManagerProducto {
                 daoProducto = new DAOProducto(); 
             listaProductos = daoProducto.obtenerProductosConDisponibilidad(producto, sucursal);
             if(listaProductos.isEmpty())
-                formulario.mostrarErrorBuscadorVacio();
+                formulario.advertirNoHayResultados();
             else{
                 for(Producto prod: listaProductos){
                     disp = prod.getDisponibilidades().get(0);
-                    formulario.agregarRenglonTabla(prod, disp);
+                   // formulario.agregarFilaDeProducto(prod, disp);
                 }
             }
                 
         }
+        return listaProductos;
     }
 }

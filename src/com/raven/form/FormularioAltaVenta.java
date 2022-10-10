@@ -7,16 +7,13 @@ import clases_entidad.Disponibilidad;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
 import clases_entidad.Sucursal;
+import clases_control.LogicaAltaVenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FormularioAltaVenta extends javax.swing.JPanel {
-    ArrayList<Producto> productosCorrientes; 
-    ArrayList<ItemVenta> itemsCorrientes; 
-    
-    ManagerVenta managerVenta = null; 
-    ManagerProducto managerProducto = null;
+    LogicaAltaVenta logica;
     
     public FormularioAltaVenta() {
         initComponents();
@@ -26,15 +23,16 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoSucursal.addItem("San Luis");
         campoSucursal.setEnabled(false);     
         esconderCartelesDeError();
+        logica = new LogicaAltaVenta(this);
     }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        panelCabecera = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        panelDatos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -58,47 +56,47 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         tablaBuscador = new com.raven.swing.table.Table();
         jLabel11 = new javax.swing.JLabel();
         botonAgregarItem = new com.raven.swing.Button();
-        campoApellido2 = new javax.swing.JTextField();
+        campoCantidad = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaItems = new javax.swing.JTable();
-        cartelErrorTablaVacia = new javax.swing.JLabel();
+        errorTablaItems = new javax.swing.JLabel();
         botonEliminarItem = new com.raven.swing.Button();
         jSeparator3 = new javax.swing.JSeparator();
         botonRegistrarReserva = new com.raven.swing.Button();
         botonRegistrarVenta = new com.raven.swing.Button();
-        cartelErrorBuscadorNombre = new javax.swing.JLabel();
-        cartelErrorBuscadorVacio = new javax.swing.JLabel();
+        errorNombreProducto = new javax.swing.JLabel();
+        JScrollPane666 = new javax.swing.JScrollPane();
+        tablaItems = new com.raven.swing.table.Table();
+        errorCantidad = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
 
-        jPanel3.setBackground(new java.awt.Color(238, 156, 167));
+        panelCabecera.setBackground(new java.awt.Color(238, 156, 167));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Alta Venta");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelCabeceraLayout = new javax.swing.GroupLayout(panelCabecera);
+        panelCabecera.setLayout(panelCabeceraLayout);
+        panelCabeceraLayout.setHorizontalGroup(
+            panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCabeceraLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        panelCabeceraLayout.setVerticalGroup(
+            panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCabeceraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setForeground(new java.awt.Color(253, 229, 229));
+        panelDatos.setBackground(new java.awt.Color(255, 255, 255));
+        panelDatos.setForeground(new java.awt.Color(253, 229, 229));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel3.setText("Nombre del cliente");
@@ -208,37 +206,14 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             }
         });
 
-        campoApellido2.setBackground(new java.awt.Color(204, 204, 255));
+        campoCantidad.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
         jLabel9.setText("Items de venta agregados");
 
-        tablaItems.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Producto", "Nombre del producto", "Cantidad", "Precio por unidad", "Precio total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tablaItems.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tablaItems);
-        if (tablaItems.getColumnModel().getColumnCount() > 0) {
-            tablaItems.getColumnModel().getColumn(0).setResizable(false);
-            tablaItems.getColumnModel().getColumn(4).setResizable(false);
-        }
-
-        cartelErrorTablaVacia.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        cartelErrorTablaVacia.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorTablaVacia.setText("Tiene que agregar al menos un item de venta");
+        errorTablaItems.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        errorTablaItems.setForeground(new java.awt.Color(255, 51, 51));
+        errorTablaItems.setText("Tiene que agregar al menos un item de venta");
 
         botonEliminarItem.setBackground(new java.awt.Color(238, 156, 167));
         botonEliminarItem.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,28 +248,56 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             }
         });
 
-        cartelErrorBuscadorNombre.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        cartelErrorBuscadorNombre.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorBuscadorNombre.setText("El nombre debe tener entre 1 y 80 caracteres");
+        errorNombreProducto.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        errorNombreProducto.setForeground(new java.awt.Color(255, 51, 51));
+        errorNombreProducto.setText("El nombre debe tener entre 1 y 80 caracteres");
 
-        cartelErrorBuscadorVacio.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        cartelErrorBuscadorVacio.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorBuscadorVacio.setText("No se encontraron productos ");
+        tablaItems.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            },
+            new String [] {
+                "Nombre producto", "Cantidad ", "Precio por unidad", "Precio total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JScrollPane666.setViewportView(tablaItems);
+
+        errorCantidad.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        errorCantidad.setForeground(new java.awt.Color(255, 51, 51));
+        errorCantidad.setText("Error formato de cantidad");
+
+        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
+        panelDatos.setLayout(panelDatosLayout);
+        panelDatosLayout.setHorizontalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
                         .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(errorTablaItems)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(JScrollPane666, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
@@ -302,79 +305,74 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4))
                                 .addGap(80, 80, 80)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(592, 592, 592))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGroup(panelDatosLayout.createSequentialGroup()
                                         .addComponent(campoBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cartelErrorBuscadorVacio)
-                                        .addGap(18, 18, 18)
                                         .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelDatosLayout.createSequentialGroup()
+                                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(cartelErrorApellido)
                                                     .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                                                     .addComponent(campoApellido)
                                                     .addComponent(campoSucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(cartelErrorNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(74, 74, 74)
-                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(panelDatosLayout.createSequentialGroup()
                                                         .addComponent(jLabel7)
                                                         .addGap(209, 209, 209)
                                                         .addComponent(campoEnvioGratis))
-                                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                                    .addGroup(panelDatosLayout.createSequentialGroup()
                                                         .addComponent(jLabel8)
                                                         .addGap(80, 80, 80)
                                                         .addComponent(campoMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addComponent(cartelErrorBuscadorNombre))
+                                            .addComponent(errorNombreProducto))
                                         .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
                                 .addComponent(botonRegistrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(100, 100, 100)
-                                .addComponent(campoApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(campoCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(errorCantidad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonAgregarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2))
+                                .addComponent(botonAgregarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cartelErrorTablaVacia)
-                .addGap(389, 389, 389))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        panelDatosLayout.setVerticalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel4)
                 .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(campoSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
                     .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
                         .addComponent(cartelErrorNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel8)
@@ -382,7 +380,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(cartelErrorApellido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)))
@@ -392,34 +390,34 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
                 .addGap(8, 8, 8)
-                .addComponent(cartelErrorBuscadorNombre)
+                .addComponent(errorNombreProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(campoBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cartelErrorBuscadorVacio))
+                    .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAgregarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(32, 32, 32)
+                    .addComponent(campoCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(errorCantidad))
+                .addGap(28, 28, 28)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cartelErrorTablaVacia)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(errorTablaItems))
+                .addGap(32, 32, 32)
+                .addComponent(JScrollPane666, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonRegistrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
@@ -432,17 +430,17 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -460,36 +458,37 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     }
     
     public void mostrarErrorTablaVacia(){
-        cartelErrorTablaVacia.setText("Debe ingresar al menos un item de venta");
+        errorTablaItems.setText("Debe ingresar al menos un item de venta");
     }
     
-     public void mostrarErrorBuscadorVacio(){
-        cartelErrorBuscadorVacio.setText("No se encontraron productos");
+     public void advertirNoHayResultados(){
+        errorNombreProducto.setText("No se encontraron productos");
     }
     
     public void mostrarErrorBuscadorNombre(){
-        cartelErrorBuscadorNombre.setText("El nombre debe tener entre 1 y 80 caracteres");
+        errorNombreProducto.setText("El nombre debe tener entre 1 y 80 caracteres");
     }
     
     public void esconderErrorBuscadorNombre(){
-        cartelErrorBuscadorNombre.setText(" ");
+        errorNombreProducto.setText(" ");
     }
     
     public void esconderErrorBuscadorVacio(){
-        cartelErrorBuscadorVacio.setText(" ");
+        errorNombreProducto.setText(" ");
     }
     
-    public void limpiarTablaBuscador(){
+    public void borrarFilasDeProductos(){
         DefaultTableModel model = (DefaultTableModel)tablaBuscador.getModel();
         while(model.getRowCount() != 0)
             model.removeRow(0);
     }
     
-    public void agregarRenglonTabla(Producto prod, Disponibilidad disp){  
-            tablaBuscador.addRow(new Object[]{prod.getNombre(), prod.getCategoria().toString(), prod.getDescripcion(), 
-                   disp.getStockActual(), disp.getPrecioVenta()});
+    public void agregarFilaDeProducto(String nom, String cat, String desc, int stockActual, float precioVenta){  
+            tablaBuscador.addRow(new Object[]{nom, cat, desc, stockActual, precioVenta});
     }
-    
+    public void agregarItemVenta(String nombre, String categoria, int cantidad, float precioUnidad, float importeTotal) {
+            tablaItems.addRow(new Object[]{nombre, categoria, cantidad, precioUnidad, importeTotal});
+    }
     public void reiniciarCampos(){
         DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
         campoNombre.setText("");
@@ -501,11 +500,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         esconderCartelesDeError();
     }
     
-    public
-         void mostrarCartelFracaso(){
-        JOptionPane.showMessageDialog(this, "ERROR FATAL: la venta no pudo registrarse. Contacte con equipo de soporte");
-    }
-    
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
 
     }//GEN-LAST:event_campoNombreActionPerformed
@@ -514,9 +508,9 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         // Reiniciar carteles de error:
         cartelErrorNombre.setText(" ");
         cartelErrorApellido.setText(" ");
-        cartelErrorTablaVacia.setText(" ");
-        cartelErrorBuscadorNombre.setText(" ");
-        cartelErrorBuscadorVacio.setText(" ");
+        errorTablaItems.setText(" ");
+        errorNombreProducto.setText(" ");
+        errorCantidad.setText(" ");
     }
     
     private void campoSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSucursalActionPerformed
@@ -524,18 +518,9 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // Construir objeto producto:
-        Producto producto = new Producto();
-        producto.setNombre(campoBuscador.getText());
-        // Construir objeto sucursal:
-        Sucursal sucursal = new Sucursal(1, "San Luis"); 
-
-        // Si manager no está consturido,
-        if(managerProducto == null)
-            // entonces crear nuevo manager. 
-            managerProducto = new ManagerProducto();
-        // Buscar productos con nombre similar al ingresado que tengan disponibilidad
-        // en la sucursal indicada. 
-        managerProducto.buscarProductosConStock(this, producto, sucursal);
+        String nombreProducto = campoBuscador.getText();
+        // Invocar a lógica de la acción.
+        logica.usuarioBuscaProducto(nombreProducto, 1, "San Luis");
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void tablaBuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBuscadorMouseClicked
@@ -543,19 +528,52 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_tablaBuscadorMouseClicked
 
     private void botonAgregarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarItemActionPerformed
-        DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
-        model.addRow(new Object[]{(int)1,"",(int)0,(float)0,(float)0});
+        boolean datosValidos = true; 
+        int cantidadAVender = 0; 
+        int filaSeleccionada = -1; 
+        DefaultTableModel modelo;
+        
+        // Obtener modelo de tabla de items.
+        modelo = (DefaultTableModel)tablaBuscador.getModel();
+        // Obtener fila seleccionada. 
+        filaSeleccionada = tablaBuscador.getSelectedRow();
+         
+        // Ocultar cartel de error
+        errorCantidad.setText(" ");
+        
+        // Validar que campoCantidad pueda transformarse a int.
+        try
+        {
+            cantidadAVender = Integer.parseInt(campoCantidad.getText());
+        } 
+        catch (NumberFormatException e) 
+        {
+            errorCantidad.setText("Error en formato de cantidad ");
+            datosValidos = false; 
+        }
+        // Si no hubo errores y hay al menos una fila seleccionada. 
+        if(datosValidos && filaSeleccionada >= 0)
+            // entonces invocar a la lógica de la acción. 
+            logica.usuarioQuiereAgregarItem(filaSeleccionada, cantidadAVender);
     }//GEN-LAST:event_botonAgregarItemActionPerformed
 
     private void botonEliminarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarItemActionPerformed
+       DefaultTableModel model;
+       int filaSeleccionada = -1; 
+       String nombreProducto = "";
         // Obtener modelo de tabla de items.
-       DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
+        model = (DefaultTableModel)tablaItems.getModel();
        // Obtener fila seleccionada de tabla.
-       int filaSeleccionada = tablaItems.getSelectedRow();
+       filaSeleccionada = tablaItems.getSelectedRow();
        // Si hay una fila seleccionada,
-       if(filaSeleccionada != -1)
-           // entonces borrar esa fila. 
-           model.removeRow(tablaItems.getSelectedRow());
+       if(filaSeleccionada >= 0)
+       {
+           // entonces obtener nombre del producto.
+           nombreProducto = tablaItems.getValueAt(filaSeleccionada, 0).toString(); 
+           // e invocar a la lógica de esa acción.
+           logica.usuarioQuiereEliminarItem(filaSeleccionada, nombreProducto);
+       }
+           
     }//GEN-LAST:event_botonEliminarItemActionPerformed
 
     private void botonRegistrarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarReservaActionPerformed
@@ -563,68 +581,36 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_botonRegistrarReservaActionPerformed
 
     private void botonRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarVentaActionPerformed
-        managerVenta = new ManagerVenta(this);
-        ArrayList<RenglonTablaAltaVenta> listRenglones = new ArrayList<>();
-        RenglonTablaAltaVenta renglon;
-        
-        // Obtener nombre de cliente:
         String nomCliente = campoNombre.getText();
-        // Obtener apellido del cliente:
-        String apeCliente = campoApellido.getText(); 
-        // Obtener si la venta es con envio gratis o no:
-        boolean envioGratis = campoEnvioGratis.isSelected(); 
-        // Obtener metodo de pago:
+        String apeCliente = campoApellido.getText();
         String strMetodoPago = campoMetodoPago.getSelectedItem().toString(); 
-        // Obtener ubicacion de sucursal:
-        String strUbiSucursal = campoSucursal.getSelectedItem().toString(); 
-        
-        // En este bloque de código lleno mi lista de renglones
-        // Obtener modelo de la tabla:
-        DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
-        // Recorrer todas las filas de la tabla:
-        for(int i = 0; i < model.getRowCount(); i++){
-            // Crear nuevo renglon: 
-            renglon = new RenglonTablaAltaVenta(); 
-            renglon.setIDProducto((int)model.getValueAt(i, 0));
-            renglon.setNombreProducto(model.getValueAt(i, 1).toString());
-            renglon.setCantidad((int) model.getValueAt(i, 2));
-            
-            renglon.setPrecioPorUnidad((float) (model.getValueAt(i, 3)));
-            listRenglones.add(renglon);
-        }
-        
-        // Reiniciar carteles de error:
-        cartelErrorNombre.setText(" ");
-        cartelErrorApellido.setText(" ");
-        cartelErrorTablaVacia.setText(" ");
-        
-        // Trasmitir datos a manager de ventas:
-        managerVenta.altaVenta(nomCliente, apeCliente, envioGratis, 1000, 
-                                strMetodoPago, strUbiSucursal, listRenglones);
+        String ubiSucursal = campoSucursal.getSelectedItem().toString(); 
+        logica.usuarioQuiereCompletarVenta(nomCliente, apeCliente, true, strMetodoPago, 1, ubiSucursal);
     }//GEN-LAST:event_botonRegistrarVentaActionPerformed
 
     private void campoBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscadorActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_campoBuscadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane666;
     private com.raven.swing.Button botonAgregarItem;
     private com.raven.swing.Button botonBuscar;
     private com.raven.swing.Button botonEliminarItem;
     private com.raven.swing.Button botonRegistrarReserva;
     private com.raven.swing.Button botonRegistrarVenta;
     private javax.swing.JTextField campoApellido;
-    private javax.swing.JTextField campoApellido2;
     private javax.swing.JTextField campoBuscador;
+    private javax.swing.JTextField campoCantidad;
     private javax.swing.JCheckBox campoEnvioGratis;
     private javax.swing.JComboBox<String> campoMetodoPago;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JComboBox<String> campoSucursal;
     private javax.swing.JLabel cartelErrorApellido;
-    private javax.swing.JLabel cartelErrorBuscadorNombre;
-    private javax.swing.JLabel cartelErrorBuscadorVacio;
     private javax.swing.JLabel cartelErrorNombre;
-    private javax.swing.JLabel cartelErrorTablaVacia;
+    private javax.swing.JLabel errorCantidad;
+    private javax.swing.JLabel errorNombreProducto;
+    private javax.swing.JLabel errorTablaItems;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -637,14 +623,46 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JPanel panelCabecera;
+    private javax.swing.JPanel panelDatos;
     private com.raven.swing.table.Table tablaBuscador;
-    private javax.swing.JTable tablaItems;
+    private com.raven.swing.table.Table tablaItems;
     // End of variables declaration//GEN-END:variables
+
+    public void advertirCantidadNegativa() {
+        errorCantidad.setText("La cantidad debe ser positiva");
+    }
+
+    public void indicarQueCantidadSuperaStock() {
+        errorCantidad.setText("La cantidad supera el stock");
+    }
+
+    public void advertirItemRepetido() {
+        errorTablaItems.setText("Quiere agregar un producto repetido");
+    }
+
+    public void eliminarFilaItemVenta(int filaSeleccionada) {
+        DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
+        model.removeRow(filaSeleccionada);
+    }
+
+    public void esconderAdvertenciaCantidadNegativa() {
+        errorCantidad.setText(" ");
+    }
+
+    public void esconderAdvertenciaCantidadSuperaStock() {
+        errorCantidad.setText(" ");
+    }
+
+    public void esconderAdvertenciaItemRepetido() {
+        errorTablaItems.setText(" ");
+    }
+
+    public void mostrarCartelFracaso() {
+        JOptionPane.showMessageDialog(this, "ERROR FATAL: Contacte con el equipo de soporte");
+    }
 }

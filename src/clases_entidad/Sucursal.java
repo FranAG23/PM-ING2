@@ -18,10 +18,14 @@ public class Sucursal {
         this.id = id; 
         this.ubicacion = ubicacion;
     }
+
+    public Sucursal() {
+      
+    }
     
     // Getters y Setters
     public int getID(){return id;}
-    public int setID(){return id;}
+    public void setID(int id){this.id = id;}
     public String getUbicacion() {return ubicacion;}
     public void setUbicacion(String ubicacion) {this.ubicacion = ubicacion;}
 

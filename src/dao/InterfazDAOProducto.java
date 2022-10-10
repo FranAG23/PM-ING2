@@ -17,4 +17,5 @@ public interface InterfazDAOProducto {
     
     void obtenerProductoPorNombre(Producto buscado, Producto resultado);
     ArrayList<Producto> obtenerProductosConDisponibilidad(Producto buscado, Sucursal sucursal);
+    ArrayList<Producto> obtenerProdsConDisp(Producto buscado, Sucursal sucursal);
 }
