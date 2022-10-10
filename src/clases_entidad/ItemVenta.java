@@ -21,7 +21,10 @@ public class ItemVenta {
     }
 
     public ItemVenta() {
-        
+        this.id = -1;
+        this.cantidad = -1;
+        this.precioUnidad = -1;
+        this.producto = new Producto();
     }
 
     ItemVenta(ItemVenta item) {

@@ -10,6 +10,8 @@ import com.raven.event.EventShowPopupMenu;
 //import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaProducto;
+import com.raven.form.FormularioAltaVenta;
+import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.MainForm;
 import com.raven.form.panelConScrollAltaVenta;
 import com.raven.swing.MenuItem;
@@ -20,7 +22,10 @@ import dao.DAOProducto;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -55,13 +60,13 @@ public class Main extends javax.swing.JFrame {
     // Objeto usado para las animaciones. 
     private Animator animator;
 
-    public Main() {
+    public Main() throws SQLException {
         initComponents();
         init();
     }
 
     // Función que inicializa componentes creadas por Raven. 
-    private void init() {
+    private void init() throws SQLException, SQLException {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         menu = new Menu();
@@ -80,25 +85,33 @@ public class Main extends javax.swing.JFrame {
                 // en base al menú seleccionado. 
                 switch(menuIndex){
                     case 0:
+                    {
+                        try {
+                            main.showForm(new Form_Home());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                        break;
+
+                    case 1:
                         switch(subMenuIndex){
                             case 0:
                                 main.showForm(new FormularioAltaProducto());
                                 break;
                         }
-                        break; 
-                    case 1:
-                        switch(subMenuIndex){
-                            case 0:
-                                main.showForm(new panelConScrollAltaVenta());
-                                break;
-                            case 1:
-                                //main.showForm(new FormularioConsultarVenta()); 
-                                break; 
-                        }
                         break;
                     case 2:
-                        main.showForm(new Form_Home());
-                        break; 
+                        switch(subMenuIndex){
+                            case 0:
+                                main.showForm(new FormularioAltaVenta());
+                                break;
+                            case 1:
+                                main.showForm(new FormularioConsultarVenta()); 
+                                break;
+                            
+                        }
+                        break;
                 }
             }
         });
@@ -259,37 +272,41 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Main().setVisible(true);
-                /*
-                DAOProducto daoprod = new DAOProducto();
-                //Crear lista resultado:
-                ArrayList<Producto> listaProductos = new ArrayList<Producto>();
-                
-                // Crear sucursal:
-                Sucursal sucursal = new Sucursal(1,"San Luis");
-                
-                // Crear producto: 
-                Producto prod = new Producto();
-                prod.setNombre("prod");
-               
-                // Testeo:
-                listaProductos = daoprod.obtenerProductosConDisponibilidad(prod, sucursal);
-                
-                // Imprimir resultados:
-                for(Producto p: listaProductos){
+                try {
+                    new Main().setVisible(true);
+                    /*
+                    DAOProducto daoprod = new DAOProducto();
+                    //Crear lista resultado:
+                    ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+                    
+                    // Crear sucursal:
+                    Sucursal sucursal = new Sucursal(1,"San Luis");
+                    
+                    // Crear producto:
+                    Producto prod = new Producto();
+                    prod.setNombre("prod");
+                    
+                    // Testeo:
+                    listaProductos = daoprod.obtenerProductosConDisponibilidad(prod, sucursal);
+                    
+                    // Imprimir resultados:
+                    for(Producto p: listaProductos){
                     System.out.println(p.getId());
-                    System.out.println(p.getNombre()); 
-                    System.out.println(p.getCategoria().toString()); 
+                    System.out.println(p.getNombre());
+                    System.out.println(p.getCategoria().toString());
                     System.out.println(p.getDescripcion()); 
                     for(Disponibilidad d: p.getDisponibilidades()){
-                        System.out.println(d.getID()); 
-                        System.out.println(d.getPrecioVenta()); 
-                        System.out.println(d.getStockActual()); 
-                        System.out.println(d.getStockMinimo()); 
-                        System.out.println(d.getTieneStockMinimo()); 
+                    System.out.println(d.getID());
+                    System.out.println(d.getPrecioVenta());
+                    System.out.println(d.getStockActual());
+                    System.out.println(d.getStockMinimo());
+                    System.out.println(d.getTieneStockMinimo()); 
                     }
                     System.out.println("-..-");
-                }*/
+                    }*/
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
         });

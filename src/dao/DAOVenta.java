@@ -4,6 +4,11 @@ package dao;
 import base_datos.BaseDatos;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
+import static clases_entidad.Producto.CategoriaProducto.ACCESORIO;
+import static clases_entidad.Producto.CategoriaProducto.LENCERIA;
+import static clases_entidad.Producto.CategoriaProducto.MARROQUINERIA;
+import static clases_entidad.Producto.CategoriaProducto.PAPELERIA;
+import static clases_entidad.Producto.CategoriaProducto.VARIOS;
 import clases_entidad.Reserva;
 import clases_entidad.Venta;
 import clases_entidad.auxiliares.ItemLista;
@@ -36,6 +41,10 @@ public class DAOVenta implements InterfazDAOVenta {
     private final String queryParaInsertarEnTablaVentas = "INSERT INTO " + nombreTablaVentas + " VALUES (DEFAULT,?,?,?,?,?,?,?,?)"; 
     private final String queryParaGenerarIDVenta = "SELECT CURRVAL('Venta_vID_seq')"; 
     private final String queryParaInsertarEnTablaItemsVenta = "INSERT INTO " + nombreTablaItemsVenta + " VALUES (DEFAULT,?,?,?,?)";
+    private final String queryParaGenerarIDItemVenta = "SELECT CURRVAL('itemventa_ivid_seq')"; 
+    private final String queryParaObtenerVentaxFecha = "SELECT * FROM venta WHERE (vfecha = ?)";
+    private final String queryParaObtenerItemsVenta = "SELECT * FROM itemventa WHERE (vid = ?)";
+    private final String queryParaObtenerProductosItemVenta = "SELECT producto.pid, pnombre, pcategoria, pdescripcion FROM itemventa, producto WHERE(ivid = ?) AND (itemventa.pid = producto.pid)";
     
     @Override
     public boolean registrar(Venta venta) {
@@ -54,7 +63,7 @@ public class DAOVenta implements InterfazDAOVenta {
             } else { //Neuquén
                 pst.setInt(colIDSucursal, 2);
             }
-            pst.setString(colNomCliente, venta.getNombreCliente());
+          pst.setString(colNomCliente, venta.getNombreCliente());
             pst.setString(colApeCliente, venta.getApellidoCliente());
             pst.setBoolean(colEnvioGratis, venta.getEnvioGratis());
             pst.setFloat(colImporte, venta.getImporte());
@@ -91,7 +100,6 @@ public class DAOVenta implements InterfazDAOVenta {
         return exito;
     }
 
-    @Override
     public boolean modificar(Venta v) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
@@ -101,105 +109,133 @@ public class DAOVenta implements InterfazDAOVenta {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    @Override
-    public Venta obtener(int id) {
-        
-        Venta v = new Venta();
+ public ArrayList<Venta> ObtenerFecha(Date D) throws SQLException{
+        ArrayList<Venta> Ventas = new ArrayList<Venta>();
         PreparedStatement pst = null;
-        Connection con = null;
-        ResultSet rs = null;
+        ResultSet rsVenta = null;
+        ResultSet rsItemVenta = null;
+        BaseDatos conexionBD = BaseDatos.getInstance(); 
+        conexionBD.establecerConexion();
+        Connection con;
+        con = conexionBD.establecerConexion();
+        pst = con.prepareStatement(queryParaObtenerVentaxFecha);
+      // BASE DE DATOS NUEVA pst.setDate(colFechaPago, new java.sql.Date(D.getTime()));
+        pst.setDate(1, new java.sql.Date(D.getTime()));
+        rsVenta = pst.executeQuery();
         
-        try {
-            
-            
-            // Obtener datos de tabla Venta
-            
-            pst = con.prepareStatement("SELECT * FROM Venta WHERE (vID = ?)");
-            pst.setInt(1, id);
-            rs = pst.executeQuery();
-            
-            if (rs.next()) {
-                v.setId(rs.getInt("vID"));
-                v.setNombreCliente(rs.getString("vNombreCliente"));
-                v.setEnvioGratis(rs.getBoolean("vEnvioGratis"));
-                v.setImporte(rs.getFloat("vImporte"));
-                v.setFecha(new java.util.Date(rs.getDate("vFecha").getTime()));
-                if (rs.getString("vMetodoPago").equals("Efectivo")) {
-                    v.setMetodoPago(Venta.MetodoPago.EFECTIVO);
+        while(rsVenta.next()) {
+                Venta V = new Venta();
+                V.setId(rsVenta.getInt("vid"));
+                V.setNombreCliente(rsVenta.getString("vnombrecliente"));
+                V.setApellidoCliente(rsVenta.getString("vapellidocliente"));
+                V.setEnvioGratis(rsVenta.getBoolean("venviogratis"));
+                V.setImporte(rsVenta.getFloat("vimporte"));
+                V.setFecha(new java.util.Date(rsVenta.getDate("vfecha").getTime()));
+                if (rsVenta.getString("vmetodopago").equals("Efectivo")) {
+                    V.setMetodoPago(Venta.MetodoPago.EFECTIVO);
                 } 
                 else {
-                    v.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
+                    V.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
                 }
-                switch (rs.getString("vEstadoVenta")) {
-                    case "Completada": v.setEstado(Venta.EstadoVenta.COMPLETADA);
-                    case "En reserva": v.setEstado(Venta.EstadoVenta.EN_RESERVA);
-                    default: v.setEstado(Venta.EstadoVenta.CANCELADA);
-                }
-            }
-            
-            // Obtener Reserva (si la hay)
-            
-            pst = con.prepareStatement("SELECT * FROM Reserva WHERE (vID = ?)");
-            pst.setInt(1, id);
-            rs = pst.executeQuery();
-            
-            if (rs.next()) {
-                Reserva r = new Reserva();
-                r.setTelefonoCliente(rs.getLong("rTelefonoCliente"));
-                r.setSeña(rs.getFloat("rSeña"));
-                r.setFecha(new java.util.Date(rs.getDate("rFecha").getTime()));
-                v.setReserva(r);
-            }
-            
-            // Obtener datos de tabla ItemVenta
-            
-            pst = con.prepareStatement("SELECT * FROM ItemVenta WHERE (vID = ?)");
-            pst.setInt(1, id);
-            rs = pst.executeQuery();
-            
-            ArrayList<ItemVenta> ai = new ArrayList<>();
-            while (rs.next()) {
+                if(rsVenta.getString("vestadoventa").equals("Completada")) {
+                    V.setEstado(Venta.EstadoVenta.COMPLETADA);
+                    }
+                        else{
+                           if(rsVenta.getString("vestadoventa").equals("Cancelada")){
+                            V.setEstado(Venta.EstadoVenta.CANCELADA);
+                            }
+                            else
+                               V.setEstado(Venta.EstadoVenta.EN_RESERVA);
+                            }
+                
+                
+               // OBTENGO Y GUARDO LOS ITEM VENTA
+                ArrayList<ItemVenta> ai = new ArrayList<>();
+                pst = con.prepareStatement(queryParaObtenerItemsVenta);
+                pst.setInt(1, V.getId());
+                rsItemVenta = pst.executeQuery();
+                
+                
+                while (rsItemVenta.next()) {
                 ItemVenta i = new ItemVenta();
-                i.setId(rs.getInt("ivID"));
-                i.setCantidad(rs.getInt("ivCantidad"));
-                i.setPrecioUnidad(rs.getFloat("ivPrecioUnidad"));
-                ai.add(i);
-            }
-            v.setItems(ai);
-            
-            // Obtener ID y nombre de producto de cada ItemVenta
-            
-            for (ItemVenta i : v.getItems()) {
+                i.setId(rsItemVenta.getInt("ivid"));
+                i.setCantidad(rsItemVenta.getInt("ivcantidad"));
+                i.setPrecioUnidad(rsItemVenta.getFloat("ivpreciounidad"));
                 
-                pst = con.prepareStatement("SELECT Producto.pID, pNombre FROM ItemVenta, Producto WHERE"+
-                                            " (ivID = ? and ItemVenta.pID = Producto.pID)");
-                pst.setInt(1, i.getId());
-                rs = pst.executeQuery();
+                    ai.add(i);
+                }
+                V.setItems(ai);
                 
-                Producto p = new Producto();
-                p.setId(rs.getInt("pID"));
-                p.setNombre(rs.getString("pNombre"));
-                i.setProducto(p);
+                Ventas.add(V);
             }
-            
-        } catch (SQLException e){
-            e.printStackTrace();
-        } finally {
-            try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
-            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        conexionBD.cerrarConexion();   
+        return Ventas;
+ }
+ 
+ public ArrayList<ItemVenta> getItemsVenta(int IDV) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rsItemVenta = null;
+        ResultSet rsProductos = null;
+        BaseDatos conexionBD = BaseDatos.getInstance(); 
+        Connection con = conexionBD.establecerConexion();
+        
+        
+        //BUSCO LOS ITEMS DE LA VENTA
+        ArrayList<ItemVenta> ai = new ArrayList<>();
+        pst = con.prepareStatement(queryParaObtenerItemsVenta);
+        pst.setInt(1, IDV);
+        //pst.setInt(2, IDP);
+        rsItemVenta = pst.executeQuery();
+  
+        
+        while (rsItemVenta.next()) {
+        ItemVenta i = new ItemVenta();
+        i.setId(rsItemVenta.getInt("ivid"));
+        i.setCantidad(rsItemVenta.getInt("ivcantidad"));
+        i.setPrecioUnidad(rsItemVenta.getFloat("ivpreciounidad"));
+        
+        // BUSCO EL PRODUCTO DEL ITEM
+        
+        pst = con.prepareStatement(queryParaObtenerProductosItemVenta);
+        pst.setInt(1, i.getId());
+        rsProductos =pst.executeQuery();
+        Producto P= new Producto();
+        if(rsProductos.next()){
+        P.setId(rsProductos.getInt("pid"));
+        P.setNombre(rsProductos.getString("pnombre"));
+        switch(rsProductos.getString("pcategoria")){
+                case "Lencería" -> P.setCategoria(LENCERIA);
+                case "Accesorio" -> P.setCategoria(ACCESORIO);
+                case "Papelería" -> P.setCategoria(PAPELERIA);
+                case "Marroquinería" -> P.setCategoria(MARROQUINERIA);
+                default -> P.setCategoria(VARIOS);
         }
-        
-        return v;
+        P.setDescripcion(rsProductos.getString("pdescripcion"));
+        // guardamos el producto
+        i.setProducto(P);
+        }
+        //guardamos el item venta en el array
+        ai.add(i);
+        }       
+     return ai;
+ }
+ 
+ public ArrayList<Venta> ObtenerVentas(){
+     ArrayList<Venta> Ventas = new ArrayList<>();
+     return Ventas;
+ }
+
+    @Override
+    public Venta obtener(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    // FALTAN IMPLEMENTAR (Elegir cuál para el caso de uso Consultar Venta) : 
-    
-    public ArrayList<ItemLista> obtenerTodas() {
-        
-        throw new UnsupportedOperationException("Not supported yet."); 
+
+    public boolean registrar(Object v) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public ArrayList<ItemLista> obtenerPorFecha(Date d) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+
+  
+    public boolean modificar(Object v) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
