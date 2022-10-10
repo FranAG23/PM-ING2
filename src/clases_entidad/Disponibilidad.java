@@ -21,16 +21,26 @@ public class Disponibilidad {
                             int stockMinimo, 
                             Sucursal sucursal, 
                             Producto producto   ) {
-        
+
         this.precioVenta = precioVenta;
         this.stockActual = stockActual;
         this.tieneStockMinimo = tieneStockMinimo;
         this.stockMinimo = stockMinimo;
-        this.sucursal = sucursal;
-        this.producto = producto;
+        this.sucursal = new Sucursal(sucursal);
+        this.producto = new Producto(producto);
     }
 
     public Disponibilidad(){
+    }
+    
+     public Disponibilidad(Disponibilidad disp){
+         this.id = disp.getID(); 
+         this.precioVenta = disp.precioVenta;
+         this.stockActual = disp.stockActual;
+         this.tieneStockMinimo = disp.tieneStockMinimo;
+         this.stockMinimo = disp.stockMinimo;
+         this.sucursal = disp.getSucursal(); 
+         this.producto = disp.getProducto(); 
     }
     
     // Getters y Setters
@@ -47,11 +57,15 @@ public class Disponibilidad {
     public boolean getTieneStockMinimo() {return tieneStockMinimo;}
     public void setTieneStockMinimo(boolean tieneStockMinimo) {this.tieneStockMinimo = tieneStockMinimo;}
 
-    public Sucursal getSucursal() {return sucursal;}
-    public void setSucursal(Sucursal sucursal) {this.sucursal = sucursal;}
+    public Sucursal getSucursal() {return new Sucursal(sucursal);}
+    public void setSucursal(Sucursal sucursal) {this.sucursal = new Sucursal(sucursal);}
     
-    public Producto getProducto() {return producto;}
-    public void setProducto(Producto producto) {this.producto = producto;}
+    public Producto getProducto(){
+        return new Producto(producto); 
+    }
+    public void setProducto(Producto producto){
+        this.producto = new Producto(producto);
+    }
 
     public void setID(int id) {
        this.id = id;

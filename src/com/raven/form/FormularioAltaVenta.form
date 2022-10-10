@@ -136,11 +136,11 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="cartelErrorApellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="errorApellido" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="campoNombre" pref="256" max="32767" attributes="0"/>
                                                       <Component id="campoApellido" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="campoSucursal" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="cartelErrorNombre" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="errorNombre" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -165,6 +165,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="botonRegistrarReserva" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="avisoMirarArriba" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="botonRegistrarVenta" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
@@ -207,7 +209,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="cartelErrorNombre" min="-2" max="-2" attributes="0"/>
+                          <Component id="errorNombre" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="campoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -216,7 +218,7 @@
                               <Component id="campoMetodoPago" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cartelErrorApellido" min="-2" max="-2" attributes="0"/>
+                          <Component id="errorApellido" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="campoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -264,6 +266,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="botonRegistrarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="botonRegistrarVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="avisoMirarArriba" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
@@ -356,7 +359,7 @@
             <Property name="text" type="java.lang.String" value="Sucursal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="cartelErrorApellido">
+        <Component class="javax.swing.JLabel" name="errorApellido">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="12" style="0"/>
@@ -367,7 +370,7 @@
             <Property name="text" type="java.lang.String" value="El apellido debe tener entre 1 y 30 caracteres"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="cartelErrorNombre">
+        <Component class="javax.swing.JLabel" name="errorNombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="12" style="0"/>
@@ -459,27 +462,27 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -671,6 +674,17 @@
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Error formato de cantidad"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="avisoMirarArriba">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Liberation Sans" size="12" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Hay un error! Mire arriba"/>
           </Properties>
         </Component>
       </SubComponents>

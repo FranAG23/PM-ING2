@@ -6,6 +6,7 @@ import clases_entidad.Producto;
 import clases_entidad.Sucursal;
 import clases_entidad.Venta;
 import com.raven.form.FormularioAltaVenta;
+import dao.DAODisponibilidad;
 import dao.DAOProducto;
 import dao.DAOVenta;
 import java.util.ArrayList;
@@ -34,10 +35,8 @@ public class LogicaAltaVenta {
         Sucursal sucursalDeVenta = new Sucursal();
         Disponibilidad dispProd = new Disponibilidad();
         
-        // Esconder mensaje de error antiguo. 
-        formulario.esconderErrorBuscadorNombre();
-        // Borrar los resultados que mostré antes.
-        formulario.borrarFilasDeProductos();
+        // Esconder mensajes de error antiguo. 
+        formulario.esconderCartelesDeError();
         
         // Si el nombre es vacío o tiene una longitud mayor a 30, 
         if(nombreBuscado.isEmpty() || nombreBuscado.length() > 30){
@@ -60,44 +59,48 @@ public class LogicaAltaVenta {
             }
             else
             {
-                // Si obtuve los resultados que quería, mostrar todos los productos y su disponibilidad
-                // por pantalla
+                
+                // Si obtuve los resultados que quería, escondemos la búsqueda antigua y mostrados 
+                // los nuevos productos y disponibilidades obtenidos.
+                formulario.borrarFilasDeProductos();
                 for(Producto prod: productosBuscados){
                     // Obtener disponibilidad del producto:
                     dispProd = prod.getDisponibilidades().get(0);
                     // Agregar una nueva fila a la tabla de productos con los datos obtenidos:
                     formulario.agregarFilaDeProducto(prod.getNombre(), prod.getCategoria().toString(), 
-                            prod.getDescripcion(), dispProd.getStockActual(), dispProd.getStockMinimo());
+                            prod.getDescripcion(), dispProd.getStockActual(), dispProd.getPrecioVenta());
                 }
             }
         }   
     }
     
     public void usuarioQuiereAgregarItem(int filaSeleccionada, int cantidad){
-        // esconder mensajes de error antiguos:
-        formulario.esconderAdvertenciaCantidadNegativa();
-        formulario.esconderAdvertenciaCantidadSuperaStock();
-        formulario.esconderAdvertenciaItemRepetido();
+        // Esconder mensajes de error antiguos:
+        formulario.esconderCartelesDeError();
         
         Producto prod; 
         Disponibilidad disp; 
         ItemVenta item = new ItemVenta(); 
+        ArrayList<Disponibilidad> disponibilidades = new ArrayList<>(); 
         boolean repetido = false; 
-        float importeTotal = 0;
+        int stockActual = 0; 
+        float importeProducto = 0;
         // Si el usuario ingresó un numero negativo,
-        if(cantidad < 0)
+        if(cantidad <= 0)
         { 
             // entonces enviar mensaje de error.
-            formulario.advertirCantidadNegativa();
+            formulario.advertirCantidadNoPositiva();
         }
         else
         {
             // Obtener producto seleccionado por el usuario. 
-            prod = productosBuscados.get(filaSeleccionada);
+            prod = new Producto(productosBuscados.get(filaSeleccionada));
             // Obtener disponibilidad de ese producto. 
-            disp = prod.getDisponibilidades().get(0); 
+            disp = new Disponibilidad(prod.getDisponibilidades().get(0)); 
+            // Obtenemos el stock actual del producto.
+            stockActual = disp.getStockActual();
             // Si la cantidad a comprar es mayor a la disponibilidad actual,
-            if(disp.getStockActual() < cantidad)
+            if(stockActual < cantidad)
             {
               // entonces enviar mensaje de error por pantalla.
               formulario.indicarQueCantidadSuperaStock();
@@ -120,23 +123,34 @@ public class LogicaAltaVenta {
                 }
                 else
                 {
-                    // Si el item no estaba repetido, entonces construirlo
+                    // Si todo salio bien, modificamos el stock del producto. 
+                    disp.setStockActual(stockActual - cantidad);
+                    
+                    // Modificamos disponibilidades.
+                    disponibilidades.add(disp); 
+                    
+                    // Se lo damos al nuevo producto.
+                    prod.setDisponibilidades(disponibilidades);
+                    //System.out.println("Disponibilidad prod: " +  prod.getDisponibilidades().get(0).getStockActual());
+                    // Construimos el item de venta:
                     item.setCantidad(cantidad);
                     item.setPrecioUnidad(disp.getPrecioVenta());
                     item.setProducto(prod);
+                    //System.out.println("Disponibilidad prod: " +  item.getProducto().getDisponibilidades().get(0).getStockActual());
                     // Agregarlo a nuestro arreglo. 
                     itemsCargados.add(item); 
                     // Finalmente, mostrar el item de venta por pantalla.
-                    importeTotal = cantidad * item.getPrecioUnidad();
-                    importe += importeTotal; 
-                    formulario.agregarItemVenta(prod.getNombre(), prod.getCategoria().toString(), cantidad, 
-                            item.getPrecioUnidad(), importeTotal);
+                    importeProducto = cantidad * item.getPrecioUnidad();
+                    importe += importeProducto; 
+                    formulario.agregarItemVenta(prod.getNombre(), cantidad, item.getPrecioUnidad(), importeProducto);
                 } 
             }
         }    
     }
     
     public void usuarioQuiereEliminarItem(int filaSeleccionada, String nombreProducto){
+       // Esconder mensajes de error antiguos. 
+        formulario.esconderCartelesDeError();
        // Buscar item de venta que quiere eliminar el usuario:
        for(int i = 0; i < itemsCargados.size(); i++){
             // Si coinciden los nombres,
@@ -154,7 +168,9 @@ public class LogicaAltaVenta {
     public void usuarioQuiereCompletarVenta(String nomCliente, String apeCliente, boolean envioGratis, 
             String strMetodoPago, int idsucursal, String ubiSucursal){
        DAOVenta daoVenta = new DAOVenta();
+       DAODisponibilidad daoDisp = new DAODisponibilidad(); 
        Sucursal sucursal; 
+       Disponibilidad disp; 
        Venta venta; 
        Venta.MetodoPago metodoPago; 
        Venta.EstadoVenta estadoVenta;
@@ -204,15 +220,41 @@ public class LogicaAltaVenta {
 
             // Si la insercion en la BD fue exitosa,
             if(exitoInsercionBD){
+                // entonces modificar stock de los productos.
+                // Por el momento esta operación es costosa porque abrimos y cerramos la conexión bajo demanda.
+                // Luego abriremos y cerraremos la la conexión una sola vez. 
+                for(ItemVenta item: venta.getItems()){
+                    disp = item.getProducto().getDisponibilidades().get(0);
+                    System.out.println("Actualizacion prod: " +  disp.getStockActual());
+                    daoDisp.modificar(disp);
+                }
+                
                 // reiniciar campos de la GUI. 
                 formulario.reiniciarCampos();
                 // entonces mostrar un cartel de éxito.
                 formulario.mostrarCartelExito();
+                // y prepararse para una nueva venta. 
+                this.prepararseParaNuevaVenta();
             }
             else{
                 // Si no, mostrar cartel de fracaso.
                 formulario.mostrarCartelFracaso();
             }
        }
+    }
+    
+    private void prepararseParaNuevaVenta(){
+        // Eliminar todos los items cargados.
+        for(int i = 0; i < itemsCargados.size(); i++){
+               itemsCargados.remove(i);
+        }    
+        
+        // Eliminar todos los productos buscados.
+        for(int i = 0; i < productosBuscados.size(); i++){
+               productosBuscados.remove(i);
+        }  
+        
+        // Reiniciar el importe a 0.
+        importe = 0; 
     }
 }

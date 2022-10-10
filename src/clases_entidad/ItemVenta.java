@@ -17,11 +17,18 @@ public class ItemVenta {
         this.id = id;
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
-        this.producto = producto;
+        this.producto = new Producto(producto);
     }
 
     public ItemVenta() {
         
+    }
+
+    ItemVenta(ItemVenta item) {
+        this.id = item.getId();
+        this.cantidad = item.getCantidad();
+        this.precioUnidad = item.getPrecioUnidad();
+        this.producto = item.getProducto(); 
     }
     
     // Getters y Setters
@@ -35,6 +42,6 @@ public class ItemVenta {
     public float getPrecioUnidad() {return precioUnidad;}
     public void setPrecioUnidad(float precioUnidad) {this.precioUnidad = precioUnidad;}
 
-    public Producto getProducto() {return producto;}
-    public void setProducto(Producto producto) {this.producto = producto;}
+    public Producto getProducto() {return new Producto(producto);}
+    public void setProducto(Producto producto) {this.producto = new Producto(producto);}
 }

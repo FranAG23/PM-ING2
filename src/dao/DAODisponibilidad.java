@@ -51,8 +51,31 @@ public class DAODisponibilidad implements InterfazDAODisponibilidad{
     }
 
     @Override
-    public boolean modificar(Disponibilidad d) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public boolean modificar(Disponibilidad disp) {
+        boolean exito = false;
+        PreparedStatement pst = null;
+        Connection con = null;
+        BaseDatos instancia = BaseDatos.getInstance(); 
+        try {    
+            con = instancia.establecerConexion();
+            pst = con.prepareStatement("UPDATE Disponibilidad "
+                    + "SET dPrecioVenta = ?, dstockActual = ?, dStockMinimo =  ?, dTieneStockMinimo = ?"
+                    + "WHERE dId = ?");
+            pst.setFloat(1, disp.getPrecioVenta());
+            System.out.println("Actualizacion en BD: " +  disp.getStockActual());
+            pst.setInt(2, disp.getStockActual()); 
+            pst.setInt(3, disp.getStockMinimo());
+            pst.setBoolean(4, disp.getTieneStockMinimo());
+            pst.setInt(5, disp.getID());
+            pst.executeUpdate(); 
+            
+        } catch (SQLException e){
+            System.out.println("Error en public boolean modificar(Disponibilidad disp) de clase DAODisponibilidad");
+            e.printStackTrace();
+        } finally {
+            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        }
+        return exito;         
     }
 
     @Override
@@ -63,50 +86,5 @@ public class DAODisponibilidad implements InterfazDAODisponibilidad{
     @Override
     public Disponibilidad obtener(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public void obtenerDisponibilidadesProductos(Sucursal sucursal, ArrayList<Disponibilidad> disponibilidades){
-        disponibilidades = new ArrayList<>();
-        Disponibilidad disponibilidad; 
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        BaseDatos instanciaBD = BaseDatos.getInstance();
-        Connection con = null;
-        try {
-            // Establecer conexión con base de datos.
-            con = instanciaBD.establecerConexion();
-           
-            // Obtener todas las disponibilidades correspondientes a sucursal, 
-            // ordenadas por id del producto.
-            pst = con.prepareStatement("SELECT * " + 
-                                       "FROM Disponibilidad " +
-                                       "WHERE sID = ? "
-                                     + "ORDER BY pID"); 
-            pst.setInt(1, sucursal.getID());
-            pst.executeUpdate();
-            rs = pst.executeQuery();
-            
-            // Construir disponibilidades. 
-            while(rs.next()){
-                disponibilidad = new Disponibilidad(); 
-                disponibilidad.setID(rs.getInt(0));
-                
-                disponibilidades.add(disponibilidad);
-            }
-            instanciaBD.cerrarConexion();
-        } catch (SQLException e){
-            e.printStackTrace();
-        } finally {
-             instanciaBD.cerrarConexion();
-            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
-        }
-    }
-
-    @Override
-    public void obtenerDisponibilidadesDeSucursal(Sucursal sucursal, ArrayList<Disponibilidad> disponibilidades) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-    
+    } 
 }

@@ -13,6 +13,4 @@ public interface InterfazDAODisponibilidad {
     boolean eliminar(int id);
     
     Disponibilidad obtener(int id);
-    
-   void obtenerDisponibilidadesDeSucursal(Sucursal sucursal, ArrayList<Disponibilidad> disponibilidades);
 }

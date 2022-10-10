@@ -627,7 +627,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                                                             (! campoStockMinimoSanLuis.getText().isBlank()),
                                                             stockMinimoSanLuis,
                                                             new Sucursal("San Luis"),
-                                                            null);
+                                                            new Producto());
                 
                 arrd.add(dsl);
             }
@@ -639,7 +639,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                                                         (! campoStockMinimoNeuquen.getText().isBlank()),
                                                         stockMinimoNeuquen,
                                                         new Sucursal("Neuquen"),
-                                                        null);
+                                                        new Producto());
                 
                 arrd.add(dn);
             }

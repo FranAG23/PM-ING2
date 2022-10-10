@@ -24,6 +24,12 @@ public class Reserva {
         
     }
 
+    public Reserva(Reserva reserva){
+        this.telefonoCliente = reserva.getTelefonoCliente();
+        this.seña = reserva.getSeña();
+        this.fecha = reserva.getFecha(); 
+    }
+    
     // Getters y Setters
 
     public long getTelefonoCliente() {return telefonoCliente;}

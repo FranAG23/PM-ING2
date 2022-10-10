@@ -68,8 +68,11 @@ public class Venta {
         this.metodoPago = metodoPago;
         this.estado = estado;
         this.reserva = reserva;
-        this.items = items;
-        this.sucursal = sucursal;
+        this.sucursal = new Sucursal(sucursal);
+        this.items = new ArrayList<>();
+        for(ItemVenta item: items){
+            this.items.add(new ItemVenta(item));
+        }
     }
 
     public Venta() {
@@ -102,14 +105,26 @@ public class Venta {
     public EstadoVenta getEstado() {return estado;}
     public void setEstado(EstadoVenta estado) {this.estado = estado;}
 
-    public Reserva getReserva() {return reserva;}
-    public void setReserva(Reserva reserva) {this.reserva = reserva;}
+    public Reserva getReserva() {return new Reserva(reserva);}
+    public void setReserva(Reserva reserva) {this.reserva = new Reserva(reserva);}
     
-    public ArrayList<ItemVenta> getItems(){ return items; }
-    public void setItems(ArrayList<ItemVenta> items) {this.items = items;}
+    public ArrayList<ItemVenta> getItems(){ 
+        ArrayList<ItemVenta> copia = new ArrayList<>();
+        for(ItemVenta item: items){
+            copia.add(new ItemVenta(item));
+        }
+        return copia; 
+    }
+   
+    public void setItems(ArrayList<ItemVenta> items){
+        this.items = new ArrayList<>();
+        for(ItemVenta item: items){
+            this.items.add(new ItemVenta(item));
+        }
+    }
     
-    public Sucursal getSucursal() {return sucursal;}
-    public void setSucursal(Sucursal sucursal) {this.sucursal = sucursal;}
+    public Sucursal getSucursal() {return new Sucursal(sucursal);}
+    public void setSucursal(Sucursal sucursal) {this.sucursal = new Sucursal(sucursal);}
     
     // Otros métodos
     public static MetodoPago stringAMetodoPago(String str){

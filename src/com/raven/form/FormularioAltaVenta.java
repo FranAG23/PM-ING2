@@ -43,8 +43,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         campoSucursal = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cartelErrorApellido = new javax.swing.JLabel();
-        cartelErrorNombre = new javax.swing.JLabel();
+        errorApellido = new javax.swing.JLabel();
+        errorNombre = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -68,6 +68,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         JScrollPane666 = new javax.swing.JScrollPane();
         tablaItems = new com.raven.swing.table.Table();
         errorCantidad = new javax.swing.JLabel();
+        avisoMirarArriba = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -126,13 +127,13 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Sucursal");
 
-        cartelErrorApellido.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        cartelErrorApellido.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
+        errorApellido.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        errorApellido.setForeground(new java.awt.Color(255, 51, 51));
+        errorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
 
-        cartelErrorNombre.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        cartelErrorNombre.setForeground(new java.awt.Color(255, 51, 51));
-        cartelErrorNombre.setText("El nombre debe tener entre 1 y 30 caracteres");
+        errorNombre.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        errorNombre.setForeground(new java.awt.Color(255, 51, 51));
+        errorNombre.setText("El nombre debe tener entre 1 y 30 caracteres");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
         jLabel4.setText("Datos básicos");
@@ -191,6 +192,13 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tablaBuscador);
+        if (tablaBuscador.getColumnModel().getColumnCount() > 0) {
+            tablaBuscador.getColumnModel().getColumn(0).setResizable(false);
+            tablaBuscador.getColumnModel().getColumn(1).setResizable(false);
+            tablaBuscador.getColumnModel().getColumn(2).setResizable(false);
+            tablaBuscador.getColumnModel().getColumn(3).setResizable(false);
+            tablaBuscador.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel11.setText("Cantidad a vender");
@@ -281,6 +289,10 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         errorCantidad.setForeground(new java.awt.Color(255, 51, 51));
         errorCantidad.setText("Error formato de cantidad");
 
+        avisoMirarArriba.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        avisoMirarArriba.setForeground(new java.awt.Color(255, 51, 51));
+        avisoMirarArriba.setText("Hay un error! Mire arriba");
+
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
         panelDatosLayout.setHorizontalGroup(
@@ -318,11 +330,11 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(panelDatosLayout.createSequentialGroup()
                                                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(cartelErrorApellido)
+                                                    .addComponent(errorApellido)
                                                     .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                                                     .addComponent(campoApellido)
                                                     .addComponent(campoSucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(cartelErrorNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(errorNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(74, 74, 74)
                                                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(panelDatosLayout.createSequentialGroup()
@@ -338,6 +350,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
                                 .addComponent(botonRegistrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(avisoMirarArriba)
+                                .addGap(18, 18, 18)
                                 .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +384,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(cartelErrorNombre)
+                        .addComponent(errorNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,7 +392,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addComponent(campoMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(cartelErrorApellido)
+                        .addComponent(errorApellido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -419,7 +433,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonRegistrarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(avisoMirarArriba))
                 .addGap(30, 30, 30))
         );
 
@@ -450,14 +465,17 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     }
     
     public void mostrarErrorNombre(){
-        cartelErrorNombre.setText("El nombre debe tener entre 1 y 30 caracteres");
+        avisoMirarArriba.setText("Hay un error! Mire arriba");
+        errorNombre.setText("El nombre debe tener entre 1 y 30 caracteres");
     }
     
     public void mostrarErrorApellido(){
-        cartelErrorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
+        avisoMirarArriba.setText("Hay un error! Mire arriba");
+        errorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
     }
     
     public void mostrarErrorTablaVacia(){
+        avisoMirarArriba.setText("Hay un error! Mire arriba");
         errorTablaItems.setText("Debe ingresar al menos un item de venta");
     }
     
@@ -486,18 +504,20 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     public void agregarFilaDeProducto(String nom, String cat, String desc, int stockActual, float precioVenta){  
             tablaBuscador.addRow(new Object[]{nom, cat, desc, stockActual, precioVenta});
     }
-    public void agregarItemVenta(String nombre, String categoria, int cantidad, float precioUnidad, float importeTotal) {
-            tablaItems.addRow(new Object[]{nombre, categoria, cantidad, precioUnidad, importeTotal});
+    public void agregarItemVenta(String nombre, int cantidad, float precioUnidad, float importeTotal) {
+            tablaItems.addRow(new Object[]{nombre, cantidad, precioUnidad, importeTotal});
     }
     public void reiniciarCampos(){
-        DefaultTableModel model = (DefaultTableModel)tablaItems.getModel();
+        DefaultTableModel modeloProductos = (DefaultTableModel)tablaBuscador.getModel();
+        DefaultTableModel modeloItems = (DefaultTableModel)tablaItems.getModel();
         campoNombre.setText("");
         campoApellido.setText("");
         campoEnvioGratis.setSelected(false);
         campoMetodoPago.setSelectedIndex(0);
-        while(model.getRowCount() != 0)
-            model.removeRow(0);
-        esconderCartelesDeError();
+        while(modeloProductos.getRowCount() != 0)
+            modeloProductos.removeRow(0);
+        while(modeloItems.getRowCount() != 0)
+            modeloItems.removeRow(0);
     }
     
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
@@ -505,12 +525,13 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_campoNombreActionPerformed
 
     public void esconderCartelesDeError(){
-        // Reiniciar carteles de error:
-        cartelErrorNombre.setText(" ");
-        cartelErrorApellido.setText(" ");
+        // Esconder carteles de error:
+        errorNombre.setText(" ");
+        errorApellido.setText(" ");
         errorTablaItems.setText(" ");
         errorNombreProducto.setText(" ");
         errorCantidad.setText(" ");
+        avisoMirarArriba.setText(" ");
     }
     
     private void campoSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSucursalActionPerformed
@@ -594,6 +615,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JScrollPane666;
+    private javax.swing.JLabel avisoMirarArriba;
     private com.raven.swing.Button botonAgregarItem;
     private com.raven.swing.Button botonBuscar;
     private com.raven.swing.Button botonEliminarItem;
@@ -606,9 +628,9 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> campoMetodoPago;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JComboBox<String> campoSucursal;
-    private javax.swing.JLabel cartelErrorApellido;
-    private javax.swing.JLabel cartelErrorNombre;
+    private javax.swing.JLabel errorApellido;
     private javax.swing.JLabel errorCantidad;
+    private javax.swing.JLabel errorNombre;
     private javax.swing.JLabel errorNombreProducto;
     private javax.swing.JLabel errorTablaItems;
     private javax.swing.Box.Filler filler1;
@@ -633,7 +655,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     private com.raven.swing.table.Table tablaItems;
     // End of variables declaration//GEN-END:variables
 
-    public void advertirCantidadNegativa() {
+    public void advertirCantidadNoPositiva() {
         errorCantidad.setText("La cantidad debe ser positiva");
     }
 

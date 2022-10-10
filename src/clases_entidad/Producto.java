@@ -42,11 +42,26 @@ public class Producto {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.categoria = categoria;
-        this.disponibilidades = disponibilidades;
+        this.disponibilidades = new ArrayList<>();
+        for(Disponibilidad disp: disponibilidades){
+            this.disponibilidades.add(new Disponibilidad(disp)); 
+        }
     }
     
-    public Producto() {
-        
+    public Producto(Producto producto){
+        this.id = producto.getId(); 
+        this.nombre = producto.getNombre();
+        this.descripcion =  producto.getDescripcion();
+        this.categoria = producto.getCategoria();
+        disponibilidades = producto.getDisponibilidades(); 
+    }
+    
+    public Producto(){
+        this.id = -1;
+        this.nombre = "";
+        this.descripcion = "";
+        this.categoria = CategoriaProducto.ACCESORIO;
+        this.disponibilidades = new ArrayList();
     }
     
     // Getters y Setters
@@ -63,8 +78,20 @@ public class Producto {
     public CategoriaProducto getCategoria() {return categoria;}
     public void setCategoria(CategoriaProducto categoria) {this.categoria = categoria;}
 
-    public ArrayList<Disponibilidad> getDisponibilidades() {return disponibilidades;}
-    public void setDisponibilidades(ArrayList<Disponibilidad> disponibilidades) {this.disponibilidades = disponibilidades;}
+    public ArrayList<Disponibilidad> getDisponibilidades(){
+        ArrayList<Disponibilidad> copia = new ArrayList();
+        for(Disponibilidad disp: disponibilidades){
+            copia.add(new Disponibilidad(disp)); 
+        }
+        return copia;
+    }
+    
+    public void setDisponibilidades(ArrayList<Disponibilidad> disponibilidades){
+        this.disponibilidades = new ArrayList<>();
+        for(Disponibilidad disp: disponibilidades){
+            this.disponibilidades.add(new Disponibilidad(disp)); 
+        }
+    }
 
     // Otros metodos
     

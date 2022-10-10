@@ -21,6 +21,7 @@
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/com/raven/swing/table/Profile.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/com/raven/form/Form_Home.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/com/raven/form/FormularioAltaVenta.java</file>
+            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_entidad/ItemVenta.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/dao/DAOProducto.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_control/LogicaAltaVenta.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_entidad/Sucursal.java</file>
@@ -32,7 +33,9 @@
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/com/raven/form/FormularioAltaProducto.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/com/raven/swing/table/ModelAction.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/dao/InterfazDAOProducto.java</file>
+            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_entidad/Reserva.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_entidad/Producto.java</file>
+            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_entidad/ItemCompra.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/com/raven/main/Main.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/clases_entidad/Compra.java</file>
             <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/pullSpace/src/dao/DAODisponibilidad.java</file>

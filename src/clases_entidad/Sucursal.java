@@ -23,6 +23,11 @@ public class Sucursal {
       
     }
     
+    public Sucursal(Sucursal sucursal){
+        this.id = sucursal.getID();
+        this.ubicacion = sucursal.getUbicacion(); 
+    }
+    
     // Getters y Setters
     public int getID(){return id;}
     public void setID(int id){this.id = id;}

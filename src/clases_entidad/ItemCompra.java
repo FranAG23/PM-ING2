@@ -17,7 +17,7 @@ public class ItemCompra {
         this.id = id;
         this.cantidad = cantidad;
         this.costoUnidad = costoUnidad;
-        this.producto = producto;
+        this.producto = new Producto(producto);
     }
     
     // Getters y Setters
@@ -31,7 +31,7 @@ public class ItemCompra {
     public float getCostoUnidad() {return costoUnidad;}
     public void setCostoUnidad(float costoUnidad) {this.costoUnidad = costoUnidad;}
 
-    public Producto getProducto() {return producto;}
-    public void setProducto(Producto producto) {this.producto = producto;}
+    public Producto getProducto() {return new Producto(producto);}
+    public void setProducto(Producto producto) {this.producto = new Producto(producto);}
     
 }
