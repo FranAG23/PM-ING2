@@ -104,7 +104,7 @@ public class Main extends javax.swing.JFrame {
                     case 2:
                         switch(subMenuIndex){
                             case 0:
-                                main.showForm(new FormularioAltaVenta());
+                                main.showForm(new panelConScrollAltaVenta());
                                 break;
                             case 1:
                                 main.showForm(new FormularioConsultarVenta()); 
