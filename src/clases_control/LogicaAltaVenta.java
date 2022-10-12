@@ -21,16 +21,22 @@ public class LogicaAltaVenta {
     FormularioAltaVenta formulario;
     // Monto total.
     float importe;
+    // DAOS
+    DAOVenta daoVenta;
+    DAOProducto daoProducto;
+    DAODisponibilidad daoDisp; 
     
     public LogicaAltaVenta(FormularioAltaVenta formulario){
         this.formulario = formulario; 
         itemsCargados = new ArrayList<>();
         productosBuscados = new ArrayList<>();
         importe = 0; 
+        daoVenta = new DAOVenta();
+        daoProducto = new DAOProducto();
+        daoDisp = new DAODisponibilidad();
     }
     
     public void usuarioBuscaProducto(String nombreBuscado, int idsucursal, String ubicacionSucursal){
-        DAOProducto daoProducto = new DAOProducto();
         Producto prodBuscado = new Producto();
         Sucursal sucursalDeVenta = new Sucursal();
         Disponibilidad dispProd = new Disponibilidad();
@@ -111,7 +117,12 @@ public class LogicaAltaVenta {
                 // venta con el mismo producto.
                 for(ItemVenta it: itemsCargados){
                     //Si el nombre del producto de it es igual al nombre del producto que quiero agregar,
+                    /*
                     if(it.getProducto().getNombre().equals(prod.getNombre())){
+                        // marcar que el item está repetido.
+                        repetido = true; 
+                    }*/
+                     if(it.getProducto().getId() == prod.getId()){
                         // marcar que el item está repetido.
                         repetido = true; 
                     }
@@ -167,8 +178,6 @@ public class LogicaAltaVenta {
     
     public void usuarioQuiereCompletarVenta(String nomCliente, String apeCliente, boolean envioGratis, 
             String strMetodoPago, int idsucursal, String ubiSucursal){
-       DAOVenta daoVenta = new DAOVenta();
-       DAODisponibilidad daoDisp = new DAODisponibilidad(); 
        Sucursal sucursal; 
        Disponibilidad disp; 
        Venta venta; 
@@ -225,9 +234,12 @@ public class LogicaAltaVenta {
                 // Luego abriremos y cerraremos la la conexión una sola vez. 
                 for(ItemVenta item: venta.getItems()){
                     disp = item.getProducto().getDisponibilidades().get(0);
-                    System.out.println("Actualizacion prod: " +  disp.getStockActual());
                     daoDisp.modificar(disp);
                 }
+                
+                /*
+                for
+                */
                 
                 // reiniciar campos de la GUI. 
                 formulario.reiniciarCampos();

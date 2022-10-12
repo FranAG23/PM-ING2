@@ -12,16 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/com/raven/form/ConsultarItemVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/clases_control/LogicaConsultarVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/clases_control/ManagerVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/dao/DAOVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/com/raven/form/MainForm.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/com/raven/form/FormularioAltaProducto.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/com/raven/main/Main.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/com/raven/form/FormularioAltaVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/clases_control/LogicaAltaVenta.java</file>
-            <file>file:/home/matias/Documents/ingeniería_II/laboratorio/ProyectosNetbeans/IntegracionConsultarVenta/src/com/raven/form/FormularioConsultarVenta.java</file>
+            <file>file:/home/matias/Desktop/hoy2/src/com/raven/form/FormularioConsultarVenta.java</file>
+            <file>file:/home/matias/Desktop/hoy2/src/dao/DAOVenta.java</file>
+            <file>file:/home/matias/Desktop/hoy2/src/clases_control/LogicaAltaVenta.java</file>
+            <file>file:/home/matias/Desktop/hoy2/src/com/raven/form/FormularioAltaVenta.java</file>
         </group>
     </open-files>
 </project-private>

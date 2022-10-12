@@ -606,7 +606,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         String apeCliente = campoApellido.getText();
         String strMetodoPago = campoMetodoPago.getSelectedItem().toString(); 
         String ubiSucursal = campoSucursal.getSelectedItem().toString(); 
-        logica.usuarioQuiereCompletarVenta(nomCliente, apeCliente, true, strMetodoPago, 1, ubiSucursal);
+        boolean envioGratis = campoEnvioGratis.isSelected();
+        logica.usuarioQuiereCompletarVenta(nomCliente, apeCliente, envioGratis , strMetodoPago, 1, ubiSucursal);
     }//GEN-LAST:event_botonRegistrarVentaActionPerformed
 
     private void campoBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscadorActionPerformed
