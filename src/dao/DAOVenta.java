@@ -1,15 +1,15 @@
 
 package dao;
 
-import base_datos.BaseDatos;
-import clases_entidad.ItemVenta;
-import clases_entidad.Producto;
-import static clases_entidad.Producto.CategoriaProducto.ACCESORIO;
-import static clases_entidad.Producto.CategoriaProducto.LENCERIA;
-import static clases_entidad.Producto.CategoriaProducto.MARROQUINERIA;
-import static clases_entidad.Producto.CategoriaProducto.PAPELERIA;
-import static clases_entidad.Producto.CategoriaProducto.VARIOS;
-import clases_entidad.Venta;
+import baseDatos.BaseDatos;
+import clasesEntidad.ItemVenta;
+import clasesEntidad.Producto;
+import static clasesEntidad.Producto.CategoriaProducto.ACCESORIO;
+import static clasesEntidad.Producto.CategoriaProducto.LENCERIA;
+import static clasesEntidad.Producto.CategoriaProducto.MARROQUINERIA;
+import static clasesEntidad.Producto.CategoriaProducto.PAPELERIA;
+import static clasesEntidad.Producto.CategoriaProducto.VARIOS;
+import clasesEntidad.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,7 +1,7 @@
 
 package dao;
 
-import clases_entidad.Venta;
+import clasesEntidad.Venta;
 
 public interface InterfazDAOVenta {
     

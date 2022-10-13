@@ -1,10 +1,10 @@
 
 package dao;
 
-import base_datos.BaseDatos;
-import clases_entidad.Disponibilidad;
-import clases_entidad.Producto;
-import clases_entidad.Sucursal;
+import baseDatos.BaseDatos;
+import clasesEntidad.Disponibilidad;
+import clasesEntidad.Producto;
+import clasesEntidad.Sucursal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
