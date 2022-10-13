@@ -1,7 +1,7 @@
 
 package com.raven.form;
 
-import clases_control.LogicaConsultarVenta;
+import clases_control.ControladorConsultarVenta;
 import clases_control.ManagerProducto;
 import clases_control.ManagerVenta;
 import clases_entidad.ItemVenta;
@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class FormularioConsultarVenta extends javax.swing.JPanel {
     
-    LogicaConsultarVenta logica; 
+    ControladorConsultarVenta logica; 
     ManagerProducto MProducto;
     public FormularioConsultarVenta() {
         initComponents();
         setOpaque(false);
-        logica = new LogicaConsultarVenta(this);
+        logica = new ControladorConsultarVenta(this);
         cartelNoHayResultados.setText(" "); 
     }
 

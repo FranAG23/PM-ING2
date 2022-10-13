@@ -1,6 +1,7 @@
 
 package com.raven.form;
 
+import clases_control.ControladorAltaProducto;
 import clases_control.ManagerProducto;
 import clases_entidad.Disponibilidad;
 import clases_entidad.Producto;
@@ -655,7 +656,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
             
             // Llamar al controlador
-            new ManagerProducto().alta(this, p);
+            new ControladorAltaProducto(this, p);
         }
         
     }//GEN-LAST:event_botonAceptarActionPerformed

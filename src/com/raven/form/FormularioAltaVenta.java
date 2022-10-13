@@ -7,13 +7,13 @@ import clases_entidad.Disponibilidad;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
 import clases_entidad.Sucursal;
-import clases_control.LogicaAltaVenta;
+import clases_control.ControladorAltaVenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FormularioAltaVenta extends javax.swing.JPanel {
-    LogicaAltaVenta logica;
+    ControladorAltaVenta logica;
     
     public FormularioAltaVenta() {
         initComponents();
@@ -23,7 +23,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoSucursal.addItem("San Luis");
         campoSucursal.setEnabled(false);     
         esconderCartelesDeError();
-        logica = new LogicaAltaVenta(this);
+        logica = new ControladorAltaVenta(this);
     }
    
     @SuppressWarnings("unchecked")

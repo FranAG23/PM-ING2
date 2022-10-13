@@ -1,12 +1,7 @@
 package clases_control;
 
 import clases_entidad.ItemVenta;
-import clases_entidad.Producto;
-import clases_entidad.Sucursal;
 import clases_entidad.Venta;
-import clases_entidad.Venta.EstadoVenta;
-import clases_entidad.Venta.MetodoPago;
-import clases_entidad.auxiliares.RenglonTablaAltaVenta;
 import com.raven.form.FormularioAltaVenta;
 import dao.DAOVenta;
 import java.sql.SQLException;

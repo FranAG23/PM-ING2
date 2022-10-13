@@ -2,21 +2,19 @@ package clases_control;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
 import clases_entidad.Venta;
-import com.raven.form.ConsultarItemVenta;
 import com.raven.form.FormularioConsultarVenta;
 import dao.DAOVenta;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class LogicaConsultarVenta {
+public class ControladorConsultarVenta {
     FormularioConsultarVenta formulario; 
     ArrayList<Venta> ventasEncontradas; 
  
-    public LogicaConsultarVenta(FormularioConsultarVenta formulario){
+    public ControladorConsultarVenta(FormularioConsultarVenta formulario){
         this.formulario = formulario; 
         ventasEncontradas = new ArrayList<>();
     }

@@ -1,5 +1,4 @@
 package clases_control;
-import clases_control.ManagerProducto;
 import clases_entidad.Disponibilidad;
 import clases_entidad.ItemVenta;
 import clases_entidad.Producto;
@@ -12,7 +11,7 @@ import dao.DAOVenta;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class LogicaAltaVenta {
+public class ControladorAltaVenta {
     // Tiene los últimos productos buscados por el cliente.
     ArrayList<Producto> productosBuscados;
     // Tiene los items de venta cargados actualmente por el usuario.
@@ -26,7 +25,7 @@ public class LogicaAltaVenta {
     DAOProducto daoProducto;
     DAODisponibilidad daoDisp; 
     
-    public LogicaAltaVenta(FormularioAltaVenta formulario){
+    public ControladorAltaVenta(FormularioAltaVenta formulario){
         this.formulario = formulario; 
         itemsCargados = new ArrayList<>();
         productosBuscados = new ArrayList<>();
