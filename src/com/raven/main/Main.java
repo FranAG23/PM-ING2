@@ -1,16 +1,12 @@
 package com.raven.main;
 
-import clases_entidad.Disponibilidad;
-import clases_entidad.Producto;
-import clases_entidad.Sucursal;
+import base_datos.BaseDatos;
 import com.raven.component.Header;
 import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
 import com.raven.event.EventShowPopupMenu;
-//import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.Form_Home;
 import com.raven.form.FormularioAltaProducto;
-import com.raven.form.FormularioAltaVenta;
 import com.raven.form.FormularioConsultarVenta;
 import com.raven.form.MainForm;
 import com.raven.form.panelConScrollAltaVenta;
@@ -18,12 +14,10 @@ import com.raven.swing.MenuItem;
 import com.raven.swing.PopupMenu;
 import com.raven.swing.icon.GoogleMaterialDesignIcons;
 import com.raven.swing.icon.IconFontSwing;
-import dao.DAOProducto;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.miginfocom.swing.MigLayout;
@@ -212,8 +206,13 @@ public class Main extends javax.swing.JFrame {
 
         bg = new javax.swing.JLayeredPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Malaika Store");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         bg.setBackground(new java.awt.Color(245, 245, 245));
         bg.setOpaque(true);
@@ -243,6 +242,14 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+        // (Intentar) cerrar la conexión con la Base de Datos y cerrar la aplicación
+        
+        BaseDatos.getInstance().cerrarConexion();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

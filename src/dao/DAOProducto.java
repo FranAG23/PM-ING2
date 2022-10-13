@@ -100,13 +100,11 @@ public class DAOProducto implements InterfazDAOProducto {
                 resultado.setCategoria(Producto.strAEnumCategoria(rs.getString(2)));
                 resultado.setDescripcion(rs.getString(3));
             }
-            instanciaBD.cerrarConexion();
         } catch (SQLException e){
             e.printStackTrace();
         } finally {
             System.out.println("Error en public void obtenerProductoPorNombre(Producto buscado, Producto resultado) "
                     + "de clase DAOProducto");
-            instanciaBD.cerrarConexion();
             try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
             try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
         }
@@ -168,14 +166,12 @@ public class DAOProducto implements InterfazDAOProducto {
                 // Agregar producto a resultado:
                 listaProductos.add(prodTemp);
             }
-            instanciaBD.cerrarConexion();
         } catch (SQLException e){
             System.out.println("Error en public public void obtenerProductosConDisponibilidad(Producto buscado, "
                     + " Sucursal sucursal, ArrayList<Producto> listaProductos) de clase DAOProducto");
             
             e.printStackTrace();
         } finally {
-            instanciaBD.cerrarConexion();
             try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
             try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
         }
@@ -235,14 +231,12 @@ public class DAOProducto implements InterfazDAOProducto {
                 // Agregar producto a resultado:
                 listaProductos.add(prodTemp);
             }
-            instanciaBD.cerrarConexion();
         } catch (SQLException e){
             System.out.println("Error en public public void obtenerProductosConDisponibilidad(Producto buscado, "
                     + " Sucursal sucursal, ArrayList<Producto> listaProductos) de clase DAOProducto");
             
             e.printStackTrace();
         } finally {
-            instanciaBD.cerrarConexion();
             try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
             try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
         }

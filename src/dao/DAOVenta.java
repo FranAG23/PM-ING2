@@ -92,7 +92,6 @@ public class DAOVenta implements InterfazDAOVenta {
         } finally {
             try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
             try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
-            conexionBD.cerrarConexion();
         }
         conexionBD.cerrarConexion();
         return exito;
@@ -166,7 +165,6 @@ public class DAOVenta implements InterfazDAOVenta {
                 
                 Ventas.add(V);
             }
-        conexionBD.cerrarConexion();   
         return Ventas;
  }
  
