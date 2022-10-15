@@ -24,7 +24,7 @@ public class ControladorGenerarInforme {
     
     public ArrayList<Venta> BuscarFecha(Date D) throws SQLException{
         ArrayList<Venta> Ventas;
-        Ventas = daoVenta.ObtenerFecha(D);
+        Ventas = daoVenta.ObtenerPorFecha(D);
         return Ventas;
     }
     public ArrayList<ItemVenta> getItemsVenta(int ID) throws SQLException{

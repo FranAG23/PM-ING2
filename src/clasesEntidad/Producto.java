@@ -97,16 +97,13 @@ public class Producto {
     
     public static CategoriaProducto strAEnumCategoria(String str){
         CategoriaProducto retorno; 
-        if(str.equals("Lencería"))
-            retorno = CategoriaProducto.LENCERIA; 
-        else if(str.equals("Accesorio"))
-            retorno = CategoriaProducto.ACCESORIO; 
-        else if(str.equals("Papelería"))
-            retorno = CategoriaProducto.PAPELERIA; 
-        else if(str.equals("Marroquinería"))
-            retorno = CategoriaProducto.MARROQUINERIA;
-        else 
-            retorno = CategoriaProducto.VARIOS; 
+        retorno = switch (str) {
+            case "Lencería" -> CategoriaProducto.LENCERIA;
+            case "Accesorio" -> CategoriaProducto.ACCESORIO;
+            case "Papelería" -> CategoriaProducto.PAPELERIA;
+            case "Marroquinería" -> CategoriaProducto.MARROQUINERIA;
+            default -> CategoriaProducto.VARIOS;
+        };
         return retorno; 
     }
 }

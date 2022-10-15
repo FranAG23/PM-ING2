@@ -9,6 +9,8 @@ import static clasesEntidad.Producto.CategoriaProducto.LENCERIA;
 import static clasesEntidad.Producto.CategoriaProducto.MARROQUINERIA;
 import static clasesEntidad.Producto.CategoriaProducto.PAPELERIA;
 import static clasesEntidad.Producto.CategoriaProducto.VARIOS;
+import clasesEntidad.Reserva;
+import clasesEntidad.Sucursal;
 import clasesEntidad.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DAOVenta implements InterfazDAOVenta {
+    
     private final String nombreTablaVentas = "Venta"; 
     private final String nombreTablaItemsVenta = "ItemVenta"; 
     private final int colIDVentaEnVentas = 0;
@@ -46,6 +49,7 @@ public class DAOVenta implements InterfazDAOVenta {
     
     @Override
     public boolean registrar(Venta venta) {
+        
         boolean exito = false;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -97,6 +101,7 @@ public class DAOVenta implements InterfazDAOVenta {
         return exito;
     }
 
+    @Override
     public boolean modificar(Venta v) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
@@ -106,7 +111,13 @@ public class DAOVenta implements InterfazDAOVenta {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
- public ArrayList<Venta> ObtenerFecha(Date D) throws SQLException{
+    @Override
+    public Venta obtener(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public ArrayList<Venta> ObtenerPorFecha(Date D) throws SQLException {
+        
         ArrayList<Venta> Ventas = new ArrayList<Venta>();
         PreparedStatement pst = null;
         ResultSet rsVenta = null;
@@ -116,59 +127,58 @@ public class DAOVenta implements InterfazDAOVenta {
         Connection con;
         con = conexionBD.establecerConexion();
         pst = con.prepareStatement(queryParaObtenerVentaxFecha);
-      // BASE DE DATOS NUEVA pst.setDate(colFechaPago, new java.sql.Date(D.getTime()));
+        // BASE DE DATOS NUEVA pst.setDate(colFechaPago, new java.sql.Date(D.getTime()));
         pst.setDate(1, new java.sql.Date(D.getTime()));
         rsVenta = pst.executeQuery();
         
         while(rsVenta.next()) {
-                Venta V = new Venta();
-                V.setId(rsVenta.getInt("vid"));
-                V.setNombreCliente(rsVenta.getString("vnombrecliente"));
-                V.setApellidoCliente(rsVenta.getString("vapellidocliente"));
-                V.setEnvioGratis(rsVenta.getBoolean("venviogratis"));
-                V.setImporte(rsVenta.getFloat("vimporte"));
-                V.setFecha(new java.util.Date(rsVenta.getDate("vfecha").getTime()));
-                if (rsVenta.getString("vmetodopago").equals("Efectivo")) {
-                    V.setMetodoPago(Venta.MetodoPago.EFECTIVO);
-                } 
-                else {
-                    V.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
+            Venta V = new Venta();
+            V.setId(rsVenta.getInt("vid"));
+            V.setNombreCliente(rsVenta.getString("vnombrecliente"));
+            V.setApellidoCliente(rsVenta.getString("vapellidocliente"));
+            V.setEnvioGratis(rsVenta.getBoolean("venviogratis"));
+            V.setImporte(rsVenta.getFloat("vimporte"));
+            V.setFecha(new java.util.Date(rsVenta.getDate("vfecha").getTime()));
+            if (rsVenta.getString("vmetodopago").equals("Efectivo")) {
+                V.setMetodoPago(Venta.MetodoPago.EFECTIVO);
+            } 
+            else {
+                V.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
+            }
+            if(rsVenta.getString("vestadoventa").equals("Completada")) {
+                V.setEstado(Venta.EstadoVenta.COMPLETADA);
                 }
-                if(rsVenta.getString("vestadoventa").equals("Completada")) {
-                    V.setEstado(Venta.EstadoVenta.COMPLETADA);
-                    }
-                        else{
-                           if(rsVenta.getString("vestadoventa").equals("Cancelada")){
-                            V.setEstado(Venta.EstadoVenta.CANCELADA);
-                            }
-                            else
-                               V.setEstado(Venta.EstadoVenta.EN_RESERVA);
-                            }
-                
-                
-               // OBTENGO Y GUARDO LOS ITEM VENTA
-                ArrayList<ItemVenta> ai = new ArrayList<>();
-                pst = con.prepareStatement(queryParaObtenerItemsVenta);
-                pst.setInt(1, V.getId());
-                rsItemVenta = pst.executeQuery();
-                
-                
-                while (rsItemVenta.next()) {
+                    else{
+                       if(rsVenta.getString("vestadoventa").equals("Cancelada")){
+                        V.setEstado(Venta.EstadoVenta.CANCELADA);
+                        }
+                        else
+                           V.setEstado(Venta.EstadoVenta.EN_RESERVA);
+                        }
+
+
+            // OBTENGO Y GUARDO LOS ITEM VENTA
+            ArrayList<ItemVenta> ai = new ArrayList<>();
+            pst = con.prepareStatement(queryParaObtenerItemsVenta);
+            pst.setInt(1, V.getId());
+            rsItemVenta = pst.executeQuery();
+
+            while (rsItemVenta.next()) {
                 ItemVenta i = new ItemVenta();
                 i.setId(rsItemVenta.getInt("ivid"));
                 i.setCantidad(rsItemVenta.getInt("ivcantidad"));
                 i.setPrecioUnidad(rsItemVenta.getFloat("ivpreciounidad"));
-                
+
                     ai.add(i);
-                }
-                V.setItems(ai);
-                
-                Ventas.add(V);
             }
+            
+            V.setItems(ai);
+            Ventas.add(V);
+        }
         return Ventas;
  }
  
- public ArrayList<ItemVenta> getItemsVenta(int IDV) throws SQLException{
+    public ArrayList<ItemVenta> getItemsVenta(int IDV) throws SQLException{
         PreparedStatement pst = null;
         ResultSet rsItemVenta = null;
         ResultSet rsProductos = null;
@@ -216,22 +226,89 @@ public class DAOVenta implements InterfazDAOVenta {
      return ai;
  }
  
- public ArrayList<Venta> ObtenerVentas(){
-     ArrayList<Venta> Ventas = new ArrayList<>();
-     return Ventas;
- }
-
-    @Override
-    public Venta obtener(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Venta> ObtenerVentasConReserva(){
+        
+        PreparedStatement pst = null;
+        Connection con = null;
+        ResultSet rs = null;
+        ArrayList<Venta> resultado = new ArrayList<>();
+        
+        try {
+            
+            // Establecer conexión
+            con = BaseDatos.getInstance().establecerConexion();
+            
+            // Ejecutar query
+            pst = con.prepareStatement("SELECT * FROM venta,reserva WHERE"+
+                                       " (venta.vID = reserva.vID) AND"+
+                                       " vEstadoVenta = 'En reserva'");
+            rs = pst.executeQuery();
+            
+            // Obtener resultados
+            while (rs.next()) {
+                
+                Venta v = new Venta();
+                v.setId(rs.getInt("vID"));
+                v.setNombreCliente(rs.getString("vNombreCliente"));
+                v.setApellidoCliente(rs.getString("vApellidoCliente"));
+                v.setEnvioGratis(rs.getBoolean("vEnvioGratis"));
+                v.setImporte(rs.getFloat("vImporte"));
+                if (rs.getString("vMetodoPago").equals("Efectivo")) {   // Efectivo
+                    v.setMetodoPago(Venta.MetodoPago.EFECTIVO);
+                } else {    // MercadoPago
+                    v.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
+                }
+                if (rs.getInt("sID") == 1) {    // San Luis
+                    v.setSucursal(new Sucursal("San Luis"));
+                } else {    // Neuquén
+                    v.setSucursal(new Sucursal("Neuquén"));
+                }
+                
+                Reserva r = new Reserva();
+                r.setFecha(new java.util.Date(rs.getDate("rFecha").getTime()));
+                r.setSeña(rs.getFloat("rSeña"));
+                r.setTelefonoCliente(rs.getLong("rTelefonoCliente"));
+                
+                v.setReserva(r);
+                resultado.add(v);
+            }
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
+            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        }
+        
+        return resultado;
+    }
+    
+    public boolean cancelarVenta(int id, Date f) {
+        
+        boolean exito = false;
+        PreparedStatement pst = null;
+        Connection con = null;
+        
+        try {
+            
+            con = BaseDatos.getInstance().establecerConexion();
+            
+            // Modificar en tabla Venta
+            pst = con.prepareStatement("UPDATE venta SET vEstadoVenta = 'Cancelada', vFecha = ? "+
+                                       "WHERE vID = ?");
+            pst.setDate(1, new java.sql.Date(f.getTime()));
+            pst.setInt(2, id);
+            pst.executeUpdate();
+            
+            exito = true;
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        }
+        
+        return exito;
     }
 
-    public boolean registrar(Object v) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-  
-    public boolean modificar(Object v) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

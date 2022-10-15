@@ -1,6 +1,8 @@
 package interfaz.main;
 
 import baseDatos.BaseDatos;
+import clasesControl.ControladorNotificarFinReserva;
+import clasesEntidad.Venta;
 import interfaz.raven.component.Header;
 import interfaz.raven.component.Menu;
 import interfaz.raven.event.EventMenuSelected;
@@ -55,12 +57,17 @@ public class Main extends javax.swing.JFrame {
     private Animator animator;
 
     public Main() throws SQLException {
+        
         initComponents();
         init();
+        
+        // Comprobar si hay reservas vencidas, generar notificaciones
+        new ControladorNotificarFinReserva(this);
     }
 
     // Función que inicializa componentes creadas por Raven. 
     private void init() throws SQLException, SQLException {
+        
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         menu = new Menu();
@@ -200,6 +207,21 @@ public class Main extends javax.swing.JFrame {
         main.showForm(new Form_Home());
     }
 
+    // Función que genera una notificación de reserva vencida
+    public void generarNotificacionFinReserva(Venta v) {
+        
+        // Añadir una notificación de reserva vencida a alguna estructura de datos (queue?)
+        // y que el ícono de notificaciones en el header (header : interfaz.raven.component.Header)
+        // incremente el número en 1. Generar un sonido, quizá?
+        
+        // Luego hay que añadir un evento para el ícono de notificaciones (buttonBadges1):
+        // Cuando el usuario le haga click, que muestre una lista o un panel donde se muestren
+        // las reservas vencidas.
+        
+        // Una vez que una venta con reserva vencida es notificada, su estado cambia a CANCELADA.
+        // Por lo tanto, no es posible que se notifique más de una vez.
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

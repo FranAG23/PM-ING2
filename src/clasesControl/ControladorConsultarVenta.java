@@ -31,7 +31,7 @@ public class ControladorConsultarVenta {
         
         try 
         {
-            ventasEncontradas = daoVenta.ObtenerFecha(fecha);
+            ventasEncontradas = daoVenta.ObtenerPorFecha(fecha);
             cantidad = ventasEncontradas.size();
             if(cantidad == 0){
                 formulario.avisarNoHayResultados();

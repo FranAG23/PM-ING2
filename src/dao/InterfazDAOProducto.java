@@ -14,8 +14,5 @@ public interface InterfazDAOProducto {
     boolean eliminar(int id);
     
     Producto obtener(int id);
-    
-    void obtenerProductoPorNombre(Producto buscado, Producto resultado);
-    ArrayList<Producto> obtenerProductosConDisponibilidad(Producto buscado, Sucursal sucursal);
-    ArrayList<Producto> obtenerProdsConDisp(Producto buscado, Sucursal sucursal);
+ 
 }

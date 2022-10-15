@@ -74,19 +74,9 @@ public class Venta {
             this.items.add(new ItemVenta(item));
         }
     }
-
+    
     public Venta() {
-        id = -1; 
-        nombreCliente = ""; 
-        apellidoCliente = ""; 
-        envioGratis = false; 
-        importe = 0;
-        fecha = new Date();
-        metodoPago = MetodoPago.EFECTIVO; 
-        estado = EstadoVenta.EN_RESERVA;
-        reserva = new Reserva();
-        sucursal = new Sucursal();
-        items = new ArrayList<>();
+        
     }
     
     // Getters y Setters
