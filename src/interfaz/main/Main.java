@@ -220,8 +220,6 @@ public class Main extends javax.swing.JFrame {
         
         // Una vez que una venta con reserva vencida es notificada, su estado cambia a CANCELADA.
         // Por lo tanto, no es posible que se notifique más de una vez.
-        
-        
     }
     
     @SuppressWarnings("unchecked")

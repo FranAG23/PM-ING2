@@ -19,7 +19,7 @@ public class ControladorAltaVenta {
     // Interfaz. 
     FormularioAltaVenta formulario;
     // Monto total.
-    float importe;
+    float importeTotal;
     // DAOs.
     DAOVenta daoVenta;
     DAOProducto daoProducto;
@@ -29,7 +29,7 @@ public class ControladorAltaVenta {
         this.formulario = formulario; 
         itemsCargados = new ArrayList<>();
         productosBuscados = new ArrayList<>();
-        importe = 0; 
+        importeTotal = 0; 
         daoVenta = new DAOVenta();
         daoProducto = new DAOProducto();
         daoDisp = new DAODisponibilidad();
@@ -149,10 +149,12 @@ public class ControladorAltaVenta {
                     //System.out.println("Disponibilidad prod: " +  item.getProducto().getDisponibilidades().get(0).getStockActual());
                     // Agregarlo a nuestro arreglo. 
                     itemsCargados.add(item); 
-                    // Finalmente, mostrar el item de venta por pantalla.
+                    // Finalmente, mostrar el item de venta por pantalla,
                     importeProducto = cantidad * item.getPrecioUnidad();
-                    importe += importeProducto; 
+                    importeTotal += importeProducto; 
                     formulario.agregarItemVenta(prod.getNombre(), cantidad, item.getPrecioUnidad(), importeProducto);
+                    // y actualizar el monto total:
+                    formulario.establecerMontoTotal(importeTotal);
                 } 
             }
         }    
@@ -166,13 +168,15 @@ public class ControladorAltaVenta {
             // Si coinciden los nombres,
            if(itemsCargados.get(i).getProducto().getNombre().equals(nombreProducto)){
                // entonces lo eliminamos de nuestra lista.
-               importe -= itemsCargados.get(i).getPrecioUnidad() * itemsCargados.get(i).getCantidad(); 
+               importeTotal -= itemsCargados.get(i).getPrecioUnidad() * itemsCargados.get(i).getCantidad(); 
                itemsCargados.remove(i);
            }    
        }
        
-       // Eliminar item de la tabla que ve el usuario:
+       // Eliminar item de la tabla que ve el usuario,
        formulario.eliminarFilaItemVenta(filaSeleccionada);
+       // y mostrar monto total actualizado:
+       formulario.establecerMontoTotal(importeTotal);
     }
     
     public void usuarioQuiereCompletarVenta(String nomCliente, String apeCliente, boolean envioGratis, 
@@ -220,8 +224,8 @@ public class ControladorAltaVenta {
             // Hasta que no agreguemos el CU "Alta Reserva", nuestras ventas estarán siempre completas:
             estadoVenta = Venta.EstadoVenta.COMPLETADA;
             // Finalmente el objeto venta es el siguiente. 
-            venta = new Venta(-1, nomCliente, apeCliente, envioGratis, importe,  new Date(),
-                              metodoPago, estadoVenta, null, itemsCargados, sucursal);
+            venta = new Venta(-1, nomCliente, apeCliente, envioGratis, importeTotal, importeTotal,  
+                    new Date(), metodoPago, estadoVenta, null, itemsCargados, sucursal);
 
             // Dar de alta venta en Base de datos:
             exitoInsercionBD = daoVenta.registrar(venta);
@@ -236,13 +240,9 @@ public class ControladorAltaVenta {
                     daoDisp.modificar(disp);
                 }
                 
-                /*
-                for
-                */
-                
                 // reiniciar campos de la GUI. 
                 formulario.reiniciarCampos();
-                // entonces mostrar un cartel de éxito.
+                // entonces mostrar un cartel de éxito,
                 formulario.mostrarCartelExito();
                 // y prepararse para una nueva venta. 
                 this.prepararseParaNuevaVenta();
@@ -266,6 +266,6 @@ public class ControladorAltaVenta {
         }  
         
         // Reiniciar el importe a 0.
-        importe = 0; 
+        importeTotal = 0; 
     }
 }

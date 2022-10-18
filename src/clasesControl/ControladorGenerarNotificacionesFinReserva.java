@@ -1,4 +1,3 @@
-
 package clasesControl;
 
 import clasesEntidad.Venta;

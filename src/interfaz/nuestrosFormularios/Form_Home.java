@@ -34,7 +34,7 @@ public class Form_Home extends javax.swing.JPanel {
         Object row[] = new Object[3];
         String S="Hoy";
         row[0] = v.getNombreCliente();
-        row[1] = v.getImporte();
+        row[1] = v.getImporteTotal();
         row[2] = S;
         table2.addRow(row);
 }

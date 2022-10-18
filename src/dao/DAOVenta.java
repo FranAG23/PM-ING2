@@ -28,10 +28,11 @@ public class DAOVenta implements InterfazDAOVenta {
     private final int colNomCliente = 2;
     private final int colApeCliente = 3;
     private final int colEnvioGratis = 4;
-    private final int colImporte = 5; 
-    private final int colFechaPago = 6; 
-    private final int colMetodoPago = 7; 
-    private final int colEstadoVenta = 8; 
+    private final int colImporteTotal = 5; 
+    private final int colImporteActual = 6;
+    private final int colFechaUltimoPago = 7; 
+    private final int colMetodoPago = 8; 
+    private final int colEstadoVenta = 9; 
        
     private final int colIDItemVenta = 0; 
     private final int colIDProducto = 1; 
@@ -39,17 +40,16 @@ public class DAOVenta implements InterfazDAOVenta {
     private final int colPrecioUnidad = 3;
     private final int colIDVentaEnItemsVenta = 4;
     
-    private final String queryParaInsertarEnTablaVentas = "INSERT INTO " + nombreTablaVentas + " VALUES (DEFAULT,?,?,?,?,?,?,?,?)"; 
+    private final String queryParaInsertarEnTablaVentas = "INSERT INTO " + nombreTablaVentas + " VALUES (DEFAULT,?,?,?,?,?,?,?,?,?)"; 
     private final String queryParaGenerarIDVenta = "SELECT CURRVAL('Venta_vID_seq')"; 
     private final String queryParaInsertarEnTablaItemsVenta = "INSERT INTO " + nombreTablaItemsVenta + " VALUES (DEFAULT,?,?,?,?)";
     private final String queryParaGenerarIDItemVenta = "SELECT CURRVAL('itemventa_ivid_seq')"; 
-    private final String queryParaObtenerVentaxFecha = "SELECT * FROM venta WHERE (vfecha = ?)";
+    private final String queryParaObtenerVentaxFecha = "SELECT * FROM venta WHERE (vfechaUltimoPago = ?)";
     private final String queryParaObtenerItemsVenta = "SELECT * FROM itemventa WHERE (vid = ?)";
     private final String queryParaObtenerProductosItemVenta = "SELECT producto.pid, pnombre, pcategoria, pdescripcion FROM itemventa, producto WHERE(ivid = ?) AND (itemventa.pid = producto.pid)";
     
     @Override
-    public boolean registrar(Venta venta) {
-        
+    public boolean registrar(Venta venta) {        
         boolean exito = false;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -65,11 +65,12 @@ public class DAOVenta implements InterfazDAOVenta {
             } else { //Neuquén
                 pst.setInt(colIDSucursal, 2);
             }
-          pst.setString(colNomCliente, venta.getNombreCliente());
+            pst.setString(colNomCliente, venta.getNombreCliente());
             pst.setString(colApeCliente, venta.getApellidoCliente());
             pst.setBoolean(colEnvioGratis, venta.getEnvioGratis());
-            pst.setFloat(colImporte, venta.getImporte());
-            pst.setDate(colFechaPago, new java.sql.Date(venta.getFecha().getTime()));
+            pst.setFloat(colImporteTotal, venta.getImporteTotal());
+            pst.setFloat(colImporteActual, venta.getImporteActual()); 
+            pst.setDate(colFechaUltimoPago, new java.sql.Date(venta.getFechaUltimoPago().getTime()));
             pst.setString(colMetodoPago, venta.getMetodoPago().toString());
             pst.setString(colEstadoVenta, venta.getEstado().toString());
             pst.executeUpdate();
@@ -137,8 +138,8 @@ public class DAOVenta implements InterfazDAOVenta {
             V.setNombreCliente(rsVenta.getString("vnombrecliente"));
             V.setApellidoCliente(rsVenta.getString("vapellidocliente"));
             V.setEnvioGratis(rsVenta.getBoolean("venviogratis"));
-            V.setImporte(rsVenta.getFloat("vimporte"));
-            V.setFecha(new java.util.Date(rsVenta.getDate("vfecha").getTime()));
+            V.setImporteTotal(rsVenta.getFloat("vimporteTotal"));
+            V.setFechaUltimoPago(new java.util.Date(rsVenta.getDate("vfechaUltimoPago").getTime()));
             if (rsVenta.getString("vmetodopago").equals("Efectivo")) {
                 V.setMetodoPago(Venta.MetodoPago.EFECTIVO);
             } 
@@ -252,7 +253,7 @@ public class DAOVenta implements InterfazDAOVenta {
                 v.setNombreCliente(rs.getString("vNombreCliente"));
                 v.setApellidoCliente(rs.getString("vApellidoCliente"));
                 v.setEnvioGratis(rs.getBoolean("vEnvioGratis"));
-                v.setImporte(rs.getFloat("vImporte"));
+                v.setImporteTotal(rs.getFloat("vImporteTotal"));
                 if (rs.getString("vMetodoPago").equals("Efectivo")) {   // Efectivo
                     v.setMetodoPago(Venta.MetodoPago.EFECTIVO);
                 } else {    // MercadoPago
@@ -294,7 +295,7 @@ public class DAOVenta implements InterfazDAOVenta {
             con = BaseDatos.getInstance().establecerConexion();
             
             // Modificar en tabla Venta
-            pst = con.prepareStatement("UPDATE venta SET vEstadoVenta = 'Cancelada', vFecha = ? "+
+            pst = con.prepareStatement("UPDATE venta SET vEstadoVenta = 'Cancelada', vFechaUltimoPago = ? "+
                                        "WHERE vID = ?");
             pst.setDate(1, new java.sql.Date(f.getTime()));
             pst.setInt(2, id);

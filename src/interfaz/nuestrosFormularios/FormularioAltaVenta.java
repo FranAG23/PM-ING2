@@ -16,6 +16,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoSucursal.setEnabled(false);     
         esconderCartelesDeError();
         logica = new ControladorAltaVenta(this);
+        campoMontoTotal.setText("0");
     }
    
     @SuppressWarnings("unchecked")
@@ -61,6 +62,9 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         tablaItems = new interfaz.raven.swing.table.Table();
         errorCantidad = new javax.swing.JLabel();
         avisoMirarArriba = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        campoMontoTotal = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -285,6 +289,19 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         avisoMirarArriba.setForeground(new java.awt.Color(255, 51, 51));
         avisoMirarArriba.setText("Hay un error! Mire arriba");
 
+        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel13.setText("Monto total");
+
+        campoMontoTotal.setEditable(false);
+        campoMontoTotal.setBackground(new java.awt.Color(204, 255, 204));
+        campoMontoTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoMontoTotalActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("$");
+
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
         panelDatosLayout.setHorizontalGroup(
@@ -292,11 +309,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             .addGroup(panelDatosLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(errorTablaItems)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(JScrollPane666, javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,9 +361,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(100, 100, 100)
@@ -359,8 +368,21 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(errorCantidad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonAgregarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32))))
+                                .addComponent(botonAgregarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(135, 135, 135)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(32, 32, 32))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(errorTablaItems)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelDatosLayout.setVerticalGroup(
             panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,9 +440,13 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
                     .addComponent(errorTablaItems))
                 .addGap(32, 32, 32)
                 .addComponent(JScrollPane666, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(campoMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGap(32, 32, 32)
-                .addComponent(botonEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -487,6 +513,10 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         errorNombreProducto.setText(" ");
     }
     
+    public void establecerMontoTotal(float montoTotal){
+        campoMontoTotal.setText(Float.toString(montoTotal));
+    }
+    
     public void limpiarTablaDeProductos(){
         DefaultTableModel model = (DefaultTableModel)tablaBuscador.getModel();
         while(model.getRowCount() != 0)
@@ -505,6 +535,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoNombre.setText("");
         campoApellido.setText("");
         campoEnvioGratis.setSelected(false);
+        campoBuscador.setText("");
+        campoCantidad.setText("");
         campoMetodoPago.setSelectedIndex(0);
         while(modeloProductos.getRowCount() != 0)
             modeloProductos.removeRow(0);
@@ -524,6 +556,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         errorNombreProducto.setText(" ");
         errorCantidad.setText(" ");
         avisoMirarArriba.setText(" ");
+        campoMontoTotal.setText("0");
     }
     
     private void campoSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSucursalActionPerformed
@@ -606,6 +639,10 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
 
     }//GEN-LAST:event_campoBuscadorActionPerformed
 
+    private void campoMontoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMontoTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoMontoTotalActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JScrollPane666;
     private javax.swing.JLabel avisoMirarArriba;
@@ -619,6 +656,7 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     private javax.swing.JTextField campoCantidad;
     private javax.swing.JCheckBox campoEnvioGratis;
     private javax.swing.JComboBox<String> campoMetodoPago;
+    private javax.swing.JTextField campoMontoTotal;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JComboBox<String> campoSucursal;
     private javax.swing.JLabel errorApellido;
@@ -630,6 +668,8 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

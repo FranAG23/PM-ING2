@@ -37,8 +37,9 @@ public class Venta {
     private String nombreCliente;
     private String apellidoCliente;
     private boolean envioGratis;
-    private float importe;
-    private Date fecha;
+    private float importeTotal;
+    private float importeActual; 
+    private Date fechaUltimoPago;
     private MetodoPago metodoPago;
     private EstadoVenta estado;
     private Reserva reserva;
@@ -51,7 +52,8 @@ public class Venta {
                     String nombreCliente,
                     String apellidoCliente, 
                     boolean envioGratis, 
-                    float importe, 
+                    float importeTotal, 
+                    float importeActual,
                     Date fecha, 
                     MetodoPago metodoPago, 
                     EstadoVenta estado, 
@@ -63,8 +65,9 @@ public class Venta {
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
         this.envioGratis = envioGratis;
-        this.importe = importe;
-        this.fecha = fecha;
+        this.importeTotal = importeTotal;
+        this.importeActual = importeActual; 
+        this.fechaUltimoPago = fecha;
         this.metodoPago = metodoPago;
         this.estado = estado;
         this.reserva = reserva;
@@ -76,7 +79,18 @@ public class Venta {
     }
     
     public Venta() {
-        
+        this.id = -1;
+        this.nombreCliente = "Indefinido";
+        this.apellidoCliente = "Indefinido";
+        this.envioGratis = false; 
+        this.importeTotal = -1;
+        this.importeActual = -1;
+        this.fechaUltimoPago = new Date();
+        this.metodoPago = MetodoPago.EFECTIVO; 
+        this.estado = EstadoVenta.CANCELADA; 
+        this.reserva = null; 
+        this.sucursal = new Sucursal();
+        this.items = new ArrayList<>();
     }
     
     // Getters y Setters
@@ -93,11 +107,14 @@ public class Venta {
     public boolean getEnvioGratis() {return envioGratis;}
     public void setEnvioGratis(boolean envioGratis) {this.envioGratis = envioGratis;}
 
-    public float getImporte() {return importe;}
-    public void setImporte(float importe) {this.importe = importe;}
+    public float getImporteTotal() {return importeTotal;}
+    public void setImporteTotal(float importe) {this.importeTotal = importe;}
+    
+    public float getImporteActual() { return importeActual;}
+    public void setImporteActual(float importeActual) { this.importeActual = importeActual;}
 
-    public Date getFecha() {return fecha;}
-    public void setFecha(Date fecha) {this.fecha = fecha;}
+    public Date getFechaUltimoPago() {return fechaUltimoPago;}
+    public void setFechaUltimoPago(Date fecha) {this.fechaUltimoPago = fecha;}
 
     public MetodoPago getMetodoPago() {return metodoPago;}
     public void setMetodoPago(MetodoPago metodoPago) {this.metodoPago = metodoPago;}
