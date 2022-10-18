@@ -24,6 +24,10 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         // Esconder carteles de datos ingresados inválidos
         resetCarteles();
         
+        // Oscurecer opciones de disponibilidad en Neuquén
+        // (Para esta entrega presentamos el sistema de Marcela)
+        checkDisponibilidadNeuquen.setEnabled(false);
+        
         setOpaque(false);
     }
 
@@ -514,7 +518,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private void checkDisponibilidadNeuquenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDisponibilidadNeuquenActionPerformed
         
         // Disponible en Neuquén
-        
+        /*
         if (checkDisponibilidadNeuquen.isSelected()) {
             for (Component c : panelDatosNeuquen.getComponents()) {
                 c.setEnabled(true);
@@ -529,6 +533,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         cartelPrecioInvalidoNeuquen.setVisible(false);
         cartelStockInvalidoNeuquen.setVisible(false);
         cartelStockMinimoInvalidoNeuquen.setVisible(false);
+        */
     }//GEN-LAST:event_checkDisponibilidadNeuquenActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
