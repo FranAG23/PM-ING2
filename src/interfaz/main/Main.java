@@ -1,7 +1,7 @@
 package interfaz.main;
 
 import baseDatos.BaseDatos;
-import clasesControl.ControladorNotificarFinReserva;
+import clasesControl.ControladorGenerarNotificacionesFinReserva;
 import clasesEntidad.Venta;
 import interfaz.raven.component.Header;
 import interfaz.raven.component.Menu;
@@ -62,7 +62,7 @@ public class Main extends javax.swing.JFrame {
         init();
         
         // Comprobar si hay reservas vencidas, generar notificaciones
-        new ControladorNotificarFinReserva(this);
+        new ControladorGenerarNotificacionesFinReserva(this);
     }
 
     // Función que inicializa componentes creadas por Raven. 
@@ -220,6 +220,8 @@ public class Main extends javax.swing.JFrame {
         
         // Una vez que una venta con reserva vencida es notificada, su estado cambia a CANCELADA.
         // Por lo tanto, no es posible que se notifique más de una vez.
+        
+        
     }
     
     @SuppressWarnings("unchecked")

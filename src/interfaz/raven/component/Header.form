@@ -116,8 +116,16 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagenes/notification.png"/>
         </Property>
-        <Property name="badges" type="int" value="12"/>
+        <Property name="badges" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="3" type="code"/>
+        </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBadges1ActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Header_buttonBadges1"/>
+      </AuxValues>
     </Component>
     <Component class="interfaz.raven.swing.ButtonBadges" name="buttonBadges2">
       <Properties>

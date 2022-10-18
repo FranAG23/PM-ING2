@@ -55,7 +55,12 @@ public class Header extends javax.swing.JPanel {
 
         buttonBadges1.setForeground(new java.awt.Color(250, 49, 49));
         buttonBadges1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notification.png"))); // NOI18N
-        buttonBadges1.setBadges(12);
+        buttonBadges1.setBadges(3);
+        buttonBadges1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBadges1ActionPerformed(evt);
+            }
+        });
 
         buttonBadges2.setForeground(new java.awt.Color(63, 178, 232));
         buttonBadges2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/message.png"))); // NOI18N
@@ -103,6 +108,13 @@ public class Header extends javax.swing.JPanel {
     private void cmdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMenuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdMenuActionPerformed
+
+    private void buttonBadges1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBadges1ActionPerformed
+        
+        // Mostrar notificaciones
+        
+        
+    }//GEN-LAST:event_buttonBadges1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private interfaz.raven.swing.ButtonBadges buttonBadges1;

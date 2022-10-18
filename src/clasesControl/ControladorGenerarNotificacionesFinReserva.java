@@ -7,12 +7,12 @@ import interfaz.main.Main;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ControladorNotificarFinReserva {
+public class ControladorGenerarNotificacionesFinReserva {
     
     public static final int DIAS_LIMITE_RESERVA = 15;
     public static final int MILISEGUNDOS_EN_UN_DIA = 86400000;
     
-    public ControladorNotificarFinReserva(Main m) {
+    public ControladorGenerarNotificacionesFinReserva(Main m) {
         
         // Obtener Ventas con Reserva (En estado EN_RESERVA)
         ArrayList<Venta> ventas = new DAOVenta().ObtenerVentasConReserva();
