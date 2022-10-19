@@ -1,4 +1,6 @@
+
 package clasesControl;
+
 import clasesEntidad.Disponibilidad;
 import clasesEntidad.ItemVenta;
 import clasesEntidad.Producto;
@@ -36,6 +38,7 @@ public class ControladorAltaVenta {
     }
     
     public void usuarioBuscaProducto(String nombreBuscado, int idsucursal, String ubicacionSucursal){
+        
         Producto prodBuscado = new Producto();
         Sucursal sucursalDeVenta = new Sucursal();
         Disponibilidad dispProd = new Disponibilidad();

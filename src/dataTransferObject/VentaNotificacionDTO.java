@@ -12,6 +12,15 @@ public class VentaNotificacionDTO {
     private long telefonoCliente;
     private float importeActual;
     private Date fecha;
+
+    public VentaNotificacionDTO(String nombreCliente, String apellidoCliente, long telefonoCliente, float importeActual, Date fecha) {
+        
+        this.nombreCliente = nombreCliente;
+        this.apellidoCliente = apellidoCliente;
+        this.telefonoCliente = telefonoCliente;
+        this.importeActual = importeActual;
+        this.fecha = fecha;
+    }
     
     public String getNombreCliente() {
         return nombreCliente;
