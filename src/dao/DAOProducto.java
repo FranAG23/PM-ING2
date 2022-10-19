@@ -77,7 +77,7 @@ public class DAOProducto implements InterfazDAOProducto {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     
-    public ArrayList<Producto> obtenerProdsConDisp(Producto buscado, Sucursal sucursal){
+    public ArrayList<Producto> obtenerProductosConDisponibilidad(String nombreProducto, int idSucursal) {
         
         PreparedStatement pst = null;
         Connection con = null;
@@ -86,7 +86,7 @@ public class DAOProducto implements InterfazDAOProducto {
         Producto prodTemp; 
         Disponibilidad dispTemp;
         ArrayList<Disponibilidad> arrDisp; 
-        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        ArrayList<Producto> listaProductos = new ArrayList<>();
 
         try {
             // Establecer conexión con la base de datos. 
@@ -98,12 +98,12 @@ public class DAOProducto implements InterfazDAOProducto {
                                      + "FROM Producto, Disponibilidad "
                                      + "WHERE Producto.pNombre LIKE ? AND Disponibilidad.sID = ? AND Producto.pid = Disponibilidad.pid "
                                      + "ORDER BY Producto.pID");
-            pst.setString(1, buscado.getNombre() + "%");
-            pst.setInt(2, sucursal.getID());
+            pst.setString(1, nombreProducto + "%");
+            pst.setInt(2, idSucursal);
             rs = pst.executeQuery();
             
             // Si se obtuve un resultado, entonces construir objetos productos:
-            while(rs.next()){
+            while (rs.next()) {
                 prodTemp = new Producto();
                 dispTemp = new Disponibilidad();
                 arrDisp = new ArrayList<>();
@@ -111,7 +111,11 @@ public class DAOProducto implements InterfazDAOProducto {
                 // Construir objeto disponibilidad:
                 dispTemp.setID(rs.getInt(5));
                 dispTemp.setProducto(prodTemp);
-                dispTemp.setSucursal(sucursal); 
+                if (idSucursal==1) {
+                    dispTemp.setSucursal(new Sucursal("San Luis")); 
+                } else {
+                    dispTemp.setSucursal(new Sucursal("Neuquén")); 
+                }
                 dispTemp.setPrecioVenta(rs.getFloat(8));
                 dispTemp.setStockActual(rs.getInt(9));
                 dispTemp.setStockMinimo(rs.getInt(10));

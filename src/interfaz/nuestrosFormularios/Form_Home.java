@@ -1,9 +1,7 @@
+
 package interfaz.nuestrosFormularios;
 
-
 import clasesEntidad.Venta;
-import interfaz.raven.dialog.Message;
-import interfaz.main.Main;
 import interfaz.raven.model.ModelCard;
 import interfaz.raven.swing.icon.GoogleMaterialDesignIcons;
 import interfaz.raven.swing.icon.IconFontSwing;
@@ -15,7 +13,6 @@ import javax.swing.Icon;
 import clasesControl.ControladorGenerarInforme;
 
 public class Form_Home extends javax.swing.JPanel {
-
 
     public Form_Home() throws SQLException {
         initComponents();
@@ -30,14 +27,15 @@ public class Form_Home extends javax.swing.JPanel {
         initTableData();
     }
      
-      void insertarTablaVentas(Venta v){  
+    void insertarTablaVentas(Venta v) {  
         Object row[] = new Object[3];
         String S="Hoy";
         row[0] = v.getNombreCliente();
         row[1] = v.getImporteTotal();
         row[2] = S;
         table2.addRow(row);
-}
+    }
+    
     private void initTableData() throws SQLException {
         int cantidad;
         ControladorGenerarInforme MVenta=new ControladorGenerarInforme();
@@ -49,19 +47,14 @@ public class Form_Home extends javax.swing.JPanel {
             for(int i=0;i<cantidad;i++){
                 insertarTablaVentas(ventas.get(i));
             }
-        }
+    }
+    
     private int VentasMensuales(){
         int Cont=0;
         
         return Cont;
     }
-    private void ProductosVendidos(){
-        
-    }
-    private int NuevosClientes(){
-        int cant=0;
-        return cant;
-    }
+    
     private void initCardData() {
         
         Icon icon1 = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PEOPLE, 60, new Color(255, 255, 255, 100), new Color(255, 255, 255, 15));
@@ -85,12 +78,6 @@ public class Form_Home extends javax.swing.JPanel {
         noticeBoard.addNoticeBoard(new ModelNoticeBoard(new Color(27, 188, 204), "Skip ", "9:00 AM", "Skips a number of cells in the flow. This is used to jump over a number of cells before the next free cell is looked for. The skipping is done before this component is put in a cell and thus this cells is affected by it. \"count\" defaults to 1 if not specified."));
         noticeBoard.addNoticeBoard(new ModelNoticeBoard(new Color(238, 46, 57), "Push", "7:15 AM", "Makes the row and/or column that the component is residing in grow with \"weight\". This can be used instead of having a \"grow\" keyword in the column/row constraints."));
         noticeBoard.scrollToTop();*/
-    }
-
-    private boolean showMessage(String message) {
-        Message obj = new Message(Main.getFrames()[0], true);
-        obj.showMessage(message);
-        return obj.isOk();
     }
 
     @SuppressWarnings("unchecked")

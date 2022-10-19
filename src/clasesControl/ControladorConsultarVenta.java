@@ -47,7 +47,7 @@ public class ControladorConsultarVenta {
         }
     }
     
-    public void usuarioQuiereVerMas(int filaSeleccionada){
+    public void usuarioQuiereVerMas(int filaSeleccionada) {
        DAOVenta daoVenta = new DAOVenta(); 
        int cantidad;
        int idVenta = 0; 
@@ -67,14 +67,13 @@ public class ControladorConsultarVenta {
             // OBTENEMOS LOS CAMPOS DE LA FILA SELECCIONADA LA VENTA Y LOS ITEMS  
             Items = daoVenta.getItemsVenta(idVenta);
             cantidad = Items.size();
-            for(int i = 0; i < cantidad;i++)
-            {
+            for (int i = 0; i < cantidad; i++) {
                 item = Items.get(i);
                 producto = item.getProducto();
                 formulario.insertarInfoProducto(item, producto); 
             }
         } catch (SQLException ex) {
-            System.out.println("Error en   public void usuarioQuiereVerMas(int idVenta) en clase LogicaConsultarVenta");
+            System.out.println("Error en public void usuarioQuiereVerMas(int idVenta) en clase LogicaConsultarVenta");
             Logger.getLogger(FormularioConsultarVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -2,16 +2,11 @@
 package interfaz.nuestrosFormularios;
 
 import clasesControl.ControladorConsultarVenta;
-import clasesControl.ControladorGenerarInforme;
 import clasesEntidad.ItemVenta;
 import clasesEntidad.Producto;
 import clasesEntidad.Venta;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class FormularioConsultarVenta extends javax.swing.JPanel {
@@ -120,11 +115,6 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
             }
         });
         tablaProductos.getTableHeader().setReorderingAllowed(false);
-        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaProductosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaProductos);
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -242,10 +232,6 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
-
-    }//GEN-LAST:event_tablaProductosMouseClicked
-
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
         int FilaSeleccionada = table1.rowAtPoint(evt.getPoint());
         logica.usuarioQuiereVerMas(FilaSeleccionada);
@@ -257,6 +243,7 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
         Dt.format(D);
         logica.usuarioQuiereBuscarVenta(D);
     }//GEN-LAST:event_button1ActionPerformed
+    
     public void insertarInfoProducto(ItemVenta Item, Producto P){  
         Object row[] = new Object[5];
         row[0] = P.getNombre();
@@ -277,12 +264,12 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
         table1.addRow(row);
 }
     public void borrarTabla(){
+        
         int cant_filas=this.table1.getRowCount();
         if(cant_filas>0){
             for(int i=0 ;i<cant_filas;i++)
             ((DefaultTableModel)this.table1.getModel()).removeRow(0);
         }
-     
     }
     
     public void esconderAvisoNoHayResultados(){
@@ -313,7 +300,8 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void borrarTablaProductos() {
-       int cant_filas=this.tablaProductos.getRowCount();
+       
+        int cant_filas=this.tablaProductos.getRowCount();
         if(cant_filas>0){
             for(int i=0 ;i<cant_filas;i++)
             ((DefaultTableModel)this.tablaProductos.getModel()).removeRow(0);

@@ -39,15 +39,15 @@
 
 	CREATE TABLE Venta
 	(
-		vID			SERIAL			NOT NULL	PRIMARY KEY,
-		sID 			INT			NOT NULL,
+		vID					SERIAL			NOT NULL	PRIMARY KEY,
+		sID 				INT				NOT NULL,
 		vNombreCliente		VARCHAR(30)		NOT NULL,
 		vApellidoCliente 	VARCHAR(30)		NOT NULL,
-		vEnvioGratis		BOOLEAN		NOT NULL,
+		vEnvioGratis		BOOLEAN			NOT NULL,
 		vImporteTotal		REAL			NOT NULL,
 		vImporteActual		REAL			NOT NULL, 
 		vFechaUltimoPago	DATE			NOT NULL,
-		vMetodoPago		VARCHAR(20)		NOT NULL,
+		vMetodoPago				VARCHAR(20)		NOT NULL,
 		vEstadoVenta		VARCHAR(20)		NOT NULL,
 		
 		FOREIGN KEY (sID) REFERENCES Sucursal 

@@ -666,7 +666,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void botonAltaExitosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaExitosaActionPerformed
-            dialogAltaExitosa.setVisible(false);
+        dialogAltaExitosa.setVisible(false);
     }//GEN-LAST:event_botonAltaExitosaActionPerformed
 
     private void dialogAltaExitosaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dialogAltaExitosaFocusLost

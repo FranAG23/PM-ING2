@@ -99,11 +99,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel3.setText("Nombre del cliente");
 
         campoNombre.setBackground(new java.awt.Color(204, 204, 255));
-        campoNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombreActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel6.setText("Apellido del cliente");
@@ -141,11 +136,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         jLabel10.setText("Nombre del producto");
 
         campoBuscador.setBackground(new java.awt.Color(204, 204, 255));
-        campoBuscador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoBuscadorActionPerformed(evt);
-            }
-        });
 
         botonBuscar.setBackground(new java.awt.Color(238, 156, 167));
         botonBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,11 +172,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             }
         });
         tablaBuscador.getTableHeader().setReorderingAllowed(false);
-        tablaBuscador.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaBuscadorMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaBuscador);
         if (tablaBuscador.getColumnModel().getColumnCount() > 0) {
             tablaBuscador.getColumnModel().getColumn(0).setResizable(false);
@@ -294,11 +279,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
 
         campoMontoTotal.setEditable(false);
         campoMontoTotal.setBackground(new java.awt.Color(204, 255, 204));
-        campoMontoTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoMontoTotalActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("$");
 
@@ -544,10 +524,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
             modeloItems.removeRow(0);
     }
     
-    private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
-
-    }//GEN-LAST:event_campoNombreActionPerformed
-
     public void esconderCartelesDeError(){
         // Esconder carteles de error:
         errorNombre.setText(" ");
@@ -559,19 +535,12 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         campoMontoTotal.setText("0");
     }
     
-    private void campoSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSucursalActionPerformed
-    }//GEN-LAST:event_campoSucursalActionPerformed
-
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // Construir objeto producto:
         String nombreProducto = campoBuscador.getText();
         // Invocar a lógica de la acción.
         logica.usuarioBuscaProducto(nombreProducto, 1, "San Luis");
     }//GEN-LAST:event_botonBuscarActionPerformed
-
-    private void tablaBuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBuscadorMouseClicked
-
-    }//GEN-LAST:event_tablaBuscadorMouseClicked
 
     private void botonAgregarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarItemActionPerformed
         boolean datosValidos = true; 
@@ -634,14 +603,6 @@ public class FormularioAltaVenta extends javax.swing.JPanel {
         boolean envioGratis = campoEnvioGratis.isSelected();
         logica.usuarioQuiereCompletarVenta(nomCliente, apeCliente, envioGratis , strMetodoPago, 1, ubiSucursal);
     }//GEN-LAST:event_botonRegistrarVentaActionPerformed
-
-    private void campoBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscadorActionPerformed
-
-    }//GEN-LAST:event_campoBuscadorActionPerformed
-
-    private void campoMontoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMontoTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoMontoTotalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JScrollPane666;

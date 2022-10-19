@@ -55,7 +55,7 @@ public class ControladorAltaVenta {
             prodBuscado.setNombre(nombreBuscado);
             sucursalDeVenta.setID(idsucursal);
             sucursalDeVenta.setUbicacion(ubicacionSucursal);
-            productosBuscados = daoProducto.obtenerProdsConDisp(prodBuscado, sucursalDeVenta);
+            productosBuscados = daoProducto.obtenerProductosConDisponibilidad(prodBuscado, sucursalDeVenta);
             
             // Si no obtuve ningun producto, 
             if(productosBuscados.isEmpty()){

@@ -9,29 +9,29 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ControladorGenerarInforme {
-   private DAOVenta daoVenta; 
-   private Date Fecha;
-
+   
+    private DAOVenta daoVenta;
     FormularioAltaVenta formulario;
     
     public ControladorGenerarInforme(FormularioAltaVenta formulario) {
         this.formulario = formulario;
-          this.daoVenta = new DAOVenta();
-    }
-    public ControladorGenerarInforme(){
-    this.daoVenta = new DAOVenta();
+        this.daoVenta = new DAOVenta();
     }
     
-    public ArrayList<Venta> BuscarFecha(Date D) throws SQLException{
+    public ControladorGenerarInforme() {
+        this.daoVenta = new DAOVenta();
+    }
+    
+    public ArrayList<Venta> BuscarFecha(Date D) throws SQLException {
         ArrayList<Venta> Ventas;
         Ventas = daoVenta.ObtenerPorFecha(D);
         return Ventas;
     }
-    public ArrayList<ItemVenta> getItemsVenta(int ID) throws SQLException{
+    
+    public ArrayList<ItemVenta> getItemsVenta(int ID) throws SQLException {
         ArrayList<ItemVenta> Items;
         Items = daoVenta.getItemsVenta(ID);
         return Items;
-        
     }
   
 }
