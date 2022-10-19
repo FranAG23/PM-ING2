@@ -2,7 +2,7 @@ package interfaz.main;
 
 import baseDatos.BaseDatos;
 import clasesControl.ControladorGenerarNotificacionesFinReserva;
-import clasesEntidad.Venta;
+import dataTransferObject.VentaNotificacionDTO;
 import interfaz.raven.component.Header;
 import interfaz.raven.component.Menu;
 import interfaz.raven.event.EventMenuSelected;
@@ -208,7 +208,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Función que genera una notificación de reserva vencida
-    public void generarNotificacionFinReserva(Venta v) {
+    public void generarNotificacionFinReserva(VentaNotificacionDTO v) {
         
         // Añadir una notificación de reserva vencida a alguna estructura de datos (queue?)
         // y que el ícono de notificaciones en el header (header : interfaz.raven.component.Header)
@@ -220,6 +220,8 @@ public class Main extends javax.swing.JFrame {
         
         // Una vez que una venta con reserva vencida es notificada, su estado cambia a CANCELADA.
         // Por lo tanto, no es posible que se notifique más de una vez.
+        
+        
     }
     
     @SuppressWarnings("unchecked")

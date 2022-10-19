@@ -14,10 +14,12 @@ public class Mapper {
     public static VentaNotificacionDTO toVentaNotificacionDTO(Venta v) {
         
         return new VentaNotificacionDTO(
+            v.getId(),
             v.getNombreCliente(),
             v.getApellidoCliente(),
             v.getReserva().getTelefonoCliente(),
-            v.getImporteActual(),v.getReserva().getFecha()
+            v.getImporteActual(),
+            v.getReserva().getFecha()
         );
     }
     

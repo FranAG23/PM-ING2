@@ -37,10 +37,8 @@ public class ControladorAltaVenta {
         daoDisp = new DAODisponibilidad();
     }
     
-    public void usuarioBuscaProducto(String nombreBuscado, int idsucursal, String ubicacionSucursal){
+    public void usuarioBuscaProducto(String nombreBuscado, int idSucursal, String ubicacionSucursal){
         
-        Producto prodBuscado = new Producto();
-        Sucursal sucursalDeVenta = new Sucursal();
         Disponibilidad dispProd = new Disponibilidad();
         
         // Esconder mensajes de error antiguo. 
@@ -54,11 +52,8 @@ public class ControladorAltaVenta {
         else
         {   
             // Si todo está bien, decirle a daoProducto que me obtenga los productos y sus disponibilidades
-            // en la sucursal donde trabaja el usuario. 
-            prodBuscado.setNombre(nombreBuscado);
-            sucursalDeVenta.setID(idsucursal);
-            sucursalDeVenta.setUbicacion(ubicacionSucursal);
-            productosBuscados = daoProducto.obtenerProductosConDisponibilidad(prodBuscado, sucursalDeVenta);
+            // en la sucursal donde trabaja el usuario.
+            productosBuscados = daoProducto.obtenerProductosConDisponibilidad(nombreBuscado, idSucursal);
             
             // Si no obtuve ningun producto, 
             if(productosBuscados.isEmpty()){

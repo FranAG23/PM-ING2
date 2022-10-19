@@ -1,7 +1,7 @@
 package clasesControl;
 
-import clasesEntidad.Venta;
 import dao.DAOVenta;
+import dataTransferObject.VentaNotificacionDTO;
 import interfaz.main.Main;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,14 +14,14 @@ public class ControladorGenerarNotificacionesFinReserva {
     public ControladorGenerarNotificacionesFinReserva(Main m) {
         
         // Obtener Ventas con Reserva (En estado EN_RESERVA)
-        ArrayList<Venta> ventas = new DAOVenta().ObtenerVentasConReserva();
+        ArrayList<VentaNotificacionDTO> ventas = new DAOVenta().ObtenerVentasConReserva();
         
         // Obtener fecha actual
         Date fechaActual = new Date(System.currentTimeMillis());
         
         // Comprobar si alguna reserva está vencida y generar notificaciones
-        for (Venta v : ventas) {
-            if (v.getReserva().getFecha().getTime() + DIAS_LIMITE_RESERVA*MILISEGUNDOS_EN_UN_DIA >= 
+        for (VentaNotificacionDTO v : ventas) {
+            if (v.getFechaReserva().getTime() + DIAS_LIMITE_RESERVA*MILISEGUNDOS_EN_UN_DIA >= 
                 fechaActual.getTime()) {
                 
                 // Actualizar estado en base de datos (Cancelada) y poner la fecha actual en vFecha

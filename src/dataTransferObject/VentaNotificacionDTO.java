@@ -7,19 +7,27 @@ public class VentaNotificacionDTO {
 
     // DTO que contiene los datos a mostrar en una notificación de reserva vencida
     
+    private int id;
     private String nombreCliente;
-    private String apellidoCliente;
     private long telefonoCliente;
     private float importeActual;
-    private Date fecha;
+    private Date fechaReserva;
 
-    public VentaNotificacionDTO(String nombreCliente, String apellidoCliente, long telefonoCliente, float importeActual, Date fecha) {
+    public VentaNotificacionDTO(int id, String nombreCliente, String apellidoCliente, long telefonoCliente, float importeActual, Date fechaReserva) {
         
-        this.nombreCliente = nombreCliente;
-        this.apellidoCliente = apellidoCliente;
+        this.id = id;
+        this.nombreCliente = nombreCliente + apellidoCliente;
         this.telefonoCliente = telefonoCliente;
         this.importeActual = importeActual;
-        this.fecha = fecha;
+        this.fechaReserva = fechaReserva;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getNombreCliente() {
@@ -28,14 +36,6 @@ public class VentaNotificacionDTO {
 
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
-    }
-
-    public String getApellidoCliente() {
-        return apellidoCliente;
-    }
-
-    public void setApellidoCliente(String apellidoCliente) {
-        this.apellidoCliente = apellidoCliente;
     }
 
     public long getTelefonoCliente() {
@@ -54,12 +54,12 @@ public class VentaNotificacionDTO {
         this.importeActual = importeActual;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaReserva() {
+        return fechaReserva;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaReserva(Date fechaReserva) {
+        this.fechaReserva = fechaReserva;
     }
     
 }

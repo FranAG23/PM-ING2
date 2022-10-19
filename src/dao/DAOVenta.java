@@ -9,9 +9,8 @@ import static clasesEntidad.Producto.CategoriaProducto.LENCERIA;
 import static clasesEntidad.Producto.CategoriaProducto.MARROQUINERIA;
 import static clasesEntidad.Producto.CategoriaProducto.PAPELERIA;
 import static clasesEntidad.Producto.CategoriaProducto.VARIOS;
-import clasesEntidad.Reserva;
-import clasesEntidad.Sucursal;
 import clasesEntidad.Venta;
+import dataTransferObject.VentaNotificacionDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -227,12 +226,12 @@ public class DAOVenta implements InterfazDAOVenta {
      return ai;
  }
  
-    public ArrayList<Venta> ObtenerVentasConReserva(){
+    public ArrayList<VentaNotificacionDTO> ObtenerVentasConReserva(){
         
         PreparedStatement pst = null;
         Connection con = null;
         ResultSet rs = null;
-        ArrayList<Venta> resultado = new ArrayList<>();
+        ArrayList<VentaNotificacionDTO> resultado = new ArrayList<>();
         
         try {
             
@@ -248,29 +247,15 @@ public class DAOVenta implements InterfazDAOVenta {
             // Obtener resultados
             while (rs.next()) {
                 
-                Venta v = new Venta();
-                v.setId(rs.getInt("vID"));
-                v.setNombreCliente(rs.getString("vNombreCliente"));
-                v.setApellidoCliente(rs.getString("vApellidoCliente"));
-                v.setEnvioGratis(rs.getBoolean("vEnvioGratis"));
-                v.setImporteTotal(rs.getFloat("vImporteTotal"));
-                if (rs.getString("vMetodoPago").equals("Efectivo")) {   // Efectivo
-                    v.setMetodoPago(Venta.MetodoPago.EFECTIVO);
-                } else {    // MercadoPago
-                    v.setMetodoPago(Venta.MetodoPago.MERCADOPAGO);
-                }
-                if (rs.getInt("sID") == 1) {    // San Luis
-                    v.setSucursal(new Sucursal("San Luis"));
-                } else {    // Neuquén
-                    v.setSucursal(new Sucursal("Neuquén"));
-                }
+                VentaNotificacionDTO v = new VentaNotificacionDTO(
+                    rs.getInt("vID"),
+                    rs.getString("vNombreCliente"),
+                    rs.getString("vApellidoCliente"),
+                    rs.getLong("rTelefonoCliente"),
+                    rs.getFloat("vImporteActual"),
+                    new java.util.Date(rs.getDate("rFecha").getTime())
+                );
                 
-                Reserva r = new Reserva();
-                r.setFecha(new java.util.Date(rs.getDate("rFecha").getTime()));
-                r.setSeña(rs.getFloat("rSeña"));
-                r.setTelefonoCliente(rs.getLong("rTelefonoCliente"));
-                
-                v.setReserva(r);
                 resultado.add(v);
             }
             
