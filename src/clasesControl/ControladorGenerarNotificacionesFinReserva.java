@@ -19,9 +19,10 @@ public class ControladorGenerarNotificacionesFinReserva {
         // Obtener fecha actual
         Date fechaActual = new Date(System.currentTimeMillis());
         
-        // Comprobar si alguna reserva está vencida y generar notificaciones
         for (VentaNotificacionDTO v : ventas) {
-            if (v.getFechaReserva().getTime() + DIAS_LIMITE_RESERVA*MILISEGUNDOS_EN_UN_DIA >= 
+            
+            // Comprobar si alguna reserva se venció
+            if (v.getFechaReserva().getTime() + DIAS_LIMITE_RESERVA*MILISEGUNDOS_EN_UN_DIA < 
                 fechaActual.getTime()) {
                 
                 // Actualizar estado en base de datos (Cancelada) y poner la fecha actual en vFecha
@@ -29,6 +30,15 @@ public class ControladorGenerarNotificacionesFinReserva {
                 
                 // Generar notificación en el panel Main
                 m.generarNotificacionFinReserva(v);
+                
+            } else {
+                
+                // Comprobar si alguna reserva está a menos de un día de vencerse
+                if (v.getFechaReserva().getTime() + (DIAS_LIMITE_RESERVA-1)*MILISEGUNDOS_EN_UN_DIA < 
+                fechaActual.getTime()) {
+                    
+                    m.generarAdvertenciaFinReserva(v);
+                }
             }
         }
     }

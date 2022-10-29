@@ -224,6 +224,12 @@ public class Main extends javax.swing.JFrame {
         
     }
     
+    public void generarAdvertenciaFinReserva(VentaNotificacionDTO v) {
+        
+        // Similar a generarNotificacionFinReserva() pero que advierte que una reserva
+        // está a un día o menos de vencerse
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
