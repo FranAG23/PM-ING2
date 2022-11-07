@@ -9,11 +9,11 @@ public class VentaNotificacionDTO {
     
     private int id;
     private String nombreCliente;
-    private long telefonoCliente;
+    private String telefonoCliente;
     private float importeActual;
     private Date fechaReserva;
 
-    public VentaNotificacionDTO(int id, String nombreCliente, String apellidoCliente, long telefonoCliente, float importeActual, Date fechaReserva) {
+    public VentaNotificacionDTO(int id, String nombreCliente, String apellidoCliente, String telefonoCliente, float importeActual, Date fechaReserva) {
         
         this.id = id;
         this.nombreCliente = nombreCliente + apellidoCliente;
@@ -38,11 +38,11 @@ public class VentaNotificacionDTO {
         this.nombreCliente = nombreCliente;
     }
 
-    public long getTelefonoCliente() {
+    public String getTelefonoCliente() {
         return telefonoCliente;
     }
 
-    public void setTelefonoCliente(long telefonoCliente) {
+    public void setTelefonoCliente(String telefonoCliente) {
         this.telefonoCliente = telefonoCliente;
     }
 

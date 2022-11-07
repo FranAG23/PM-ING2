@@ -7,11 +7,7 @@ import interfaz.raven.component.Header;
 import interfaz.raven.component.Menu;
 import interfaz.raven.event.EventMenuSelected;
 import interfaz.raven.event.EventShowPopupMenu;
-import interfaz.nuestrosFormularios.Form_Home;
-import interfaz.nuestrosFormularios.FormularioAltaProducto;
-import interfaz.nuestrosFormularios.FormularioConsultarVenta;
-import interfaz.nuestrosFormularios.MainForm;
-import interfaz.nuestrosFormularios.panelConScrollAltaVenta;
+import interfaz.nuestrosFormularios.*;
 import interfaz.raven.swing.MenuItem;
 import interfaz.raven.swing.PopupMenu;
 import interfaz.raven.swing.icon.GoogleMaterialDesignIcons;
@@ -22,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -60,11 +57,14 @@ public class Main extends javax.swing.JFrame {
         
         initComponents();
         init();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         // Comprobar si hay reservas vencidas, generar notificaciones
         new ControladorGenerarNotificacionesFinReserva(this);
     }
 
+    
+    
     // Función que inicializa componentes creadas por Raven. 
     private void init() throws SQLException, SQLException {
         
@@ -77,7 +77,7 @@ public class Main extends javax.swing.JFrame {
         // Agregamos el evento menuSelected al objeto menú. Este a su vez 
         // se lo pasa a los objetos MenuItem para que puedan llamarlo cuando 
         // el usuario clickea un menú o submenú. 
-        menu.addEvent(new EventMenuSelected() {
+        menu.addEvent(new EventMenuSelected(){
             @Override    
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
@@ -105,7 +105,7 @@ public class Main extends javax.swing.JFrame {
                     case 2:
                         switch(subMenuIndex){
                             case 0:
-                                main.showForm(new panelConScrollAltaVenta());
+                                main.showForm(new FormularioAltaVentaConScroll());
                                 break;
                             case 1:
                                 main.showForm(new FormularioConsultarVenta()); 

@@ -58,7 +58,7 @@
 	CREATE TABLE Reserva
 	(
 		vID					SERIAL		NOT NULL	PRIMARY KEY,
-		rTelefonoCliente	BIGINT 		NOT NULL,
+		rTelefonoCliente	 VARCHAR(15) 		NOT NULL,
 		rSeña				REAL		NOT NULL,
 		rFecha				DATE		NOT NULL,
 		

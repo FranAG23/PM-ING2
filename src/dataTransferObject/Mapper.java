@@ -19,7 +19,7 @@ public class Mapper {
             v.getApellidoCliente(),
             v.getReserva().getTelefonoCliente(),
             v.getImporteActual(),
-            v.getReserva().getFecha()
+            v.getReserva().getFechaRegistro()
         );
     }
     

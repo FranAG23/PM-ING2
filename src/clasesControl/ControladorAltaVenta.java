@@ -4,12 +4,14 @@ package clasesControl;
 import clasesEntidad.Disponibilidad;
 import clasesEntidad.ItemVenta;
 import clasesEntidad.Producto;
+import clasesEntidad.Reserva;
 import clasesEntidad.Sucursal;
 import clasesEntidad.Venta;
-import interfaz.nuestrosFormularios.FormularioAltaVenta;
 import dao.DAODisponibilidad;
 import dao.DAOProducto;
+import dao.DAOReserva;
 import dao.DAOVenta;
+import interfaz.nuestrosFormularios.FormularioAltaVenta;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,6 +28,7 @@ public class ControladorAltaVenta {
     DAOVenta daoVenta;
     DAOProducto daoProducto;
     DAODisponibilidad daoDisp; 
+    DAOReserva daoReserva; 
     
     public ControladorAltaVenta(FormularioAltaVenta formulario){
         this.formulario = formulario; 
@@ -35,42 +38,43 @@ public class ControladorAltaVenta {
         daoVenta = new DAOVenta();
         daoProducto = new DAOProducto();
         daoDisp = new DAODisponibilidad();
+        daoReserva = new DAOReserva(); 
     }
     
     public void usuarioBuscaProducto(String nombreBuscado, int idSucursal, String ubicacionSucursal){
-        
         Disponibilidad dispProd = new Disponibilidad();
         
-        // Esconder mensajes de error antiguo. 
-        formulario.esconderCartelesDeError();
+        // Escondemos mensajes de error antiguos. 
+        formulario.escondaTodosLosCartelesDeError();
         
         // Si el nombre es vacío o tiene una longitud mayor a 30, 
         if(nombreBuscado.isEmpty() || nombreBuscado.length() > 30){
-            // mostrar mensaje de error por pantalla. 
-            formulario.mostrarErrorBuscadorNombre();
+            // mostramos mensaje de error por pantalla. 
+            formulario.muestreErrorNombreProducto();
         }        
         else
         {   
-            // Si todo está bien, decirle a daoProducto que me obtenga los productos y sus disponibilidades
-            // en la sucursal donde trabaja el usuario.
-            productosBuscados = daoProducto.obtenerProductosConDisponibilidad(nombreBuscado, idSucursal);
+            // Si todo está bien, le decimos a daoProducto que obtenga los productos y 
+            // sus disponibilidades en la sucursal donde trabaja el usuario.
+            productosBuscados = daoProducto.obtengaProductosConDisponibilidad(nombreBuscado, new Sucursal(1, "San Luis"));
             
-            // Si no obtuve ningun producto, 
+            // Si no obtuvimos ningun producto, 
             if(productosBuscados.isEmpty()){
-                // entonces mostrar un cartel de advertencia. 
-                formulario.advertirNoHayResultados();
+                // entonces mostramos un cartel de advertencia.
+                formulario.adviertaNoHayResultados();
+                // También limpiamos la tabla de resultados anterior.
+                formulario.limpieTablaDeProductos();
             }
             else
-            {
-                
-                // Si obtuve los resultados que quería, escondemos la búsqueda antigua y mostramos 
+            { 
+                // Si obtuvimos los resultados que queríamos, escondemos la búsqueda antigua y mostramos 
                 // los nuevos productos y disponibilidades obtenidos.
-                formulario.limpiarTablaDeProductos();
+                formulario.limpieTablaDeProductos();
                 for(Producto prod: productosBuscados){
-                    // Obtener disponibilidad del producto:
+                    // Obtenemos disponibilidad del producto:
                     dispProd = prod.getDisponibilidades().get(0);
-                    // Agregar una nueva fila a la tabla de productos con los datos obtenidos:
-                    formulario.agregarProductoATabla(prod.getNombre(), prod.getCategoria().toString(), 
+                    // Agregamos una nueva fila a la tabla de productos con los datos obtenidos:
+                    formulario.agregueProductoATabla(prod.getNombre(), prod.getCategoria().toString(), 
                             prod.getDescripcion(), dispProd.getStockActual(), dispProd.getPrecioVenta());
                 }
             }
@@ -78,9 +82,6 @@ public class ControladorAltaVenta {
     }
     
     public void usuarioQuiereAgregarItem(int filaSeleccionada, int cantidad){
-        // Esconder mensajes de error antiguos:
-        formulario.esconderCartelesDeError();
-        
         Producto prod; 
         Disponibilidad disp; 
         ItemVenta item = new ItemVenta(); 
@@ -88,46 +89,45 @@ public class ControladorAltaVenta {
         boolean repetido = false; 
         int stockActual = 0; 
         float importeProducto = 0;
+
+        // Escondemos mensajes de error antiguos:
+        formulario.escondaTodosLosCartelesDeError();
+      
         // Si el usuario ingresó un numero negativo,
         if(cantidad <= 0)
         { 
-            // entonces enviar mensaje de error.
-            formulario.advertirCantidadNoPositiva();
+            // entonces enviamos mensaje de error.
+            formulario.muestreErrorFormatoCantidad();
         }
         else
         {
-            // Obtener producto seleccionado por el usuario. 
+            // Obtenemos producto seleccionado por el usuario. 
             prod = new Producto(productosBuscados.get(filaSeleccionada));
-            // Obtener disponibilidad de ese producto. 
+            // Obtenemos disponibilidad de ese producto. 
             disp = new Disponibilidad(prod.getDisponibilidades().get(0)); 
             // Obtenemos el stock actual del producto.
             stockActual = disp.getStockActual();
             // Si la cantidad a comprar es mayor a la disponibilidad actual,
             if(stockActual < cantidad)
             {
-              // entonces enviar mensaje de error por pantalla.
-              formulario.indicarQueCantidadSuperaStock();
+              // entonces enviamos un mensaje de error por pantalla.
+              formulario.muestreErrorCantidadSuperaStock();
             }
             else
             {
-                // Si todo salió bien, verificar que no haya cargado un item de 
-                // venta con el mismo producto.
+                // Si todo salió bien, verificamos que el usuario 
+                // no haya cargado un item de venta con el mismo producto.
                 for(ItemVenta it: itemsCargados){
-                    //Si el nombre del producto de it es igual al nombre del producto que quiero agregar,
-                    /*
-                    if(it.getProducto().getNombre().equals(prod.getNombre())){
-                        // marcar que el item está repetido.
-                        repetido = true; 
-                    }*/
+                    //Si el id del producto de it es igual al id del producto que quiero agregar,
                      if(it.getProducto().getId() == prod.getId()){
-                        // marcar que el item está repetido.
+                        // marcamos que el item está repetido.
                         repetido = true; 
                     }
                 }
                 // Si se encontró un item repetido,
                 if(repetido){
-                    // entonces indicar un error por pantalla.
-                    formulario.advertirItemRepetido();
+                    // entonces indicamos un error por pantalla.
+                    formulario.muestreErrorItemRepetido();
                 }
                 else
                 {
@@ -137,133 +137,171 @@ public class ControladorAltaVenta {
                     // Modificamos disponibilidades.
                     disponibilidades.add(disp); 
                     
-                    // Se lo damos al nuevo producto.
+                    // Cargamos disponibilidades al nuevo producto.
                     prod.setDisponibilidades(disponibilidades);
-                    //System.out.println("Disponibilidad prod: " +  prod.getDisponibilidades().get(0).getStockActual());
+                    
                     // Construimos el item de venta:
                     item.setCantidad(cantidad);
                     item.setPrecioUnidad(disp.getPrecioVenta());
                     item.setProducto(prod);
-                    //System.out.println("Disponibilidad prod: " +  item.getProducto().getDisponibilidades().get(0).getStockActual());
-                    // Agregarlo a nuestro arreglo. 
+                    
+                    // Agregamos el item de venta a nuestro arreglo. 
                     itemsCargados.add(item); 
-                    // Finalmente, mostrar el item de venta por pantalla,
+                   
+                    // Finalmente, mostramos el item de venta por pantalla,
                     importeProducto = cantidad * item.getPrecioUnidad();
                     importeTotal += importeProducto; 
-                    formulario.agregarItemVenta(prod.getNombre(), cantidad, item.getPrecioUnidad(), importeProducto);
-                    // y actualizar el monto total:
-                    formulario.establecerMontoTotal(importeTotal);
+                    formulario.agregueItemVenta(prod.getNombre(), cantidad, item.getPrecioUnidad(), importeProducto);
+                   
+                    // y actualizamos el monto total:
+                    formulario.establezcaMontoTotal(importeTotal);
                 } 
             }
         }    
     }
     
-    public void usuarioQuiereEliminarItem(int filaSeleccionada, String nombreProducto){
-       // Esconder mensajes de error antiguos. 
-        formulario.esconderCartelesDeError();
-       // Buscar item de venta que quiere eliminar el usuario:
-       for(int i = 0; i < itemsCargados.size(); i++){
-            // Si coinciden los nombres,
-           if(itemsCargados.get(i).getProducto().getNombre().equals(nombreProducto)){
-               // entonces lo eliminamos de nuestra lista.
-               importeTotal -= itemsCargados.get(i).getPrecioUnidad() * itemsCargados.get(i).getCantidad(); 
-               itemsCargados.remove(i);
-           }    
+    public void usuarioQuiereEliminarItem(int filaSeleccionada){
+       // Escondemos mensajes de error antiguos. 
+       formulario.escondaTodosLosCartelesDeError();
+       
+       // Actualizmos el importe total.
+       importeTotal -= itemsCargados.get(filaSeleccionada).getPrecioUnidad() 
+               * itemsCargados.get(filaSeleccionada).getCantidad();
+       
+       // Eliminamos el item de nuestro arreglo. 
+       itemsCargados.remove(filaSeleccionada); 
+       
+       // Eliminamos el item de la tabla que ve el usuario,
+       formulario.elimineItemVenta(filaSeleccionada);
+       
+       // y mostramos el monto total actualizado:
+       formulario.establezcaMontoTotal(importeTotal);
+    }
+    
+    private boolean valideDatosParaCompletarVenta(String nomCliente, String apeCliente, boolean envioGratis, 
+            boolean ventaConReserva, String codArea, String numeroTelefono, float seña){
+       
+        boolean datosValidos = true; 
+       
+       if(nomCliente.isEmpty() || nomCliente.length() > 30){
+           formulario.muestreErrorNombreCliente();
+           datosValidos = false; 
+       }
+  
+       if(apeCliente.isEmpty() || apeCliente.length() > 30){
+           formulario.muestreErrorApellidoCliente();
+           datosValidos = false;
+       }
+
+       if(itemsCargados.isEmpty()){ 
+           formulario.muestreErrorPorTablaVacia();
+           datosValidos = false; 
        }
        
-       // Eliminar item de la tabla que ve el usuario,
-       formulario.eliminarFilaItemVenta(filaSeleccionada);
-       // y mostrar monto total actualizado:
-       formulario.establecerMontoTotal(importeTotal);
+       if(ventaConReserva){
+           if(codArea.length() < 2 || codArea.length() > 4){
+               formulario.muestreErrorTamañoCodArea(); 
+               datosValidos = false; 
+           }
+           else if(!codArea.chars().allMatch( Character::isDigit )){
+                formulario.muestreErrorFormatoCodArea();
+                datosValidos = false;
+           }
+           
+           if(numeroTelefono.length() < 6 || numeroTelefono.length() > 8){
+               formulario.muestreErrorTamañoNumeroTelefono(); 
+               datosValidos = false; 
+           }
+           else if(!numeroTelefono.chars().allMatch( Character::isDigit ))
+            {
+                formulario.muestreErrorFormatoNumeroTelefono();
+                datosValidos = false;
+            }
+           
+           if(seña <= 0){
+               formulario.muestreErrorSeñaNoPositiva(); 
+               datosValidos = false;
+           }
+           else if (seña >= importeTotal){
+               formulario.muestreErrorSeñaSuperaTotal();
+               datosValidos = false; 
+           }
+       }
+       
+       return datosValidos; 
     }
     
     public void usuarioQuiereCompletarVenta(String nomCliente, String apeCliente, boolean envioGratis, 
-            String strMetodoPago, int idsucursal, String ubiSucursal){
+            String strMetodoPago, int idsucursal, String ubiSucursal, boolean ventaConReserva, 
+            String codArea, String numeroTelefono, float seña){
        Sucursal sucursal; 
        Disponibilidad disp; 
+       ArrayList<Disponibilidad> disponibilidades = new ArrayList();
+       Reserva reserva = null; 
+       float importeActual = -1; 
        Venta venta; 
        Venta.MetodoPago metodoPago; 
        Venta.EstadoVenta estadoVenta;
        boolean datosValidos = true;
        boolean exitoInsercionBD = true; 
-      
-       // Esconder mensajes de error antiguos:
-       formulario.esconderCartelesDeError();
        
-       // Si nombre tiene 0 caracteres o más de 30 caracteres,
-       if(nomCliente.isEmpty() || nomCliente.length() > 30){
-           // entonces enviar mensaje de error.
-           formulario.mostrarErrorNombre();
-           datosValidos = false; 
-       }
-       // Si apellido tiene 0 caracteres o más de 30 caracteres,
-       if(apeCliente.isEmpty() || apeCliente.length() > 30){
-           // entonces enviar mensaje de error
-           formulario.mostrarErrorApellido();
-           datosValidos = false;
-       }
-       // Si la lista de items está vacía,
-       if(itemsCargados.isEmpty()){
-           // entonces enviar mensaje de error. 
-           formulario.mostrarErrorTablaVacia();
-           datosValidos = false; 
-       }
-       
+       // Primero validamos los datos. 
+       datosValidos = this.valideDatosParaCompletarVenta(nomCliente, apeCliente, envioGratis, 
+               ventaConReserva, codArea, numeroTelefono, seña); 
+               
        // Si todos los datos son correctos,
        if(datosValidos)
        {
-            // entonces construimos los objetos a dar de alta.
-           //  Primero construimos la sucursal.
+            // entonces construimos la venta a dar de alta. 
             sucursal = new Sucursal(idsucursal, ubiSucursal);
-
-            // Ahora construimos el objeto venta.
-            // Convertimos de string a enumerado. 
             metodoPago = Venta.stringAMetodoPago(strMetodoPago);
-            // Hasta que no agreguemos el CU "Alta Reserva", nuestras ventas estarán siempre completas:
-            estadoVenta = Venta.EstadoVenta.COMPLETADA;
-            // Finalmente el objeto venta es el siguiente. 
-            venta = new Venta(-1, nomCliente, apeCliente, envioGratis, importeTotal, importeTotal,  
-                    new Date(), metodoPago, estadoVenta, null, itemsCargados, sucursal);
+            
+            if(ventaConReserva){
+                reserva = new Reserva(codArea + numeroTelefono, seña, new Date());
+                estadoVenta = Venta.EstadoVenta.EN_RESERVA;
+                importeActual = seña; 
+            }
+            else{
+                estadoVenta = Venta.EstadoVenta.COMPLETADA;
+                importeActual = importeTotal; 
+            }
+             
+            venta = new Venta(-1, nomCliente, apeCliente, envioGratis, importeTotal, importeActual,  
+                    new Date(), metodoPago, estadoVenta, reserva, itemsCargados, sucursal);
 
-            // Dar de alta venta en Base de datos:
+            // Damos de alta la venta en la base de datos:
             exitoInsercionBD = daoVenta.registrar(venta);
 
-            // Si la insercion en la BD fue exitosa,
             if(exitoInsercionBD){
+                
                 // entonces modificar stock de los productos.
-                // Por el momento esta operación es costosa porque abrimos y cerramos la conexión bajo demanda.
-                // Luego abriremos y cerraremos la la conexión una sola vez. 
                 for(ItemVenta item: venta.getItems()){
                     disp = item.getProducto().getDisponibilidades().get(0);
-                    daoDisp.modificar(disp);
+                    disponibilidades.add(disp);
+                  
+                }
+                 daoDisp.modificaDisponibilidades(disponibilidades);
+                // y damos de alta la reserva. 
+                if(ventaConReserva){
+                    daoReserva.registrar(reserva, venta.getId()); 
                 }
                 
-                // reiniciar campos de la GUI. 
-                formulario.reiniciarCampos();
-                // entonces mostrar un cartel de éxito,
-                formulario.mostrarCartelExito();
-                // y prepararse para una nueva venta. 
+                // reiniciamos campos de la GUI, mostramos un cartel de éxito y
+                // nos preparamos para la próxima venta:
+                formulario.reinicieTodosLosCampos();
+                formulario.muestreCartelDeExito();
                 this.prepararseParaNuevaVenta();
             }
             else{
-                // Si no, mostrar cartel de fracaso.
-                formulario.mostrarCartelFracaso();
+                // Si la inserción no fue exitosa, mostramos cartel de fracaso.
+                formulario.muestreCartelDeFracaso();
             }
        }
-    }
-    
+    }   
+ 
     private void prepararseParaNuevaVenta(){
-        // Eliminar todos los items cargados.
-        for(int i = 0; i < itemsCargados.size(); i++){
-               itemsCargados.remove(i);
-        }    
-        
-        // Eliminar todos los productos buscados.
-        for(int i = 0; i < productosBuscados.size(); i++){
-               productosBuscados.remove(i);
-        }  
-        
-        // Reiniciar el importe a 0.
+        itemsCargados = new ArrayList();
+        productosBuscados = new ArrayList();
         importeTotal = 0; 
     }
 }

@@ -7,38 +7,39 @@ public class Reserva {
     
     // Atributos
     
-    private long telefonoCliente;
+    private String telefonoCliente;
     private float seña;
-    private Date fecha;
+    private Date fechaRegistro;
     
     // Constructor
 
-    public Reserva(long telefonoCliente, float seña, Date fecha) {
-       
+    public Reserva(String telefonoCliente, float seña, Date fecha) {    
         this.telefonoCliente = telefonoCliente;
         this.seña = seña;
-        this.fecha = fecha;
+        this.fechaRegistro = fecha;
     }
 
     public Reserva() {
-        
+        telefonoCliente = "INVALIDO";
+        seña = -1;
+        fechaRegistro = new Date(); 
     }
 
     public Reserva(Reserva reserva){
         this.telefonoCliente = reserva.getTelefonoCliente();
         this.seña = reserva.getSeña();
-        this.fecha = reserva.getFecha(); 
+        this.fechaRegistro = reserva.getFechaRegistro(); 
     }
     
     // Getters y Setters
 
-    public long getTelefonoCliente() {return telefonoCliente;}
-    public void setTelefonoCliente(long telefonoCliente) {this.telefonoCliente = telefonoCliente;}
+    public String getTelefonoCliente() {return telefonoCliente;}
+    public void setTelefonoCliente(String telefonoCliente) {this.telefonoCliente = telefonoCliente;}
 
     public float getSeña() {return seña;}
     public void setSeña(float seña) {this.seña = seña;}
 
-    public Date getFecha() {return fecha;}
-    public void setFecha(Date fecha) {this.fecha = fecha;}
+    public Date getFechaRegistro() {return fechaRegistro;}
+    public void setFechaRegistro(Date fecha) {this.fechaRegistro = fecha;}
     
 }

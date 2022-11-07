@@ -51,35 +51,60 @@ public class DAODisponibilidad implements InterfazDAODisponibilidad{
     }
 
     @Override
-    public boolean modificar(Disponibilidad disp) {
+    public boolean modificaDisponibilidades(ArrayList<Disponibilidad> disponibilidades){
         boolean exito = false;
         PreparedStatement pst = null;
         Connection con = null;
-        BaseDatos instancia = BaseDatos.getInstance(); 
+        BaseDatos conexionBD = BaseDatos.getInstance(); 
+        
         try {    
-            con = instancia.establecerConexion();
-            pst = con.prepareStatement("UPDATE Disponibilidad "
-                    + "SET dPrecioVenta = ?, dstockActual = ?, dStockMinimo =  ?, dTieneStockMinimo = ?"
-                    + "WHERE dId = ?");
-            pst.setFloat(1, disp.getPrecioVenta());
-            System.out.println("Actualizacion en BD: " +  disp.getStockActual());
-            pst.setInt(2, disp.getStockActual()); 
-            pst.setInt(3, disp.getStockMinimo());
-            pst.setBoolean(4, disp.getTieneStockMinimo());
-            pst.setInt(5, disp.getID());
-            pst.executeUpdate(); 
+            con = conexionBD.establecerConexion();
             
-        } catch (SQLException e){
-            System.out.println("Error en public boolean modificar(Disponibilidad disp) de clase DAODisponibilidad");
+            for(Disponibilidad disp: disponibilidades){
+                pst = con.prepareStatement("UPDATE Disponibilidad " 
+                                         + "SET dPrecioVenta = ?, dstockActual = ?, dStockMinimo =  ?, dTieneStockMinimo = ?"
+                                         + "WHERE dId = ?");
+
+                pst.setFloat(1, disp.getPrecioVenta());
+                pst.setInt(2, disp.getStockActual()); 
+                pst.setInt(3, disp.getStockMinimo());
+                pst.setBoolean(4, disp.getTieneStockMinimo());
+                pst.setInt(5, disp.getID());
+
+                pst.executeUpdate(); 
+            }
+            exito = true; 
+        } 
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
             e.printStackTrace();
-        } finally {
-            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        } 
+        finally 
+        {
+            conexionBD.cerrarConexion();
+            try 
+            { 
+                if (pst != null) 
+                    pst.close();
+            } 
+            catch (SQLException e) 
+            {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
+        
         return exito;         
     }
 
     @Override
     public boolean eliminar(int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public boolean modificar(Disponibilidad disp) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

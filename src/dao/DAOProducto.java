@@ -77,71 +77,76 @@ public class DAOProducto implements InterfazDAOProducto {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     
-    public ArrayList<Producto> obtenerProductosConDisponibilidad(String nombreProducto, int idSucursal) {
+    public ArrayList<Producto> obtengaProductosConDisponibilidad(String nombreProducto, Sucursal sucursal) {
+        Producto prod; 
+        Disponibilidad disp;
+        ArrayList<Disponibilidad> arrDisp; 
+        ArrayList<Producto> listaProductos = new ArrayList<>();
         
         PreparedStatement pst = null;
         Connection con = null;
         ResultSet rs = null;
         BaseDatos instanciaBD = BaseDatos.getInstance();
-        Producto prodTemp; 
-        Disponibilidad dispTemp;
-        ArrayList<Disponibilidad> arrDisp; 
-        ArrayList<Producto> listaProductos = new ArrayList<>();
-
         try {
-            // Establecer conexión con la base de datos. 
             con = instanciaBD.establecerConexion();
             
-            // Obtener productos con nombre similar a buscado, y tambien sus disponibilidades
-            // en sucursal. 
             pst = con.prepareStatement("SELECT * "
                                      + "FROM Producto, Disponibilidad "
                                      + "WHERE Producto.pNombre LIKE ? AND Disponibilidad.sID = ? AND Producto.pid = Disponibilidad.pid "
                                      + "ORDER BY Producto.pID");
-            pst.setString(1, nombreProducto + "%");
-            pst.setInt(2, idSucursal);
+            
+            pst.setString(1, "%" + nombreProducto + "%");
+            pst.setInt(2, sucursal.getID());
+            
             rs = pst.executeQuery();
             
-            // Si se obtuve un resultado, entonces construir objetos productos:
             while (rs.next()) {
-                prodTemp = new Producto();
-                dispTemp = new Disponibilidad();
+                disp = new Disponibilidad();
                 arrDisp = new ArrayList<>();
-                
-                // Construir objeto disponibilidad:
-                dispTemp.setID(rs.getInt(5));
-                dispTemp.setProducto(prodTemp);
-                if (idSucursal==1) {
-                    dispTemp.setSucursal(new Sucursal("San Luis")); 
-                } else {
-                    dispTemp.setSucursal(new Sucursal("Neuquén")); 
-                }
-                dispTemp.setPrecioVenta(rs.getFloat(8));
-                dispTemp.setStockActual(rs.getInt(9));
-                dispTemp.setStockMinimo(rs.getInt(10));
-                dispTemp.setTieneStockMinimo(rs.getBoolean(11));
-                
-                // Construir arreglo de disponibilidades:
-                arrDisp.add(dispTemp);
+                prod = new Producto();
                         
-                // Construir objeto produto:
-                prodTemp.setId(rs.getInt(1));
-                prodTemp.setNombre(rs.getString(2));
-                prodTemp.setCategoria(Producto.strAEnumCategoria(rs.getString(3)));
-                prodTemp.setDescripcion(rs.getString(4));
-                prodTemp.setDisponibilidades(arrDisp);
+                disp.setID(rs.getInt(5));
+                disp.setProducto(prod);
+                disp.setSucursal(sucursal);  
+                disp.setPrecioVenta(rs.getFloat(8));
+                disp.setStockActual(rs.getInt(9));
+                disp.setStockMinimo(rs.getInt(10));
+                disp.setTieneStockMinimo(rs.getBoolean(11));
                 
-                // Agregar producto a resultado:
-                listaProductos.add(prodTemp);
+                arrDisp.add(disp);
+                        
+                prod.setId(rs.getInt(1));
+                prod.setNombre(rs.getString(2));
+                prod.setCategoria(Producto.strAEnumCategoria(rs.getString(3)));
+                prod.setDescripcion(rs.getString(4));
+                prod.setDisponibilidades(arrDisp);
+                
+                listaProductos.add(prod);
             }
-        } catch (SQLException e){
-            System.out.println("Error en public public void obtenerProductosConDisponibilidad(Producto buscado, "
-                    + " Sucursal sucursal, ArrayList<Producto> listaProductos) de clase DAOProducto");
-            
+        } 
+        catch (SQLException e){
+            System.out.println(e.getMessage());
             e.printStackTrace();
-        } finally {
-            try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
-            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        } 
+        finally 
+        {
+            try { 
+                if (rs != null) 
+                    rs.close();
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+            try 
+            { 
+                if (pst != null) 
+                    pst.close();
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
         }
         return listaProductos;
     }

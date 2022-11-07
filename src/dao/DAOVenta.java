@@ -18,8 +18,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DAOVenta implements InterfazDAOVenta {
-    
+public class DAOVenta implements InterfazDAOVenta 
+{    
     private final String nombreTablaVentas = "Venta"; 
     private final String nombreTablaItemsVenta = "ItemVenta"; 
     private final int colIDVentaEnVentas = 0;
@@ -38,66 +38,88 @@ public class DAOVenta implements InterfazDAOVenta {
     private final int colCantidad = 2;
     private final int colPrecioUnidad = 3;
     private final int colIDVentaEnItemsVenta = 4;
-    
-    private final String queryParaInsertarEnTablaVentas = "INSERT INTO " + nombreTablaVentas + " VALUES (DEFAULT,?,?,?,?,?,?,?,?,?)"; 
-    private final String queryParaGenerarIDVenta = "SELECT CURRVAL('Venta_vID_seq')"; 
-    private final String queryParaInsertarEnTablaItemsVenta = "INSERT INTO " + nombreTablaItemsVenta + " VALUES (DEFAULT,?,?,?,?)";
-    private final String queryParaGenerarIDItemVenta = "SELECT CURRVAL('itemventa_ivid_seq')"; 
+     
     private final String queryParaObtenerVentaxFecha = "SELECT * FROM venta WHERE (vfechaUltimoPago = ?)";
     private final String queryParaObtenerItemsVenta = "SELECT * FROM itemventa WHERE (vid = ?)";
     private final String queryParaObtenerProductosItemVenta = "SELECT producto.pid, pnombre, pcategoria, pdescripcion FROM itemventa, producto WHERE(ivid = ?) AND (itemventa.pid = producto.pid)";
     
     @Override
-    public boolean registrar(Venta venta) {        
+    public boolean registrar(Venta venta){      
         boolean exito = false;
+        int IDVenta;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        BaseDatos conexionBD = BaseDatos.getInstance(); 
-        int IDVenta;
-        try {       
-            Connection con = BaseDatos.getInstance().establecerConexion();
+        BaseDatos conexionBD = BaseDatos.getInstance();
+        
+        try{       
+            Connection con = conexionBD.establecerConexion();
             
-            // En este bloque de código inserto los atributos de venta en la tabla de ventas:
-            pst = con.prepareStatement(queryParaInsertarEnTablaVentas);
-            if (venta.getSucursal().getUbicacion().equals("San Luis")) {
-                pst.setInt(colIDSucursal, 1);
-            } else { //Neuquén
-                pst.setInt(colIDSucursal, 2);
-            }
-            pst.setString(colNomCliente, venta.getNombreCliente());
-            pst.setString(colApeCliente, venta.getApellidoCliente());
-            pst.setBoolean(colEnvioGratis, venta.getEnvioGratis());
-            pst.setFloat(colImporteTotal, venta.getImporteTotal());
-            pst.setFloat(colImporteActual, venta.getImporteActual()); 
-            pst.setDate(colFechaUltimoPago, new java.sql.Date(venta.getFechaUltimoPago().getTime()));
-            pst.setString(colMetodoPago, venta.getMetodoPago().toString());
-            pst.setString(colEstadoVenta, venta.getEstado().toString());
+            pst = con.prepareStatement("INSERT INTO Venta VALUES (DEFAULT,?,?,?,?,?,?,?,?,?)");
+           
+            pst.setInt(1, venta.getSucursal().getID());
+            pst.setString(2, venta.getNombreCliente());
+            pst.setString(3, venta.getApellidoCliente());
+            pst.setBoolean(4, venta.getEnvioGratis());
+            pst.setFloat(5, venta.getImporteTotal());
+            pst.setFloat(6, venta.getImporteActual()); 
+            pst.setDate(7, new java.sql.Date(venta.getFechaUltimoPago().getTime()));
+            pst.setString(8, venta.getMetodoPago().toString());
+            pst.setString(9, venta.getEstado().toString());
+           
             pst.executeUpdate();
-            
-            
-            // Aquí recupero el ID de venta generado anteriormente para luego insertarlo en la tabla de items de venta.            
-            pst = con.prepareStatement(queryParaGenerarIDVenta);
+                       
+            // En este bloque de código recuperamos el ID generado para la venta 
+            // que se acaba de dar de alta. Necesitamos este ID para dar de alta
+            // cada uno de los items de venta dentro de la tabla ItemVenta. 
+            pst = con.prepareStatement("SELECT CURRVAL('Venta_vID_seq')");
             rs = pst.executeQuery();
             rs.next();
             IDVenta = rs.getInt(1);
             
-            // En este bloque de código inserto cada uno de los items de venta en la tabla de items de venta. 
-            for (ItemVenta itemVenta : venta.getItems()) {
-                pst = con.prepareStatement(queryParaInsertarEnTablaItemsVenta);
-                pst.setInt(colIDProducto, itemVenta.getProducto().getId());
-                pst.setInt(colIDVentaEnItemsVenta, IDVenta);
-                pst.setInt(colCantidad, itemVenta.getCantidad());
-                pst.setFloat(colPrecioUnidad, itemVenta.getPrecioUnidad());
+            for (ItemVenta itemVenta : venta.getItems()){
+                pst = con.prepareStatement("INSERT INTO ItemVenta VALUES (DEFAULT,?,?,?,?)");
+              
+                pst.setInt(1, itemVenta.getProducto().getId());
+                pst.setInt(2, itemVenta.getCantidad());
+                pst.setFloat(3, itemVenta.getPrecioUnidad());
+                pst.setInt(4, IDVenta);
+               
                 pst.executeUpdate();
             }
+            
+            // Actualizamos el objeto venta con el nuevo ID generado por 
+            // la base de datos. 
+            venta.setId(IDVenta);  
+            
             exito = true;
-        } catch (SQLException e){
+        } 
+        catch (SQLException e){
+            System.out.println(e.getMessage()); 
             e.printStackTrace();
-        } finally {
-            try { if (rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
-            try { if (pst != null) pst.close();} catch (Exception e) {e.printStackTrace();}
+        } 
+        finally
+        {
+            conexionBD.cerrarConexion();
+            try
+            {
+                if (rs != null) 
+                    rs.close();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage()); 
+                e.printStackTrace();
+            }
+            try 
+            { 
+                if (pst != null) 
+                    pst.close();
+            } 
+            catch (SQLException e) 
+            {
+                System.out.println(e.getMessage()); 
+                e.printStackTrace();
+            }
         }
-        conexionBD.cerrarConexion();
         return exito;
     }
 
@@ -251,7 +273,7 @@ public class DAOVenta implements InterfazDAOVenta {
                     rs.getInt("vID"),
                     rs.getString("vNombreCliente"),
                     rs.getString("vApellidoCliente"),
-                    rs.getLong("rTelefonoCliente"),
+                    rs.getString("rTelefonoCliente"),
                     rs.getFloat("vImporteActual"),
                     new java.util.Date(rs.getDate("rFecha").getTime())
                 );

@@ -66,6 +66,10 @@ public class Disponibilidad {
     public void setProducto(Producto producto){
         this.producto = new Producto(producto);
     }
+    
+    public void setHandlerProducto(Producto producto){
+        this.producto = producto; 
+    }
 
     public void setID(int id) {
        this.id = id;
