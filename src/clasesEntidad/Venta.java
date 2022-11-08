@@ -83,8 +83,8 @@ public class Venta {
         this.nombreCliente = "Indefinido";
         this.apellidoCliente = "Indefinido";
         this.envioGratis = false; 
-        this.importeTotal = -1;
-        this.importeActual = -1;
+        this.importeTotal = 0;
+        this.importeActual = 0;
         this.fechaUltimoPago = new Date();
         this.metodoPago = MetodoPago.EFECTIVO; 
         this.estado = EstadoVenta.CANCELADA; 
@@ -144,6 +144,51 @@ public class Venta {
     public void setSucursal(Sucursal sucursal) {this.sucursal = new Sucursal(sucursal);}
     
     // Otros métodos
+    
+    public boolean tieneProducto(Producto prod){
+        boolean encontrado = false;
+        for(ItemVenta item: items){
+            if(item.getHandlerProducto().getId() == prod.getId()){
+                encontrado = true; 
+                break;
+            }        
+        }
+        return encontrado; 
+    }
+    
+    public ItemVenta agregueItem(int unidades, float precioVenta, Producto producto){
+        ItemVenta itemAgregado = new ItemVenta();
+        itemAgregado.setCantidad(unidades);
+        itemAgregado.setPrecioUnidad(precioVenta);
+        itemAgregado.setPrecioProducto( precioVenta * unidades);
+        itemAgregado.setHandlerProducto(producto); 
+        importeTotal += precioVenta * unidades; 
+        items.add(itemAgregado);
+        return itemAgregado; 
+    }
+    
+    public void elimineItem(int posicion){
+        ItemVenta item = items.get(posicion);
+        importeTotal -= item.getPrecioProducto(); 
+        items.remove(posicion);
+    }
+    
+    public boolean noTieneItems(){
+        return items.isEmpty(); 
+    }
+    
+    public void setHandlerReserva(Reserva reserva){
+        this.reserva = reserva; 
+    }
+    
+    public ArrayList<ItemVenta> getHandlerItems(){
+        ArrayList<ItemVenta> retorno = new ArrayList();
+        for(ItemVenta item: items){
+            retorno.add(item);
+        }
+        return retorno; 
+    }
+    
     public static MetodoPago stringAMetodoPago(String str){
         MetodoPago retorno = null; 
         if("Efectivo".equals(str)){

@@ -31,6 +31,13 @@ public class Disponibilidad {
     }
 
     public Disponibilidad(){
+        /*
+        id = -1;
+        precioVenta = 0;
+        stockActual = 0; 
+        tieneStockMinimo = false;
+        sucursal = new Sucursal();
+        producto = new Producto(); */
     }
     
      public Disponibilidad(Disponibilidad disp){
@@ -70,6 +77,10 @@ public class Disponibilidad {
     public void setHandlerProducto(Producto producto){
         this.producto = producto; 
     }
+    
+    public void setHandlerSucursal(Sucursal sucursal){
+        this.sucursal = sucursal; 
+    }
 
     public void setID(int id) {
        this.id = id;
@@ -77,6 +88,10 @@ public class Disponibilidad {
     
     public int getID(){
         return id;
+    }
+    
+    public void disminuyaStock(int cant){
+        stockActual -= cant; 
     }
 
 }

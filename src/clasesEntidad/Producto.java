@@ -2,6 +2,7 @@
 package clasesEntidad;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Producto {
     
@@ -92,9 +93,30 @@ public class Producto {
             this.disponibilidades.add(new Disponibilidad(disp)); 
         }
     }
-
-    // Otros metodos
     
+    
+    
+    public void agregarDisponibilidad(Disponibilidad disp){
+        disponibilidades.add(disp); 
+    }
+    
+    public ArrayList<Disponibilidad> getHandlerDisps(){return disponibilidades;}
+    
+    public Disponibilidad demeDisponibilidadEnSucursal(Sucursal sucursal){
+        Disponibilidad resultado = null; 
+        Disponibilidad disp;    
+        boolean encontrado = false; 
+        int i = 0; 
+        while(i < disponibilidades.size() && encontrado == false){
+           disp = disponibilidades.get(i);
+           if(disp.getSucursal().getID() == sucursal.getID()){
+               resultado = disp;
+               encontrado = true;
+           }        
+        }
+        return resultado;
+    }
+
     public static CategoriaProducto strAEnumCategoria(String str){
         CategoriaProducto retorno; 
         retorno = switch (str) {

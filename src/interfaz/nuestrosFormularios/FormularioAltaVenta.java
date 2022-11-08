@@ -1,6 +1,9 @@
 package interfaz.nuestrosFormularios;
 
 import clasesControl.ControladorAltaVenta;
+import clasesEntidad.Disponibilidad;
+import clasesEntidad.ItemVenta;
+import clasesEntidad.Producto;
 import clasesEntidad.Venta;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +20,7 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
         campoSucursal.addItem("San Luis");
         campoSucursal.setEnabled(false); 
         campoMontoTotal.setText("0");    
-        this.escondaTodosLosCartelesDeError();
+        this.escondaCartelesDeError();
         logica = new ControladorAltaVenta(this);
         
     }
@@ -44,7 +47,7 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
         errorApellido.setText("El apellido debe tener entre 1 y 30 caracteres");
     }
     
-    public void muestreErrorPorTablaVacia(){
+    public void adviertaItemsNoIngresados(){
         avisoMirarArriba.setText("Hay un error! Mire arriba");
         errorTablaItems.setText("Debe ingresar al menos un item de venta");
     }
@@ -53,63 +56,47 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
         errorNombreProducto.setText("No se encontraron productos");
     }
     
-    public void muestreErrorNombreProducto(){
+    public void adviertaTamañoNombreProducto(){
         errorNombreProducto.setText("El nombre debe tener entre 1 y 80 caracteres");
     }
     
-    public void muestreErrorFormatoCantidad() {
+    public void adviertaCantidadNoPositiva() {
         errorCantidad.setText("La cantidad debe ser positiva");
     }
 
-    public void muestreErrorCantidadSuperaStock() {
+    public void adviertaUnidadesSuperaStock() {
         errorCantidad.setText("La cantidad supera el stock");
     }
 
-    public void muestreErrorItemRepetido() {
+    public void adviertaItemRepetido() {
         errorTablaItems.setText("Quiere agregar un producto repetido");
     }
     
-    public void muestreErrorFormatoCodArea() {
+    public void adviertaCodAreaNoEsNumero() {
         errorTelefonoCliente.setText("El código de área debe ser un número");
     }
     
-    public void muestreErrorTamañoCodArea() {
+    public void adviertaTamañoCodArea() {
         errorTelefonoCliente.setText("El código de área debe tener entre 2 y 4 dígitos");
     }
     
-    public void muestreErrorFormatoNumeroTelefono() {
+    public void advieraNumTelefonoNoEsNumero() {
         errorTelefonoCliente.setText("El número de teléfono debe ser un número");
     }
     
-    public void muestreErrorTamañoNumeroTelefono() {
+    public void adviertaTamañoNumTelefono() {
         errorTelefonoCliente.setText("El número de teléfono debe tener entre 6 y 8 dígitos");
     }
     
-    public void muestreErrorSeñaNoPositiva(){
+    public void adviertaSeñaNoPositiva(){
         errorSeña.setText("La seña debe ser positiva");
     }
     
-    public void muestreErrorSeñaSuperaTotal(){
+    public void adviertaSeñaMuyGrande(){
         errorSeña.setText("La seña no puede superar el importe total");
     }
     
-    public void escondaErrorCantidadNegativa() {
-        errorCantidad.setText(" ");
-    }
-
-    public void escondaErrorCantidadSuperaStock() {
-        errorCantidad.setText(" ");
-    }
-
-    public void escondaErrorItemRepetido() {
-        errorTablaItems.setText(" ");
-    }
-    
-    public void escondaErrorNombreProducto(){
-        errorNombreProducto.setText(" ");
-    }
-    
-    public void escondaTodosLosCartelesDeError(){
+    public void escondaCartelesDeError(){
         errorNombre.setText(" ");
         errorApellido.setText(" ");
         errorTablaItems.setText(" ");
@@ -151,11 +138,22 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
             model.removeRow(0);
     }
         
-    public void agregueProductoATabla(String nom, String cat, String desc, int stockActual, float precioVenta){  
-            tablaProductosEncontrados.addRow(new Object[]{nom, cat, desc, stockActual, precioVenta});
+    public void agregueProductoATabla(Producto prod, Disponibilidad disp){  
+        tablaProductosEncontrados.addRow(new Object[]{
+            prod.getNombre(), 
+            prod.getCategoria().toString(), 
+            prod.getDescripcion(), 
+            disp.getStockActual(), 
+            disp.getPrecioVenta()
+        });
     }
-    public void agregueItemVenta(String nombre, int cantidad, float precioUnidad, float importeTotal) {
-            tablaItems.addRow(new Object[]{nombre, cantidad, precioUnidad, importeTotal});
+    public void agregueItemVenta(ItemVenta item) {
+        tablaItems.addRow(new Object[]{
+            item.getHandlerProducto().getNombre(), 
+            item.getCantidad(), 
+            item.getPrecioUnidad(), 
+            item.getPrecioProducto()
+        });
     }
     
     public void elimineItemVenta(int filaSeleccionada) {
@@ -796,7 +794,7 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
         float seña = -1;  
         
         // Ocultamos carteles de error antiguos.
-        this.escondaTodosLosCartelesDeError(); 
+        this.escondaCartelesDeError(); 
         
         // Obtenemos si la venta es con reserva.
         ventaConReserva = campoVentaConReserva.isSelected(); 
@@ -826,7 +824,7 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
             envioGratis = campoEnvioGratis.isSelected();
             
             // e invocamos a la lógica de la acción. 
-            logica.usuarioQuiereCompletarVenta(nomCliente, apeCliente, envioGratis , strMetodoPago, 1, ubiSucursal, 
+            logica.usuarioQuiereCompletarVenta(nomCliente, apeCliente, envioGratis , strMetodoPago, 
                     ventaConReserva, codArea,  numeroTelefono, seña);
         }
     }//GEN-LAST:event_botonRegistrarVentaActionPerformed

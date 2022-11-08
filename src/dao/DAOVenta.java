@@ -76,10 +76,10 @@ public class DAOVenta implements InterfazDAOVenta
             rs.next();
             IDVenta = rs.getInt(1);
             
-            for (ItemVenta itemVenta : venta.getItems()){
+            for (ItemVenta itemVenta : venta.getHandlerItems()){
                 pst = con.prepareStatement("INSERT INTO ItemVenta VALUES (DEFAULT,?,?,?,?)");
               
-                pst.setInt(1, itemVenta.getProducto().getId());
+                pst.setInt(1, itemVenta.getHandlerProducto().getId());
                 pst.setInt(2, itemVenta.getCantidad());
                 pst.setFloat(3, itemVenta.getPrecioUnidad());
                 pst.setInt(4, IDVenta);

@@ -80,7 +80,6 @@ public class DAOProducto implements InterfazDAOProducto {
     public ArrayList<Producto> obtengaProductosConDisponibilidad(String nombreProducto, Sucursal sucursal) {
         Producto prod; 
         Disponibilidad disp;
-        ArrayList<Disponibilidad> arrDisp; 
         ArrayList<Producto> listaProductos = new ArrayList<>();
         
         PreparedStatement pst = null;
@@ -102,24 +101,24 @@ public class DAOProducto implements InterfazDAOProducto {
             
             while (rs.next()) {
                 disp = new Disponibilidad();
-                arrDisp = new ArrayList<>();
                 prod = new Producto();
                         
                 disp.setID(rs.getInt(5));
-                disp.setProducto(prod);
-                disp.setSucursal(sucursal);  
+                disp.setHandlerSucursal(sucursal); 
+                disp.setHandlerProducto(prod); 
                 disp.setPrecioVenta(rs.getFloat(8));
                 disp.setStockActual(rs.getInt(9));
                 disp.setStockMinimo(rs.getInt(10));
                 disp.setTieneStockMinimo(rs.getBoolean(11));
                 
-                arrDisp.add(disp);
                         
                 prod.setId(rs.getInt(1));
                 prod.setNombre(rs.getString(2));
                 prod.setCategoria(Producto.strAEnumCategoria(rs.getString(3)));
                 prod.setDescripcion(rs.getString(4));
-                prod.setDisponibilidades(arrDisp);
+                prod.agregarDisponibilidad(disp);
+                
+                System.out.println("disp.precioVenta: " + prod.getHandlerDisps().get(0).getPrecioVenta());
                 
                 listaProductos.add(prod);
             }

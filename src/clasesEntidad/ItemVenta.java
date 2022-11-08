@@ -8,6 +8,7 @@ public class ItemVenta {
     private int id;
     private int cantidad;
     private float precioUnidad;
+    private float precioProducto; 
     private Producto producto;
     
     // Constructor
@@ -18,6 +19,7 @@ public class ItemVenta {
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
         this.producto = new Producto(producto);
+        precioProducto = cantidad * precioUnidad;
     }
 
     public ItemVenta() {
@@ -25,6 +27,7 @@ public class ItemVenta {
         this.cantidad = -1;
         this.precioUnidad = -1;
         this.producto = new Producto();
+        precioProducto = 0; 
     }
 
     ItemVenta(ItemVenta item) {
@@ -36,15 +39,51 @@ public class ItemVenta {
     
     // Getters y Setters
     
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
 
-    public int getCantidad() {return cantidad;}
-    public void setCantidad(int cantidad) {this.cantidad = cantidad;}
+    public int getCantidad(){
+        return cantidad;
+    }
+    
+    public void setCantidad(int cantidad){
+        this.cantidad = cantidad;
+    }
 
-    public float getPrecioUnidad() {return precioUnidad;}
-    public void setPrecioUnidad(float precioUnidad) {this.precioUnidad = precioUnidad;}
+    public float getPrecioUnidad(){
+        return precioUnidad;
+    }
+    
+    public void setPrecioUnidad(float precioUnidad){
+        this.precioUnidad = precioUnidad;
+    }
+    
+    public void setPrecioProducto(float precioProd){
+        this.precioProducto = precioProd;
+    }
+    
+    public float getPrecioProducto(){
+        return precioProducto; 
+    }
 
-    public Producto getProducto() {return new Producto(producto);}
-    public void setProducto(Producto producto) {this.producto = new Producto(producto);}
+    public Producto getProducto(){
+        return new Producto(producto);
+    }
+    
+    public void setProducto(Producto producto){
+        this.producto = new Producto(producto);
+    }
+    
+    public void setHandlerProducto(Producto producto){
+        this.producto = producto; 
+    }
+    
+    public Producto getHandlerProducto(){  
+        return producto;
+    }
 }
