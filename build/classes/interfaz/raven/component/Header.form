@@ -25,9 +25,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cmdMenu" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace pref="367" max="32767" attributes="0"/>
-              <Component id="buttonBadges2" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="botonReservasPorVencerse" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-              <Component id="buttonBadges1" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="botonReservasVencidas" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="8" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -54,8 +54,8 @@
                   <Component id="cmdMenu" max="32767" attributes="0"/>
                   <Component id="pic" max="32767" attributes="0"/>
                   <Component id="jSeparator1" max="32767" attributes="0"/>
-                  <Component id="buttonBadges1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="buttonBadges2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="botonReservasVencidas" alignment="0" max="32767" attributes="0"/>
+                  <Component id="botonReservasPorVencerse" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -69,9 +69,6 @@
           <Image iconType="3" name="/imagenes/menu.png"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdMenuActionPerformed"/>
-      </Events>
     </Component>
     <Container class="interfaz.raven.swing.ImageAvatar" name="pic">
       <Properties>
@@ -108,7 +105,7 @@
         <Property name="orientation" type="int" value="1"/>
       </Properties>
     </Component>
-    <Component class="interfaz.raven.swing.ButtonBadges" name="buttonBadges1">
+    <Component class="interfaz.raven.swing.ButtonBadges" name="botonReservasVencidas">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="31" green="31" red="fa" type="rgb"/>
@@ -116,10 +113,13 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagenes/notification.png"/>
         </Property>
-        <Property name="badges" type="int" value="12"/>
+        <Property name="badges" type="int" value="16"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonReservasVencidasActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="interfaz.raven.swing.ButtonBadges" name="buttonBadges2">
+    <Component class="interfaz.raven.swing.ButtonBadges" name="botonReservasPorVencerse">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e8" green="b2" red="3f" type="rgb"/>
@@ -127,8 +127,11 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagenes/message.png"/>
         </Property>
-        <Property name="badges" type="int" value="5"/>
+        <Property name="badges" type="int" value="16"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonReservasPorVencerseActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

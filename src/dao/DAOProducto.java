@@ -104,8 +104,8 @@ public class DAOProducto implements InterfazDAOProducto {
                 prod = new Producto();
                         
                 disp.setID(rs.getInt(5));
-                disp.setHandlerSucursal(sucursal); 
-                disp.setHandlerProducto(prod); 
+                disp.setSucursal(sucursal); 
+                disp.setProducto(prod); 
                 disp.setPrecioVenta(rs.getFloat(8));
                 disp.setStockActual(rs.getInt(9));
                 disp.setStockMinimo(rs.getInt(10));
@@ -118,7 +118,7 @@ public class DAOProducto implements InterfazDAOProducto {
                 prod.setDescripcion(rs.getString(4));
                 prod.agregarDisponibilidad(disp);
                 
-                System.out.println("disp.precioVenta: " + prod.getHandlerDisps().get(0).getPrecioVenta());
+                System.out.println("disp.precioVenta: " + prod.getDisponibilidades().get(0).getPrecioVenta());
                 
                 listaProductos.add(prod);
             }

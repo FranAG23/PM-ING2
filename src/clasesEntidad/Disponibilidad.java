@@ -26,18 +26,17 @@ public class Disponibilidad {
         this.stockActual = stockActual;
         this.tieneStockMinimo = tieneStockMinimo;
         this.stockMinimo = stockMinimo;
-        this.sucursal = new Sucursal(sucursal);
-        this.producto = new Producto(producto);
+        this.sucursal = sucursal;
+        this.producto = producto;
     }
 
     public Disponibilidad(){
-        /*
         id = -1;
         precioVenta = 0;
         stockActual = 0; 
         tieneStockMinimo = false;
         sucursal = new Sucursal();
-        producto = new Producto(); */
+        producto = new Producto(); 
     }
     
      public Disponibilidad(Disponibilidad disp){
@@ -50,48 +49,63 @@ public class Disponibilidad {
          this.producto = disp.getProducto(); 
     }
     
-    // Getters y Setters
-	
-    public float getPrecioVenta() {return precioVenta;}
-    public void setPrecioVenta(float precioVenta) {this.precioVenta = precioVenta;}
-
-    public int getStockActual() {return stockActual;}
-    public void setStockActual(int stockActual) {this.stockActual = stockActual;}
-
-    public int getStockMinimo() {return stockMinimo;}
-    public void setStockMinimo(int stockMinimo) {this.stockMinimo = stockMinimo;}
-
-    public boolean getTieneStockMinimo() {return tieneStockMinimo;}
-    public void setTieneStockMinimo(boolean tieneStockMinimo) {this.tieneStockMinimo = tieneStockMinimo;}
-
-    public Sucursal getSucursal() {return new Sucursal(sucursal);}
-    public void setSucursal(Sucursal sucursal) {this.sucursal = new Sucursal(sucursal);}
-    
-    public Producto getProducto(){
-        return new Producto(producto); 
-    }
-    public void setProducto(Producto producto){
-        this.producto = new Producto(producto);
+    public int getID(){
+        return id;
     }
     
-    public void setHandlerProducto(Producto producto){
-        this.producto = producto; 
-    }
-    
-    public void setHandlerSucursal(Sucursal sucursal){
-        this.sucursal = sucursal; 
-    }
-
     public void setID(int id) {
        this.id = id;
     }
+
+    public float getPrecioVenta(){
+        return precioVenta;
+    }
     
-    public int getID(){
-        return id;
+    public void setPrecioVenta(float precioVenta){
+        this.precioVenta = precioVenta;
+    }
+
+    public int getStockActual(){
+        return stockActual;
+    }
+    
+    public void setStockActual(int stockActual){
+        this.stockActual = stockActual;
+    }
+
+    public int getStockMinimo(){
+        return stockMinimo;
+    }
+    
+    public void setStockMinimo(int stockMinimo){
+        this.stockMinimo = stockMinimo;
+    }
+
+    public boolean getTieneStockMinimo(){
+        return tieneStockMinimo;
+    }
+    
+    public void setTieneStockMinimo(boolean tieneStockMinimo){
+        this.tieneStockMinimo = tieneStockMinimo;
+    }
+
+    public Sucursal getSucursal(){
+        return sucursal; 
+    }
+    
+    public void setSucursal(Sucursal sucursal){
+        this.sucursal = sucursal; 
+    }
+    
+    public Producto getProducto(){
+        return producto; 
+    }
+    
+    public void setProducto(Producto producto){
+        this.producto = producto; 
     }
     
     public void disminuyaStock(int cant){
         stockActual -= cant; 
     }
-
 }

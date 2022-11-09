@@ -28,7 +28,7 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         // (Para esta entrega presentamos el sistema de Marcela)
         checkDisponibilidadNeuquen.setEnabled(false);
         
-        setOpaque(false);
+     //   setOpaque(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +49,13 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         labelDescripcion = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         campoCategoria = new javax.swing.JComboBox<>();
+        cartelNombreInvalido = new javax.swing.JLabel();
+        campoDescripcion = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        panelTituloFormulario = new javax.swing.JPanel();
+        tituloFormulario = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         checkDisponibilidadSanLuis = new javax.swing.JCheckBox();
         panelDatosSanLuis = new javax.swing.JPanel();
         labelPrecioSanLuis = new javax.swing.JLabel();
@@ -57,17 +64,10 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         labelStockMinimoSanLuis = new javax.swing.JLabel();
         campoStockSanLuis = new javax.swing.JTextField();
         campoStockMinimoSanLuis = new javax.swing.JTextField();
-        labelOpcionalStockMinimoSanLuis = new javax.swing.JLabel();
         cartelPrecioInvalidoSanLuis = new javax.swing.JLabel();
         cartelStockInvalidoSanLuis = new javax.swing.JLabel();
         cartelStockMinimoInvalidoSanLuis = new javax.swing.JLabel();
         checkDisponibilidadNeuquen = new javax.swing.JCheckBox();
-        labelOpcionalDescripcion = new javax.swing.JLabel();
-        separador = new javax.swing.JSeparator();
-        botonAceptar = new interfaz.raven.swing.Button();
-        cartelNombreInvalido = new javax.swing.JLabel();
-        campoDescripcion = new javax.swing.JTextField();
-        cartelNingunaDisponibilidad = new javax.swing.JLabel();
         panelDatosNeuquen = new javax.swing.JPanel();
         labelPrecioNeuquen = new javax.swing.JLabel();
         campoPrecioNeuquen = new javax.swing.JTextField();
@@ -75,12 +75,12 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         labelStockMinimoNeuquen = new javax.swing.JLabel();
         campoStockNeuquen = new javax.swing.JTextField();
         campoStockMinimoNeuquen = new javax.swing.JTextField();
-        labelOpcionalStockMinimoNeuquen = new javax.swing.JLabel();
         cartelPrecioInvalidoNeuquen = new javax.swing.JLabel();
         cartelStockInvalidoNeuquen = new javax.swing.JLabel();
         cartelStockMinimoInvalidoNeuquen = new javax.swing.JLabel();
-        panelTituloFormulario = new javax.swing.JPanel();
-        tituloFormulario = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        botonAceptar = new interfaz.raven.swing.Button();
+        cartelNingunaDisponibilidad = new javax.swing.JLabel();
 
         dialogAltaExitosa.setMinimumSize(new java.awt.Dimension(345, 106));
         dialogAltaExitosa.setUndecorated(true);
@@ -184,19 +184,104 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         dialogAltaFallida.getContentPane().add(panelDialogAltaFallida);
         panelDialogAltaFallida.setBounds(0, 0, 350, 110);
 
-        panelContenidoFormulario.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        labelNombre.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        panelContenidoFormulario.setBackground(new java.awt.Color(255, 251, 251));
+        panelContenidoFormulario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        labelNombre.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         labelNombre.setText("Nombre");
 
-        labelCategoria.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelCategoria.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         labelCategoria.setText("Categoría");
 
-        labelDescripcion.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        labelDescripcion.setText("Descripción");
+        labelDescripcion.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        labelDescripcion.setText("Descripción (opcional)");
 
         campoCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Lencería", "Marroquinería", "Papelería", "Varios" }));
-        campoCategoria.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        campoCategoria.setBorder(null);
+        campoCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCategoriaActionPerformed(evt);
+            }
+        });
+
+        cartelNombreInvalido.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        cartelNombreInvalido.setForeground(new java.awt.Color(255, 0, 0));
+        cartelNombreInvalido.setText("Nombre inválido");
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        jLabel1.setText("DATOS DEL PRODUCTO");
+
+        javax.swing.GroupLayout panelContenidoFormularioLayout = new javax.swing.GroupLayout(panelContenidoFormulario);
+        panelContenidoFormulario.setLayout(panelContenidoFormularioLayout);
+        panelContenidoFormularioLayout.setHorizontalGroup(
+            panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                        .addComponent(labelNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cartelNombreInvalido))
+                    .addComponent(jLabel1)
+                    .addComponent(labelDescripcion)
+                    .addComponent(labelCategoria)
+                    .addComponent(campoNombre)
+                    .addComponent(campoCategoria, 0, 289, Short.MAX_VALUE)
+                    .addComponent(campoDescripcion))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelContenidoFormularioLayout.setVerticalGroup(
+            panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNombre)
+                    .addComponent(cartelNombreInvalido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelCategoria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelDescripcion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        panelTituloFormulario.setBackground(new java.awt.Color(255, 255, 255));
+
+        tituloFormulario.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
+        tituloFormulario.setForeground(new java.awt.Color(255, 102, 102));
+        tituloFormulario.setText("REGISTRAR PRODUCTO");
+
+        javax.swing.GroupLayout panelTituloFormularioLayout = new javax.swing.GroupLayout(panelTituloFormulario);
+        panelTituloFormulario.setLayout(panelTituloFormularioLayout);
+        panelTituloFormularioLayout.setHorizontalGroup(
+            panelTituloFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTituloFormularioLayout.createSequentialGroup()
+                .addGap(369, 369, 369)
+                .addComponent(tituloFormulario)
+                .addContainerGap(286, Short.MAX_VALUE))
+        );
+        panelTituloFormularioLayout.setVerticalGroup(
+            panelTituloFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTituloFormularioLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(tituloFormulario)
+                .addGap(22, 22, 22))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(247, 255, 247));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        jLabel2.setText("DISPONIBILIDADES");
 
         checkDisponibilidadSanLuis.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         checkDisponibilidadSanLuis.setText("Disponible en San Luis");
@@ -212,17 +297,17 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
 
         labelStockSanLuis.setText("Stock actual");
 
-        labelStockMinimoSanLuis.setText("Stock mínimo");
+        labelStockMinimoSanLuis.setText("Stock mínimo (opcional)");
 
-        labelOpcionalStockMinimoSanLuis.setForeground(new java.awt.Color(102, 102, 102));
-        labelOpcionalStockMinimoSanLuis.setText("(opcional)");
-
+        cartelPrecioInvalidoSanLuis.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelPrecioInvalidoSanLuis.setForeground(new java.awt.Color(255, 0, 0));
         cartelPrecioInvalidoSanLuis.setText("Precio inválido");
 
+        cartelStockInvalidoSanLuis.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelStockInvalidoSanLuis.setForeground(new java.awt.Color(255, 0, 0));
         cartelStockInvalidoSanLuis.setText("Cantidad inválida");
 
+        cartelStockMinimoInvalidoSanLuis.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelStockMinimoInvalidoSanLuis.setForeground(new java.awt.Color(255, 0, 0));
         cartelStockMinimoInvalidoSanLuis.setText("Cantidad inválida");
 
@@ -231,25 +316,21 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         panelDatosSanLuisLayout.setHorizontalGroup(
             panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelPrecioSanLuis)
-                    .addComponent(labelStockSanLuis)
-                    .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
-                        .addComponent(labelStockMinimoSanLuis)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelOpcionalStockMinimoSanLuis)))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(campoStockSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoStockMinimoSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPrecioSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cartelStockInvalidoSanLuis)
-                    .addComponent(cartelPrecioInvalidoSanLuis)
-                    .addComponent(cartelStockMinimoInvalidoSanLuis))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(2, 2, 2)
+                .addComponent(labelPrecioSanLuis)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cartelPrecioInvalidoSanLuis))
+            .addComponent(campoStockMinimoSanLuis, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+            .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
+                .addComponent(labelStockSanLuis)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cartelStockInvalidoSanLuis))
+            .addComponent(campoStockSanLuis)
+            .addComponent(campoPrecioSanLuis)
+            .addGroup(panelDatosSanLuisLayout.createSequentialGroup()
+                .addComponent(labelStockMinimoSanLuis)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cartelStockMinimoInvalidoSanLuis))
         );
         panelDatosSanLuisLayout.setVerticalGroup(
             panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,20 +338,22 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPrecioSanLuis)
-                    .addComponent(campoPrecioSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cartelPrecioInvalidoSanLuis))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoPrecioSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelStockSanLuis)
-                    .addComponent(campoStockSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cartelStockInvalidoSanLuis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoStockSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosSanLuisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoStockMinimoSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelOpcionalStockMinimoSanLuis)
                     .addComponent(labelStockMinimoSanLuis)
                     .addComponent(cartelStockMinimoInvalidoSanLuis))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addComponent(campoStockMinimoSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         checkDisponibilidadNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -281,44 +364,32 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
             }
         });
 
-        labelOpcionalDescripcion.setBackground(new java.awt.Color(153, 153, 153));
-        labelOpcionalDescripcion.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        labelOpcionalDescripcion.setForeground(new java.awt.Color(102, 102, 102));
-        labelOpcionalDescripcion.setText("(opcional)");
+        panelDatosNeuquen.setOpaque(false);
 
-        botonAceptar.setBackground(new java.awt.Color(51, 255, 102));
-        botonAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        botonAceptar.setText("Aceptar");
-        botonAceptar.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+        labelPrecioNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        labelPrecioNeuquen.setText("Precio de venta");
+
+        labelStockNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        labelStockNeuquen.setText("Stock actual");
+
+        labelStockMinimoNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        labelStockMinimoNeuquen.setText("Stock mínimo (opcional)");
+
+        campoStockMinimoNeuquen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAceptarActionPerformed(evt);
+                campoStockMinimoNeuquenActionPerformed(evt);
             }
         });
 
-        cartelNombreInvalido.setForeground(new java.awt.Color(255, 0, 0));
-        cartelNombreInvalido.setText("Nombre inválido");
-
-        cartelNingunaDisponibilidad.setForeground(new java.awt.Color(255, 0, 0));
-        cartelNingunaDisponibilidad.setText("El producto debe estar disponible en al menos una sucursal");
-
-        panelDatosNeuquen.setOpaque(false);
-
-        labelPrecioNeuquen.setText("Precio de venta");
-
-        labelStockNeuquen.setText("Stock actual");
-
-        labelStockMinimoNeuquen.setText("Stock mínimo");
-
-        labelOpcionalStockMinimoNeuquen.setForeground(new java.awt.Color(102, 102, 102));
-        labelOpcionalStockMinimoNeuquen.setText("(opcional)");
-
+        cartelPrecioInvalidoNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelPrecioInvalidoNeuquen.setForeground(new java.awt.Color(255, 0, 0));
         cartelPrecioInvalidoNeuquen.setText("Precio inválido");
 
+        cartelStockInvalidoNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelStockInvalidoNeuquen.setForeground(new java.awt.Color(255, 0, 0));
         cartelStockInvalidoNeuquen.setText("Cantidad inválida");
 
+        cartelStockMinimoInvalidoNeuquen.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         cartelStockMinimoInvalidoNeuquen.setForeground(new java.awt.Color(255, 0, 0));
         cartelStockMinimoInvalidoNeuquen.setText("Cantidad inválida");
 
@@ -327,25 +398,21 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         panelDatosNeuquenLayout.setHorizontalGroup(
             panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelPrecioNeuquen)
-                    .addComponent(labelStockNeuquen)
-                    .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
-                        .addComponent(labelStockMinimoNeuquen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelOpcionalStockMinimoNeuquen)))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoStockNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoStockMinimoNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPrecioNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cartelStockInvalidoNeuquen)
-                    .addComponent(cartelPrecioInvalidoNeuquen)
-                    .addComponent(cartelStockMinimoInvalidoNeuquen))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(labelPrecioNeuquen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cartelPrecioInvalidoNeuquen))
+            .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
+                .addComponent(labelStockNeuquen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cartelStockInvalidoNeuquen))
+            .addGroup(panelDatosNeuquenLayout.createSequentialGroup()
+                .addComponent(labelStockMinimoNeuquen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cartelStockMinimoInvalidoNeuquen))
+            .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(campoStockMinimoNeuquen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addComponent(campoStockNeuquen, javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(campoPrecioNeuquen, javax.swing.GroupLayout.Alignment.LEADING))
         );
         panelDatosNeuquenLayout.setVerticalGroup(
             panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,122 +420,92 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPrecioNeuquen)
-                    .addComponent(campoPrecioNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cartelPrecioInvalidoNeuquen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoPrecioNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelStockNeuquen)
-                    .addComponent(campoStockNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cartelStockInvalidoNeuquen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoStockNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosNeuquenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoStockMinimoNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelOpcionalStockMinimoNeuquen)
                     .addComponent(labelStockMinimoNeuquen)
                     .addComponent(cartelStockMinimoInvalidoNeuquen))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoStockMinimoNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
-        javax.swing.GroupLayout panelContenidoFormularioLayout = new javax.swing.GroupLayout(panelContenidoFormulario);
-        panelContenidoFormulario.setLayout(panelContenidoFormularioLayout);
-        panelContenidoFormularioLayout.setHorizontalGroup(
-            panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                                .addComponent(labelDescripcion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelOpcionalDescripcion))
-                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelContenidoFormularioLayout.createSequentialGroup()
-                                        .addComponent(cartelNingunaDisponibilidad)
-                                        .addGap(130, 130, 130))
-                                    .addComponent(separador)
-                                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                                        .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoFormularioLayout.createSequentialGroup()
-                                                .addComponent(labelCategoria)
-                                                .addGap(143, 143, 143))
-                                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                                                .addComponent(labelNombre)
-                                                .addGap(160, 160, 160)))
-                                        .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(campoNombre)
-                                            .addComponent(campoCategoria, 0, 295, Short.MAX_VALUE)
-                                            .addComponent(campoDescripcion))))
-                                .addGap(18, 18, 18)
-                                .addComponent(cartelNombreInvalido))
-                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                                .addComponent(checkDisponibilidadNeuquen)
-                                .addGap(40, 40, 40)
-                                .addComponent(panelDatosNeuquen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                                .addComponent(checkDisponibilidadSanLuis)
-                                .addGap(43, 43, 43)
-                                .addComponent(panelDatosSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkDisponibilidadSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelDatosSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDatosNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkDisponibilidadNeuquen))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panelContenidoFormularioLayout.setVerticalGroup(
-            panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelContenidoFormularioLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNombre)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cartelNombreInvalido))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkDisponibilidadSanLuis)
+                    .addComponent(checkDisponibilidadNeuquen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCategoria)
-                    .addComponent(campoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelOpcionalDescripcion)
-                    .addComponent(labelDescripcion)
-                    .addComponent(campoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cartelNingunaDisponibilidad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelDatosSanLuis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkDisponibilidadSanLuis))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelContenidoFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkDisponibilidadNeuquen)
                     .addComponent(panelDatosNeuquen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
-        panelTituloFormulario.setBackground(new java.awt.Color(238, 156, 167));
+        jPanel3.setOpaque(false);
 
-        tituloFormulario.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
-        tituloFormulario.setForeground(new java.awt.Color(255, 255, 255));
-        tituloFormulario.setText("Registrar Producto");
+        botonAceptar.setBackground(new java.awt.Color(0, 204, 51));
+        botonAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        botonAceptar.setText("ACEPTAR");
+        botonAceptar.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelTituloFormularioLayout = new javax.swing.GroupLayout(panelTituloFormulario);
-        panelTituloFormulario.setLayout(panelTituloFormularioLayout);
-        panelTituloFormularioLayout.setHorizontalGroup(
-            panelTituloFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTituloFormularioLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(tituloFormulario)
+        cartelNingunaDisponibilidad.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        cartelNingunaDisponibilidad.setForeground(new java.awt.Color(255, 0, 0));
+        cartelNingunaDisponibilidad.setText("El producto debe estar disponible en al menos una sucursal");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cartelNingunaDisponibilidad)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panelTituloFormularioLayout.setVerticalGroup(
-            panelTituloFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTituloFormularioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tituloFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelNingunaDisponibilidad))
                 .addContainerGap())
         );
 
@@ -477,11 +514,13 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelContenidoFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelTituloFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelContenidoFormulario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTituloFormulario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,8 +528,12 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(panelTituloFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelContenidoFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelContenidoFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -681,6 +724,14 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
         dialogAltaFallida.setVisible(false);
     }//GEN-LAST:event_dialogAltaFallidaFocusLost
 
+    private void campoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCategoriaActionPerformed
+
+    private void campoStockMinimoNeuquenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoStockMinimoNeuquenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoStockMinimoNeuquenActionPerformed
+
     public void avisarNombreInvalido() {
         
         campoNombre.setText("");
@@ -795,14 +846,15 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkDisponibilidadSanLuis;
     private javax.swing.JDialog dialogAltaExitosa;
     private javax.swing.JDialog dialogAltaFallida;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel labelAltaExitosa;
     private javax.swing.JLabel labelAltaFallida;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelDescripcion;
     private javax.swing.JLabel labelNombre;
-    private javax.swing.JLabel labelOpcionalDescripcion;
-    private javax.swing.JLabel labelOpcionalStockMinimoNeuquen;
-    private javax.swing.JLabel labelOpcionalStockMinimoSanLuis;
     private javax.swing.JLabel labelPrecioNeuquen;
     private javax.swing.JLabel labelPrecioSanLuis;
     private javax.swing.JLabel labelStockMinimoNeuquen;
@@ -815,7 +867,6 @@ public class FormularioAltaProducto extends javax.swing.JPanel {
     private javax.swing.JPanel panelDialogAltaExitosa;
     private javax.swing.JPanel panelDialogAltaFallida;
     private javax.swing.JPanel panelTituloFormulario;
-    private javax.swing.JSeparator separador;
     private javax.swing.JLabel tituloFormulario;
     // End of variables declaration//GEN-END:variables
 }

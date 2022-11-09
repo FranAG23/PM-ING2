@@ -3,11 +3,8 @@ package dao;
 
 import baseDatos.BaseDatos;
 import clasesEntidad.Disponibilidad;
-import clasesEntidad.Producto;
-import clasesEntidad.Sucursal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -50,8 +47,8 @@ public class DAODisponibilidad implements InterfazDAODisponibilidad{
         return exito;
     }
 
-    @Override
-    public boolean modificaDisponibilidades(ArrayList<Disponibilidad> disponibilidades){
+    public boolean modificarDisponibilidades(ArrayList<Disponibilidad> disponibilidades){
+        
         boolean exito = false;
         PreparedStatement pst = null;
         Connection con = null;

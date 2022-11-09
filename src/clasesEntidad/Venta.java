@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Venta {
-    
-    // Definición de MetodoPago (tipo enumerado)
-    
+   
     public enum MetodoPago {
         EFECTIVO, MERCADOPAGO;
         @Override
@@ -16,8 +14,6 @@ public class Venta {
             else return "MercadoPago";
         }
     }
-    
-    // Definición de EstadoVenta (tipo enumerado)
     
     public enum EstadoVenta {
         COMPLETADA, CANCELADA, EN_RESERVA;
@@ -31,8 +27,7 @@ public class Venta {
         }
     }
     
-    // Atributos
-    
+   
     private int id;
     private String nombreCliente;
     private String apellidoCliente;
@@ -46,8 +41,6 @@ public class Venta {
     private ArrayList<ItemVenta> items;
     private Sucursal sucursal;
     
-    // Constructor
-
     public Venta(   int id, 
                     String nombreCliente,
                     String apellidoCliente, 
@@ -71,10 +64,10 @@ public class Venta {
         this.metodoPago = metodoPago;
         this.estado = estado;
         this.reserva = reserva;
-        this.sucursal = new Sucursal(sucursal);
+        this.sucursal = sucursal;
         this.items = new ArrayList<>();
         for(ItemVenta item: items){
-            this.items.add(new ItemVenta(item));
+            this.items.add(item);
         }
     }
     
@@ -93,62 +86,113 @@ public class Venta {
         this.items = new ArrayList<>();
     }
     
-    // Getters y Setters
-    
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
-
-    public String getNombreCliente() {return nombreCliente;}
-    public void setNombreCliente(String nombreCliente) {this.nombreCliente = nombreCliente;}
-    
-    public String getApellidoCliente() {return apellidoCliente;}
-    public void setApellidoCliente(String apellidoCliente) {this.apellidoCliente = apellidoCliente;}
-
-    public boolean getEnvioGratis() {return envioGratis;}
-    public void setEnvioGratis(boolean envioGratis) {this.envioGratis = envioGratis;}
-
-    public float getImporteTotal() {return importeTotal;}
-    public void setImporteTotal(float importe) {this.importeTotal = importe;}
-    
-    public float getImporteActual() { return importeActual;}
-    public void setImporteActual(float importeActual) { this.importeActual = importeActual;}
-
-    public Date getFechaUltimoPago() {return fechaUltimoPago;}
-    public void setFechaUltimoPago(Date fecha) {this.fechaUltimoPago = fecha;}
-
-    public MetodoPago getMetodoPago() {return metodoPago;}
-    public void setMetodoPago(MetodoPago metodoPago) {this.metodoPago = metodoPago;}
-
-    public EstadoVenta getEstado() {return estado;}
-    public void setEstado(EstadoVenta estado) {this.estado = estado;}
-
-    public Reserva getReserva() {return new Reserva(reserva);}
-    public void setReserva(Reserva reserva) {this.reserva = new Reserva(reserva);}
-    
-    public ArrayList<ItemVenta> getItems(){ 
-        ArrayList<ItemVenta> copia = new ArrayList<>();
-        for(ItemVenta item: items){
-            copia.add(new ItemVenta(item));
-        }
-        return copia; 
+    public int getId(){
+        return id;
     }
-   
+    
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getNombreCliente(){
+        return nombreCliente;
+    }
+    
+    public void setNombreCliente(String nombreCliente){
+        this.nombreCliente = nombreCliente;
+    }
+    
+    public String getApellidoCliente(){
+        return apellidoCliente;
+    }
+    
+    public void setApellidoCliente(String apellidoCliente){
+        this.apellidoCliente = apellidoCliente;
+    }
+
+    public boolean getEnvioGratis(){
+        return envioGratis;
+    }
+    
+    public void setEnvioGratis(boolean envioGratis){
+        this.envioGratis = envioGratis;
+    }
+
+    public float getImporteTotal(){
+        return importeTotal;
+    }
+    
+    public void setImporteTotal(float importe){
+        this.importeTotal = importe;
+    }
+    
+    public float getImporteActual(){
+        return importeActual;
+    }
+    
+    public void setImporteActual(float importeActual){
+        this.importeActual = importeActual;
+    }
+
+    public Date getFechaUltimoPago(){
+        return fechaUltimoPago;
+    }
+    
+    public void setFechaUltimoPago(Date fecha){
+        this.fechaUltimoPago = fecha;
+    }
+
+    public MetodoPago getMetodoPago(){
+        return metodoPago;
+    }
+    
+    public void setMetodoPago(MetodoPago metodoPago){
+        this.metodoPago = metodoPago;
+    }
+
+    public EstadoVenta getEstado(){
+        return estado;
+    }
+    
+    public void setEstado(EstadoVenta estado){
+        this.estado = estado;
+    }
+
+    public void setReserva(Reserva reserva){
+        this.reserva = reserva; 
+    }
+    
+    public Reserva getReserva(){
+        return new Reserva(reserva);
+    }
+    
+    public ArrayList<ItemVenta> getItems(){
+        ArrayList<ItemVenta> retorno = new ArrayList();
+        for(ItemVenta item: items){
+            retorno.add(item);
+        }
+        return retorno; 
+    }
+    
     public void setItems(ArrayList<ItemVenta> items){
         this.items = new ArrayList<>();
         for(ItemVenta item: items){
-            this.items.add(new ItemVenta(item));
+            this.items.add(item);
         }
     }
     
-    public Sucursal getSucursal() {return new Sucursal(sucursal);}
-    public void setSucursal(Sucursal sucursal) {this.sucursal = new Sucursal(sucursal);}
+    public Sucursal getSucursal(){
+        return sucursal;
+    }
     
-    // Otros métodos
+    public void setSucursal(Sucursal sucursal){
+        this.sucursal = sucursal;
+    }
     
     public boolean tieneProducto(Producto prod){
         boolean encontrado = false;
         for(ItemVenta item: items){
-            if(item.getHandlerProducto().getId() == prod.getId()){
+            if(item.getProducto().getId() == prod.getId()){
                 encontrado = true; 
                 break;
             }        
@@ -161,7 +205,7 @@ public class Venta {
         itemAgregado.setCantidad(unidades);
         itemAgregado.setPrecioUnidad(precioVenta);
         itemAgregado.setPrecioProducto( precioVenta * unidades);
-        itemAgregado.setHandlerProducto(producto); 
+        itemAgregado.setProducto(producto); 
         importeTotal += precioVenta * unidades; 
         items.add(itemAgregado);
         return itemAgregado; 
@@ -175,18 +219,6 @@ public class Venta {
     
     public boolean noTieneItems(){
         return items.isEmpty(); 
-    }
-    
-    public void setHandlerReserva(Reserva reserva){
-        this.reserva = reserva; 
-    }
-    
-    public ArrayList<ItemVenta> getHandlerItems(){
-        ArrayList<ItemVenta> retorno = new ArrayList();
-        for(ItemVenta item: items){
-            retorno.add(item);
-        }
-        return retorno; 
     }
     
     public static MetodoPago stringAMetodoPago(String str){

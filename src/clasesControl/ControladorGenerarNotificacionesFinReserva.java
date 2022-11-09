@@ -19,6 +19,9 @@ public class ControladorGenerarNotificacionesFinReserva {
         // Obtener fecha actual
         Date fechaActual = new Date(System.currentTimeMillis());
         
+        ArrayList<VentaNotificacionDTO> vencidas = new ArrayList<>();
+        ArrayList<VentaNotificacionDTO> porVencerse = new ArrayList<>();
+        
         for (VentaNotificacionDTO v : ventas) {
             
             // Comprobar si alguna reserva se venció
@@ -26,10 +29,10 @@ public class ControladorGenerarNotificacionesFinReserva {
                 fechaActual.getTime()) {
                 
                 // Actualizar estado en base de datos (Cancelada) y poner la fecha actual en vFecha
+                // (Y restaurar el stock)
                 new DAOVenta().cancelarVenta(v.getId(), fechaActual);
                 
-                // Generar notificación en el panel Main
-                m.generarNotificacionFinReserva(v);
+                vencidas.add(v);
                 
             } else {
                 
@@ -37,9 +40,13 @@ public class ControladorGenerarNotificacionesFinReserva {
                 if (v.getFechaReserva().getTime() + (DIAS_LIMITE_RESERVA-1)*MILISEGUNDOS_EN_UN_DIA < 
                 fechaActual.getTime()) {
                     
-                    m.generarAdvertenciaFinReserva(v);
+                    porVencerse.add(v);
                 }
             }
         }
+        
+        m.generarAdvertenciasFinReserva(porVencerse);
+        
+        m.generarNotificacionesFinReserva(vencidas);
     }
 }

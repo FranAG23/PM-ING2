@@ -1,5 +1,6 @@
 package interfaz.raven.component;
 
+import interfaz.main.Main;
 import interfaz.raven.event.EventMenuPressed;
 import interfaz.raven.event.EventMenuSelected;
 import interfaz.raven.event.EventShowPopupMenu;
@@ -23,6 +24,7 @@ public class Menu extends javax.swing.JPanel {
     private EventShowPopupMenu eventShowPopup;
     private boolean enableMenu = true;
     private boolean showMenu = true;
+    private Main main;
     
     public boolean isShowMenu() {
         return showMenu;

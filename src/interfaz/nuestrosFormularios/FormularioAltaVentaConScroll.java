@@ -42,7 +42,6 @@ public class FormularioAltaVentaConScroll extends javax.swing.JPanel {
         sp.setBackground(new java.awt.Color(255, 255, 255));
         sp.setBorder(null);
         sp.setForeground(new java.awt.Color(255, 255, 255));
-        sp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setOpaque(false);
         sp.setViewportView(formularioAltaVenta);
 

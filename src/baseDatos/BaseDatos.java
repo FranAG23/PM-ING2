@@ -31,8 +31,8 @@ public class BaseDatos {
             
             // Cambiar parámetros según la base de datos
             
-            //INSTANCIA = new BaseDatos("postgres", "tomitomi123", "postgres", "localhost", "5432");
-            INSTANCIA = new BaseDatos("postgres", "postgres", "terceraEntrega", "localhost", "5432");
+            INSTANCIA = new BaseDatos("postgres", "tomitomi123", "postgres", "localhost", "5432");
+            //INSTANCIA = new BaseDatos("postgres", "postgres", "terceraEntrega", "localhost", "5432");
         }
         return INSTANCIA;
     }

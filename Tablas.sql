@@ -47,7 +47,7 @@
 		vImporteTotal		REAL			NOT NULL,
 		vImporteActual		REAL			NOT NULL, 
 		vFechaUltimoPago	DATE			NOT NULL,
-		vMetodoPago				VARCHAR(20)		NOT NULL,
+		vMetodoPago			VARCHAR(20)		NOT NULL,
 		vEstadoVenta		VARCHAR(20)		NOT NULL,
 		
 		FOREIGN KEY (sID) REFERENCES Sucursal 
@@ -58,7 +58,7 @@
 	CREATE TABLE Reserva
 	(
 		vID					SERIAL		NOT NULL	PRIMARY KEY,
-		rTelefonoCliente	 VARCHAR(15) 		NOT NULL,
+		rTelefonoCliente	VARCHAR(15) NOT NULL,
 		rSeña				REAL		NOT NULL,
 		rFecha				DATE		NOT NULL,
 		
@@ -105,7 +105,6 @@
 		dStockMinimo		INT				NOT NULL,
 		dTieneStockMinimo	BOOLEAN			NOT NULL,
 
-		UNIQUE (pID, sID), 
 		FOREIGN KEY (pID) REFERENCES Producto,
 		FOREIGN KEY (sID) REFERENCES Sucursal
 	);

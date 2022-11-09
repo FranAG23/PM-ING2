@@ -172,15 +172,15 @@ public class ControladorAltaVenta {
                 reserva = new Reserva("(" + codArea + ")" + numTel, seña, new Date());
                 estadoVenta = Venta.EstadoVenta.EN_RESERVA;
                 venta.setImporteActual(seña);
-                venta.setHandlerReserva(reserva); 
+                venta.setReserva(reserva); 
             }
             else{
                 estadoVenta = Venta.EstadoVenta.COMPLETADA;
                 venta.setImporteActual(venta.getImporteTotal());
             }
             venta.setEstado(estadoVenta);
-            for(ItemVenta item: venta.getHandlerItems()){
-                prod = item.getHandlerProducto();
+            for(ItemVenta item: venta.getItems()){
+                prod = item.getProducto();
                 disp = prod.demeDisponibilidadEnSucursal(venta.getSucursal()); 
                 disp.disminuyaStock(item.getCantidad()); 
                 dispsAModificar.add(disp); 
@@ -188,7 +188,7 @@ public class ControladorAltaVenta {
             
             exitoInsercionBD = daoVenta.registrar(venta);
             if(exitoInsercionBD){
-                 daoDisp.modificaDisponibilidades(dispsAModificar);
+                 daoDisp.modificarDisponibilidades(dispsAModificar);
                 if(conReserva){
                     daoReserva.registrar(reserva, venta.getId()); 
                 }

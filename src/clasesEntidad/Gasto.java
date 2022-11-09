@@ -4,9 +4,6 @@ package clasesEntidad;
 import java.util.Date;
 
 public class Gasto extends Egreso {
-    
-    // Atributos
-    
     private String nombre;
     private String descripcion;
 

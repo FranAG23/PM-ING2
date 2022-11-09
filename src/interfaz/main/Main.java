@@ -1,7 +1,7 @@
 package interfaz.main;
 
 import baseDatos.BaseDatos;
-import clasesControl.ControladorGenerarNotificacionesFinReserva;
+import clasesEntidad.TimerNotificaciones;
 import dataTransferObject.VentaNotificacionDTO;
 import interfaz.raven.component.Header;
 import interfaz.raven.component.Menu;
@@ -16,9 +16,11 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -52,6 +54,9 @@ public class Main extends javax.swing.JFrame {
     
     // Objeto usado para las animaciones. 
     private Animator animator;
+    
+    // Timer para las notificaciones
+    private TimerNotificaciones timer;
 
     public Main() throws SQLException {
         
@@ -59,8 +64,9 @@ public class Main extends javax.swing.JFrame {
         init();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        // Comprobar si hay reservas vencidas, generar notificaciones
-        new ControladorGenerarNotificacionesFinReserva(this);
+        // Iniciar timer
+        timer = new TimerNotificaciones(this);
+        
     }
 
     
@@ -71,7 +77,7 @@ public class Main extends javax.swing.JFrame {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         menu = new Menu();
-        header = new Header();
+        header = new Header(this);
         main = new MainForm();
 
         // Agregamos el evento menuSelected al objeto menú. Este a su vez 
@@ -98,7 +104,7 @@ public class Main extends javax.swing.JFrame {
                     case 1:
                         switch(subMenuIndex){
                             case 0:
-                                main.showForm(new FormularioAltaProducto());
+                                main.showForm(new FormularioAltaProductoConScroll());
                                 break;
                         }
                         break;
@@ -108,7 +114,7 @@ public class Main extends javax.swing.JFrame {
                                 main.showForm(new FormularioAltaVentaConScroll());
                                 break;
                             case 1:
-                                main.showForm(new FormularioConsultarVenta()); 
+                                main.showForm(new FormularioConsultarVentaConScroll()); 
                                 break;
                             
                         }
@@ -207,34 +213,272 @@ public class Main extends javax.swing.JFrame {
         main.showForm(new Form_Home());
     }
 
-    // Función que genera una notificación de reserva vencida
-    public void generarNotificacionFinReserva(VentaNotificacionDTO v) {
+    public void generarNotificacionesFinReserva(ArrayList<VentaNotificacionDTO> v) {
         
-        // Añadir una notificación de reserva vencida a alguna estructura de datos (queue?)
-        // y que el ícono de notificaciones en el header (header : interfaz.raven.component.Header)
-        // incremente el número en 1. Generar un sonido, quizá?
+        DefaultTableModel mod = (DefaultTableModel)jTable2.getModel();
         
-        // Luego hay que añadir un evento para el ícono de notificaciones (buttonBadges1):
-        // Cuando el usuario le haga click, que muestre una lista o un panel donde se muestren
-        // las reservas vencidas.
+        for (VentaNotificacionDTO i : v) {
+            
+            Object row[] = new Object[4];
+            row[0] = i.getNombreCliente();
+            row[1] = i.getTelefonoCliente();
+            row[2] = i.getImporteActual();
+            row[3] = i.getFechaReserva();
+            
+            mod.addRow(row);
+        }
         
-        // Una vez que una venta con reserva vencida es notificada, su estado cambia a CANCELADA.
-        // Por lo tanto, no es posible que se notifique más de una vez.
-        
-        
+        // Cambiar número en ícono
+        header.getBotonReservasVencidas().setBadges(v.size());
     }
     
-    public void generarAdvertenciaFinReserva(VentaNotificacionDTO v) {
+    public void generarAdvertenciasFinReserva(ArrayList<VentaNotificacionDTO> v) {
+    
+        resetTablaAdv();
         
-        // Similar a generarNotificacionFinReserva() pero que advierte que una reserva
-        // está a un día o menos de vencerse
+        DefaultTableModel mod = (DefaultTableModel)jTable3.getModel();
+        
+        for (VentaNotificacionDTO i : v) {
+            
+            Object row[] = new Object[4];
+            row[0] = i.getNombreCliente();
+            row[1] = i.getTelefonoCliente();
+            row[2] = i.getImporteActual();
+            row[3] = i.getFechaReserva();
+            
+            mod.addRow(row);
+        }
+        
+        // Cambiar número en ícono
+        header.getBotonReservasPorVencerse().setBadges(v.size());
+    }
+    
+    public void mostrarReservasVencidas() {
+        
+        dialogNotif.setLocationRelativeTo(null);
+        dialogNotif.setVisible(true);
+    }
+    
+    public void mostrarReservasPorVencerse() {
+        
+        dialogAdv.setLocationRelativeTo(null);
+        dialogAdv.setVisible(true);
+    }
+    
+    public void resetTablaNotif() {
+        
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
+            new String [] {
+                "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
+            }));
+    }
+    
+    public void resetTablaAdv() {
+        
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
+            new String [] {
+                "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
+            }));
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogNotif = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        dialogAdv = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         bg = new javax.swing.JLayeredPane();
+
+        dialogNotif.setMinimumSize(new java.awt.Dimension(558, 402));
+        dialogNotif.setUndecorated(true);
+        dialogNotif.setResizable(false);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setOpaque(false);
+
+        jPanel4.setBackground(new java.awt.Color(238, 156, 167));
+
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Reservas vencidas");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable2.setBackground(new java.awt.Color(255, 255, 255));
+        jTable2.setForeground(new java.awt.Color(51, 51, 51));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
+            }
+        ));
+        jTable2.setShowGrid(false);
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setHeaderValue("Cliente");
+            jTable2.getColumnModel().getColumn(1).setHeaderValue("Teléfono");
+            jTable2.getColumnModel().getColumn(2).setHeaderValue("Importe actual");
+            jTable2.getColumnModel().getColumn(3).setHeaderValue("Inicio de reserva");
+        }
+
+        jButton1.setText("Marcar como leído");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogNotifLayout = new javax.swing.GroupLayout(dialogNotif.getContentPane());
+        dialogNotif.getContentPane().setLayout(dialogNotifLayout);
+        dialogNotifLayout.setHorizontalGroup(
+            dialogNotifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogNotifLayout.setVerticalGroup(
+            dialogNotifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        dialogAdv.setMinimumSize(new java.awt.Dimension(558, 382));
+        dialogAdv.setUndecorated(true);
+        dialogAdv.setResizable(false);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setOpaque(false);
+
+        jPanel6.setBackground(new java.awt.Color(238, 156, 167));
+
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Reservas que vencen hoy");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable3.setBackground(new java.awt.Color(255, 255, 255));
+        jTable3.setForeground(new java.awt.Color(51, 51, 51));
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
+            }
+        ));
+        jTable3.setShowGrid(false);
+        jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(0).setHeaderValue("Cliente");
+            jTable3.getColumnModel().getColumn(1).setHeaderValue("Teléfono");
+            jTable3.getColumnModel().getColumn(2).setHeaderValue("Importe actual");
+            jTable3.getColumnModel().getColumn(3).setHeaderValue("Inicio de reserva");
+        }
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout dialogAdvLayout = new javax.swing.GroupLayout(dialogAdv.getContentPane());
+        dialogAdv.getContentPane().setLayout(dialogAdvLayout);
+        dialogAdvLayout.setHorizontalGroup(
+            dialogAdvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogAdvLayout.setVerticalGroup(
+            dialogAdvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Malaika Store");
@@ -281,6 +525,10 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        resetTablaNotif();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -321,5 +569,18 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
+    private javax.swing.JDialog dialogAdv;
+    private javax.swing.JDialog dialogNotif;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }

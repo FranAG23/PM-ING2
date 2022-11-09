@@ -3,6 +3,7 @@ package dao;
 import clasesEntidad.Reserva;
 
 public interface InterfazDAOReserva {
+    
     boolean registrar(Reserva reserva, int idVenta);
     
     boolean modificar(Reserva reserva);

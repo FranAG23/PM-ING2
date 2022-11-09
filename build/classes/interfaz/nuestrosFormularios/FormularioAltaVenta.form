@@ -95,13 +95,13 @@
                       </Group>
                       <Component id="scrollTablaProductos" min="-2" pref="979" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="campoSucursal" pref="289" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="promptSucursal" min="-2" max="-2" attributes="0"/>
                               <Component id="tituloPanelBuscador" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoNombreProd" alignment="0" max="32767" attributes="0"/>
+                              <Component id="campoNombreProd" alignment="0" min="-2" pref="289" max="-2" attributes="0"/>
+                              <Component id="campoSucursal" alignment="0" min="-2" pref="289" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="botonBuscar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -115,7 +115,7 @@
                           <Component id="errorNombreProducto" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -149,7 +149,7 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
     }
     public void agregueItemVenta(ItemVenta item) {
         tablaItems.addRow(new Object[]{
-            item.getHandlerProducto().getNombre(), 
+            item.getProducto().getNombre(), 
             item.getCantidad(), 
             item.getPrecioUnidad(), 
             item.getPrecioProducto()
@@ -311,12 +311,12 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
                         .addComponent(errorCantidad))
                     .addComponent(scrollTablaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 979, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelBuscadorProdsLayout.createSequentialGroup()
-                        .addGroup(panelBuscadorProdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoSucursal, 0, 289, Short.MAX_VALUE)
+                        .addGroup(panelBuscadorProdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(promptSucursal)
                             .addComponent(tituloPanelBuscador)
-                            .addComponent(campoNombreProd))
-                        .addGap(18, 18, 18)
+                            .addComponent(campoNombreProd, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBuscadorProdsLayout.createSequentialGroup()
                         .addComponent(campoCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,7 +326,7 @@ public final class FormularioAltaVenta extends javax.swing.JPanel {
                         .addComponent(promptNombreProd)
                         .addGap(18, 18, 18)
                         .addComponent(errorNombreProducto)))
-                .addGap(50, 50, 50))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         panelBuscadorProdsLayout.setVerticalGroup(
             panelBuscadorProdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

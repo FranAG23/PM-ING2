@@ -76,10 +76,10 @@ public class DAOVenta implements InterfazDAOVenta
             rs.next();
             IDVenta = rs.getInt(1);
             
-            for (ItemVenta itemVenta : venta.getHandlerItems()){
+            for (ItemVenta itemVenta : venta.getItems()){
                 pst = con.prepareStatement("INSERT INTO ItemVenta VALUES (DEFAULT,?,?,?,?)");
               
-                pst.setInt(1, itemVenta.getHandlerProducto().getId());
+                pst.setInt(1, itemVenta.getProducto().getId());
                 pst.setInt(2, itemVenta.getCantidad());
                 pst.setFloat(3, itemVenta.getPrecioUnidad());
                 pst.setInt(4, IDVenta);
@@ -291,7 +291,7 @@ public class DAOVenta implements InterfazDAOVenta
         return resultado;
     }
     
-    public boolean cancelarVenta(int id, Date f) {
+    public boolean cancelarVenta(int idVenta, Date f) {
         
         boolean exito = false;
         PreparedStatement pst = null;
@@ -301,12 +301,48 @@ public class DAOVenta implements InterfazDAOVenta
             
             con = BaseDatos.getInstance().establecerConexion();
             
-            // Modificar en tabla Venta
-            pst = con.prepareStatement("UPDATE venta SET vEstadoVenta = 'Cancelada', vFechaUltimoPago = ? "+
-                                       "WHERE vID = ?");
+            // Modificar estado de venta y poner fecha
+            
+            pst = con.prepareStatement( "UPDATE venta SET vEstadoVenta = 'Cancelada', "+
+                                        "vFechaUltimoPago = ? WHERE vID = ?");
             pst.setDate(1, new java.sql.Date(f.getTime()));
-            pst.setInt(2, id);
+            pst.setInt(2, idVenta);
             pst.executeUpdate();
+            
+            // Obtener items de venta (idVenta de producto y cantidad)
+            
+            class Par {
+                public int idProd, cantidad;
+            }
+            
+            ArrayList<Par> pares = new ArrayList<>();
+            
+            pst = con.prepareStatement( "SELECT pID, ivCantidad FROM ItemVenta" + 
+                                        "WHERE vID = ?");
+            pst.setInt(1, idVenta);
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                
+                Par p = new Par();
+                p.idProd = rs.getInt("pID");
+                p.cantidad = rs.getInt("ivCantidad");
+                
+                pares.add(p);
+            }
+            
+            // Restituir stock de cada producto
+            
+            for (Par p : pares) {
+                
+                pst = con.prepareStatement( "UPDATE Disponibilidad "+
+                                            "SET dStockActual = dStockActual + ? "+
+                                            "WHERE sID = ? AND pID = ?");
+                pst.setInt(1, p.cantidad);
+                pst.setInt(2, 1); // San Luis
+                pst.setInt(3, p.idProd);
+                pst.executeUpdate();
+            }
             
             exito = true;
             

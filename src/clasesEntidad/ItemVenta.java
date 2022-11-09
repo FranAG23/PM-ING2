@@ -11,22 +11,19 @@ public class ItemVenta {
     private float precioProducto; 
     private Producto producto;
     
-    // Constructor
-
     public ItemVenta(int id, int cantidad, float precioUnidad, Producto producto) {
-        
         this.id = id;
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
         this.producto = new Producto(producto);
-        precioProducto = cantidad * precioUnidad;
+        this.precioProducto = cantidad * precioUnidad;
     }
 
     public ItemVenta() {
-        this.id = -1;
-        this.cantidad = -1;
-        this.precioUnidad = -1;
-        this.producto = new Producto();
+        id = -1;
+        cantidad = -1;
+        precioUnidad = -1;
+        producto = new Producto();
         precioProducto = 0; 
     }
 
@@ -37,8 +34,7 @@ public class ItemVenta {
         this.producto = item.getProducto(); 
     }
     
-    // Getters y Setters
-    
+
     public int getId(){
         return id;
     }
@@ -71,19 +67,11 @@ public class ItemVenta {
         return precioProducto; 
     }
 
-    public Producto getProducto(){
-        return new Producto(producto);
+    public Producto getProducto(){  
+        return producto;
     }
     
     public void setProducto(Producto producto){
-        this.producto = new Producto(producto);
-    }
-    
-    public void setHandlerProducto(Producto producto){
         this.producto = producto; 
-    }
-    
-    public Producto getHandlerProducto(){  
-        return producto;
     }
 }

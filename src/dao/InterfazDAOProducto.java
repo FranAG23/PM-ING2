@@ -1,8 +1,6 @@
 package dao;
 
 import clasesEntidad.Producto;
-import clasesEntidad.Sucursal;
-import java.util.ArrayList;
 
 public interface InterfazDAOProducto {
     

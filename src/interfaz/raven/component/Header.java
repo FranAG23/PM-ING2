@@ -1,5 +1,10 @@
 package interfaz.raven.component;
 
+import clasesControl.ControladorAdvertirFinReserva;
+import clasesControl.ControladorGenerarNotificacionesFinReserva;
+import clasesControl.ControladorNotificarFinReserva;
+import interfaz.main.Main;
+import interfaz.raven.swing.ButtonBadges;
 import java.awt.event.ActionListener;
 
 /*
@@ -13,8 +18,11 @@ import java.awt.event.ActionListener;
 
 public class Header extends javax.swing.JPanel {
 
-    public Header() {
+    private Main main;
+        
+    public Header(Main main) {
         initComponents();
+        this.main = main;
     }
 
     public void addMenuEvent(ActionListener event) {
@@ -30,17 +38,12 @@ public class Header extends javax.swing.JPanel {
         lbUserName = new javax.swing.JLabel();
         lbRole = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        buttonBadges1 = new interfaz.raven.swing.ButtonBadges();
-        buttonBadges2 = new interfaz.raven.swing.ButtonBadges();
+        botonReservasVencidas = new interfaz.raven.swing.ButtonBadges();
+        botonReservasPorVencerse = new interfaz.raven.swing.ButtonBadges();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         cmdMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.png"))); // NOI18N
-        cmdMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdMenuActionPerformed(evt);
-            }
-        });
 
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarioMarcela3.jpg"))); // NOI18N
 
@@ -53,13 +56,23 @@ public class Header extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        buttonBadges1.setForeground(new java.awt.Color(250, 49, 49));
-        buttonBadges1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notification.png"))); // NOI18N
-        buttonBadges1.setBadges(12);
+        botonReservasVencidas.setForeground(new java.awt.Color(250, 49, 49));
+        botonReservasVencidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notification.png"))); // NOI18N
+        botonReservasVencidas.setBadges(16);
+        botonReservasVencidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReservasVencidasActionPerformed(evt);
+            }
+        });
 
-        buttonBadges2.setForeground(new java.awt.Color(63, 178, 232));
-        buttonBadges2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/message.png"))); // NOI18N
-        buttonBadges2.setBadges(5);
+        botonReservasPorVencerse.setForeground(new java.awt.Color(63, 178, 232));
+        botonReservasPorVencerse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/message.png"))); // NOI18N
+        botonReservasPorVencerse.setBadges(16);
+        botonReservasPorVencerse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReservasPorVencerseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,9 +82,9 @@ public class Header extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
-                .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonReservasPorVencerse, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(buttonBadges1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonReservasVencidas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -94,19 +107,30 @@ public class Header extends javax.swing.JPanel {
                     .addComponent(cmdMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
-                    .addComponent(buttonBadges1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonBadges2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botonReservasVencidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonReservasPorVencerse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmdMenuActionPerformed
+    private void botonReservasPorVencerseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservasPorVencerseActionPerformed
+        
+        new ControladorGenerarNotificacionesFinReserva(main);
+        new ControladorAdvertirFinReserva(main);
+    }//GEN-LAST:event_botonReservasPorVencerseActionPerformed
 
+    private void botonReservasVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservasVencidasActionPerformed
+        
+        new ControladorGenerarNotificacionesFinReserva(main);
+        new ControladorNotificarFinReserva(main);
+    }//GEN-LAST:event_botonReservasVencidasActionPerformed
+
+    public ButtonBadges getBotonReservasPorVencerse(){return botonReservasPorVencerse;}
+    public ButtonBadges getBotonReservasVencidas(){return botonReservasVencidas;}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private interfaz.raven.swing.ButtonBadges buttonBadges1;
-    private interfaz.raven.swing.ButtonBadges buttonBadges2;
+    private interfaz.raven.swing.ButtonBadges botonReservasPorVencerse;
+    private interfaz.raven.swing.ButtonBadges botonReservasVencidas;
     private interfaz.raven.swing.Button cmdMenu;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbRole;
