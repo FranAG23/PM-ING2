@@ -317,7 +317,7 @@ public class DAOVenta implements InterfazDAOVenta
             
             ArrayList<Par> pares = new ArrayList<>();
             
-            pst = con.prepareStatement( "SELECT pID, ivCantidad FROM ItemVenta" + 
+            pst = con.prepareStatement( "SELECT pID, ivCantidad FROM ItemVenta "+ 
                                         "WHERE vID = ?");
             pst.setInt(1, idVenta);
             ResultSet rs = pst.executeQuery();

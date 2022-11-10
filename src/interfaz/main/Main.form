@@ -305,22 +305,22 @@
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="Cliente"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="Tel&#xe9;fono"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="Importe actual"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="Inicio de reserva"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>

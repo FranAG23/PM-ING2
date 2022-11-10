@@ -4,6 +4,8 @@
  */
 package interfaz.nuestrosFormularios;
 
+import interfaz.raven.scrollbar.ScrollBarCustom;
+
 /**
  *
  * @author matias
@@ -15,6 +17,8 @@ public class FormularioAltaProductoConScroll extends javax.swing.JPanel {
      */
     public FormularioAltaProductoConScroll() {
         initComponents();
+        sp.getViewport().setOpaque(false);
+        sp.setVerticalScrollBar(new ScrollBarCustom());
     }
 
     /**

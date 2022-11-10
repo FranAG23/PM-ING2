@@ -15,7 +15,7 @@ public class TimerNotificaciones extends Timer {
             public void run() {
                 new ControladorGenerarNotificacionesFinReserva(main);
             }
-        }, 0, 1000 * 60 * 5);  // Se ejecuta cada 5 minutos
+        }, 0, 1000 * 60 * 2);  // Se ejecuta cada 2 minutos
     }
     
 }

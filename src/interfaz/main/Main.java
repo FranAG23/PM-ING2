@@ -8,6 +8,7 @@ import interfaz.raven.component.Menu;
 import interfaz.raven.event.EventMenuSelected;
 import interfaz.raven.event.EventShowPopupMenu;
 import interfaz.nuestrosFormularios.*;
+import interfaz.raven.swing.ButtonBadges;
 import interfaz.raven.swing.MenuItem;
 import interfaz.raven.swing.PopupMenu;
 import interfaz.raven.swing.icon.GoogleMaterialDesignIcons;
@@ -17,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -223,13 +225,14 @@ public class Main extends javax.swing.JFrame {
             row[0] = i.getNombreCliente();
             row[1] = i.getTelefonoCliente();
             row[2] = i.getImporteActual();
-            row[3] = i.getFechaReserva();
+            row[3] = new java.sql.Date(i.getFechaReserva().getTime());
             
             mod.addRow(row);
         }
         
         // Cambiar número en ícono
-        header.getBotonReservasVencidas().setBadges(v.size());
+        ButtonBadges boton = header.getBotonReservasVencidas();
+        boton.setBadges(boton.getBadges() + v.size());
     }
     
     public void generarAdvertenciasFinReserva(ArrayList<VentaNotificacionDTO> v) {
@@ -244,7 +247,7 @@ public class Main extends javax.swing.JFrame {
             row[0] = i.getNombreCliente();
             row[1] = i.getTelefonoCliente();
             row[2] = i.getImporteActual();
-            row[3] = i.getFechaReserva();
+            row[3] = new java.sql.Date(i.getFechaReserva().getTime());
             
             mod.addRow(row);
         }
@@ -441,12 +444,6 @@ public class Main extends javax.swing.JFrame {
         ));
         jTable3.setShowGrid(false);
         jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setHeaderValue("Cliente");
-            jTable3.getColumnModel().getColumn(1).setHeaderValue("Teléfono");
-            jTable3.getColumnModel().getColumn(2).setHeaderValue("Importe actual");
-            jTable3.getColumnModel().getColumn(3).setHeaderValue("Inicio de reserva");
-        }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -527,6 +524,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         resetTablaNotif();
+        header.getBotonReservasVencidas().setBadges(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

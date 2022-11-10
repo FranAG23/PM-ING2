@@ -16,7 +16,7 @@ public class VentaNotificacionDTO {
     public VentaNotificacionDTO(int id, String nombreCliente, String apellidoCliente, String telefonoCliente, float importeActual, Date fechaReserva) {
         
         this.id = id;
-        this.nombreCliente = nombreCliente + apellidoCliente;
+        this.nombreCliente = nombreCliente +" "+apellidoCliente;
         this.telefonoCliente = telefonoCliente;
         this.importeActual = importeActual;
         this.fechaReserva = fechaReserva;

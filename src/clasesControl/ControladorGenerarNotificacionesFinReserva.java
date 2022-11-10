@@ -25,6 +25,7 @@ public class ControladorGenerarNotificacionesFinReserva {
         for (VentaNotificacionDTO v : ventas) {
             
             // Comprobar si alguna reserva se venció
+            
             if (v.getFechaReserva().getTime() + DIAS_LIMITE_RESERVA*MILISEGUNDOS_EN_UN_DIA < 
                 fechaActual.getTime()) {
                 

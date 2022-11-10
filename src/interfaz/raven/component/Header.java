@@ -58,7 +58,6 @@ public class Header extends javax.swing.JPanel {
 
         botonReservasVencidas.setForeground(new java.awt.Color(250, 49, 49));
         botonReservasVencidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/notification.png"))); // NOI18N
-        botonReservasVencidas.setBadges(16);
         botonReservasVencidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReservasVencidasActionPerformed(evt);
