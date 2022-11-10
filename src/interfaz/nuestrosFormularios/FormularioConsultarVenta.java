@@ -262,7 +262,7 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
         row[2] = v.getMetodoPago();
         row[3] = v.getImporteTotal();
         row[4] = v.getEstado();
-        row[5] = v.getFechaUltimoPago();
+        row[5] = new java.sql.Date(v.getFechaUltimoPago().getTime());
         table1.addRow(row);
 }
     public void borrarTabla(){
