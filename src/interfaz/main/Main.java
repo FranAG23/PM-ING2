@@ -18,7 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -217,7 +216,7 @@ public class Main extends javax.swing.JFrame {
 
     public void generarNotificacionesFinReserva(ArrayList<VentaNotificacionDTO> v) {
         
-        DefaultTableModel mod = (DefaultTableModel)jTable2.getModel();
+        DefaultTableModel mod = (DefaultTableModel)tablaNotif.getModel();
         
         for (VentaNotificacionDTO i : v) {
             
@@ -239,7 +238,7 @@ public class Main extends javax.swing.JFrame {
     
         resetTablaAdv();
         
-        DefaultTableModel mod = (DefaultTableModel)jTable3.getModel();
+        DefaultTableModel mod = (DefaultTableModel)tablaAdv.getModel();
         
         for (VentaNotificacionDTO i : v) {
             
@@ -270,7 +269,7 @@ public class Main extends javax.swing.JFrame {
     
     public void resetTablaNotif() {
         
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaNotif.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] {
                 "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
@@ -279,7 +278,7 @@ public class Main extends javax.swing.JFrame {
     
     public void resetTablaAdv() {
         
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAdv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] {
                 "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
@@ -295,14 +294,14 @@ public class Main extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaNotif = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         dialogAdv = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tablaAdv = new javax.swing.JTable();
         bg = new javax.swing.JLayeredPane();
 
         dialogNotif.setMinimumSize(new java.awt.Dimension(558, 402));
@@ -337,9 +336,9 @@ public class Main extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
-        jTable2.setForeground(new java.awt.Color(51, 51, 51));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaNotif.setBackground(new java.awt.Color(255, 255, 255));
+        tablaNotif.setForeground(new java.awt.Color(51, 51, 51));
+        tablaNotif.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -347,13 +346,13 @@ public class Main extends javax.swing.JFrame {
                 "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
             }
         ));
-        jTable2.setShowGrid(false);
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setHeaderValue("Cliente");
-            jTable2.getColumnModel().getColumn(1).setHeaderValue("Teléfono");
-            jTable2.getColumnModel().getColumn(2).setHeaderValue("Importe actual");
-            jTable2.getColumnModel().getColumn(3).setHeaderValue("Inicio de reserva");
+        tablaNotif.setShowGrid(false);
+        jScrollPane2.setViewportView(tablaNotif);
+        if (tablaNotif.getColumnModel().getColumnCount() > 0) {
+            tablaNotif.getColumnModel().getColumn(0).setHeaderValue("Cliente");
+            tablaNotif.getColumnModel().getColumn(1).setHeaderValue("Teléfono");
+            tablaNotif.getColumnModel().getColumn(2).setHeaderValue("Importe actual");
+            tablaNotif.getColumnModel().getColumn(3).setHeaderValue("Inicio de reserva");
         }
 
         jButton1.setText("Marcar como leído");
@@ -432,9 +431,9 @@ public class Main extends javax.swing.JFrame {
 
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable3.setBackground(new java.awt.Color(255, 255, 255));
-        jTable3.setForeground(new java.awt.Color(51, 51, 51));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAdv.setBackground(new java.awt.Color(255, 255, 255));
+        tablaAdv.setForeground(new java.awt.Color(51, 51, 51));
+        tablaAdv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -442,8 +441,8 @@ public class Main extends javax.swing.JFrame {
                 "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
             }
         ));
-        jTable3.setShowGrid(false);
-        jScrollPane3.setViewportView(jTable3);
+        tablaAdv.setShowGrid(false);
+        jScrollPane3.setViewportView(tablaAdv);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -578,7 +577,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable tablaAdv;
+    private javax.swing.JTable tablaNotif;
     // End of variables declaration//GEN-END:variables
 }
