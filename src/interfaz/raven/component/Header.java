@@ -119,7 +119,7 @@ public class Header extends javax.swing.JPanel {
     }//GEN-LAST:event_botonReservasPorVencerseActionPerformed
 
     private void botonReservasVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservasVencidasActionPerformed
-        
+
         new ControladorGenerarNotificacionesFinReserva(main);
         new ControladorNotificarFinReserva(main);
     }//GEN-LAST:event_botonReservasVencidasActionPerformed

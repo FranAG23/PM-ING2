@@ -232,6 +232,7 @@ public class Main extends javax.swing.JFrame {
         // Cambiar número en ícono
         ButtonBadges boton = header.getBotonReservasVencidas();
         boton.setBadges(boton.getBadges() + v.size());
+        boton.repaint();
     }
     
     public void generarAdvertenciasFinReserva(ArrayList<VentaNotificacionDTO> v) {
@@ -253,6 +254,7 @@ public class Main extends javax.swing.JFrame {
         
         // Cambiar número en ícono
         header.getBotonReservasPorVencerse().setBadges(v.size());
+        header.getBotonReservasPorVencerse().repaint();
     }
     
     public void mostrarReservasVencidas() {
@@ -284,6 +286,8 @@ public class Main extends javax.swing.JFrame {
                 "Cliente", "Teléfono", "Importe actual", "Inicio de reserva"
             }));
     }
+    
+    public Header getHeader() {return header;}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

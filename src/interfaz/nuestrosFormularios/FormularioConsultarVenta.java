@@ -257,7 +257,7 @@ public class FormularioConsultarVenta extends javax.swing.JPanel {
 }
     public void insertarTabla(Venta v){  
         Object row[] = new Object[6];
-        row[0] = v.getNombreCliente();
+        row[0] = v.getNombreCliente()+" "+v.getApellidoCliente();
         row[1] = v.getEnvioGratis();
         row[2] = v.getMetodoPago();
         row[3] = v.getImporteTotal();
